@@ -1,4 +1,4 @@
-package com.springapp.mvc.models;
+package com.bank.mvc.models;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
