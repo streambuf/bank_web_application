@@ -4,10 +4,9 @@ DROP TABLE client;
 
 CREATE TABLE client (
   id NUMBER(10) NOT NULL,
-  surname VARCHAR2(50),
-  first_name VARCHAR2(50),
+  lname VARCHAR2(50),
+  fname VARCHAR2(50),
   patronymic VARCHAR2(50),
-  sex VARCHAR2(10), -- (male, female)
   date_of_birth DATE,
   tin NUMBER(10), -- TIN - Taxpayer Identification Number
   email VARCHAR2(50),
@@ -31,7 +30,7 @@ CREATE TABLE passport (
 CREATE TABLE bank_account (
   id NUMBER(10) NOT NULL,
   bank_identifier NUMBER(10),
-  sum_of_money NUMBER(10),
+  balance NUMBER(10),
   valuta VARCHAR2(500),
   client_id INTEGER,
   PRIMARY KEY (id, client_id),
@@ -40,44 +39,44 @@ CREATE TABLE bank_account (
 
 
 -- autoincrements for tables
-DROP SEQUENCE client_seq;
-CREATE SEQUENCE client_seq;
-
-CREATE OR REPLACE TRIGGER client_autoincrement 
-BEFORE INSERT ON client
-FOR EACH ROW
-
-BEGIN
-  SELECT client_seq.NEXTVAL
-  INTO   :new.id
-  FROM   dual;
-END;
-/
-
-DROP SEQUENCE passport_seq;
-CREATE SEQUENCE passport_seq;
-
-CREATE OR REPLACE TRIGGER passport_autoincrement 
-BEFORE INSERT ON passport
-FOR EACH ROW
-
-BEGIN
-  SELECT passport_seq.NEXTVAL
-  INTO   :new.id
-  FROM   dual;
-END;
-/
-
-DROP SEQUENCE bank_account_seq;
-CREATE SEQUENCE bank_account_seq;
-
-CREATE OR REPLACE TRIGGER bank_account_autoincrement 
-BEFORE INSERT ON bank_account
-FOR EACH ROW
-
-BEGIN
-  SELECT bank_account_seq.NEXTVAL
-  INTO   :new.id
-  FROM   dual;
-END;
-/
+--DROP SEQUENCE client_seq;
+--CREATE SEQUENCE client_seq;
+--
+--CREATE OR REPLACE TRIGGER client_autoincrement 
+--BEFORE INSERT ON client
+--FOR EACH ROW
+--
+--BEGIN
+--  SELECT client_seq.NEXTVAL
+--  INTO   :new.id
+--  FROM   dual;
+--END;
+--/
+--
+--DROP SEQUENCE passport_seq;
+--CREATE SEQUENCE passport_seq;
+--
+--CREATE OR REPLACE TRIGGER passport_autoincrement 
+--BEFORE INSERT ON passport
+--FOR EACH ROW
+--
+--BEGIN
+--  SELECT passport_seq.NEXTVAL
+--  INTO   :new.id
+--  FROM   dual;
+--END;
+--/
+--
+--DROP SEQUENCE bank_account_seq;
+--CREATE SEQUENCE bank_account_seq;
+--
+--CREATE OR REPLACE TRIGGER bank_account_autoincrement 
+--BEFORE INSERT ON bank_account
+--FOR EACH ROW
+--
+--BEGIN
+--  SELECT bank_account_seq.NEXTVAL
+--  INTO   :new.id
+--  FROM   dual;
+--END;
+--/
