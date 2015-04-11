@@ -1,6 +1,15 @@
 DROP TABLE passport;
 DROP TABLE bank_account;
 DROP TABLE client;
+DROP TABLE Employees;
+
+create table Employees (
+      id  NUMBER(10) NOT NULL,
+      age NUMBER(10),
+      name varchar2(255),
+      salary NUMBER(10,2),
+      PRIMARY KEY (id)
+);
 
 CREATE TABLE client (
   id NUMBER(10) NOT NULL,
@@ -15,6 +24,11 @@ CREATE TABLE client (
   phone VARCHAR2(50),
   PRIMARY KEY (id)
 );
+
+INSERT INTO client (id, lname, fname, patronymic, date_of_birth, tin, email,
+citizenship, address, phone)
+VALUES(1, 'Mois', 'Maxim', 'patronymic', '30-nov-08', 123, 'email@mail.ru',
+'rus', 'Moscow', '823423452544325');
 
 CREATE TABLE passport (
   id NUMBER(10) NOT NULL,
@@ -36,6 +50,8 @@ CREATE TABLE bank_account (
   PRIMARY KEY (id, client_id),
   FOREIGN KEY (client_id) REFERENCES client (id)
 );
+
+
 
 
 -- autoincrements for tables

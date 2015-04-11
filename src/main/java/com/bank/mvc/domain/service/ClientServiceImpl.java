@@ -1,4 +1,4 @@
-package com.bank.mvc.service;
+package com.bank.mvc.domain.service;
 
 import com.bank.mvc.dao.ClientDao;
 import com.bank.mvc.models.Client;

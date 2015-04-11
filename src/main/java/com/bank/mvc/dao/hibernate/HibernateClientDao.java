@@ -16,7 +16,7 @@ public class HibernateClientDao implements ClientDao {
     @Autowired
     SessionFactory sessionFactory;
 
-    @Transactional(readOnly = true)
+    //@Transactional(readOnly = true)
     @Override
     public Collection<Client> getAll() {
         String hql = "from Client";
@@ -24,7 +24,7 @@ public class HibernateClientDao implements ClientDao {
                 createQuery("from Client").list();
     }
 
-    @Transactional(readOnly = true)
+    //@Transactional(readOnly = true)
     @Override
     public Client getById(int clientId) {
         return (Client)sessionFactory.getCurrentSession()
