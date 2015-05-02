@@ -2,17 +2,19 @@ DROP TABLE passport;
 DROP TABLE bank_account;
 DROP TABLE client;
 DROP TABLE Employees;
+DROP TABLE user;
+DROP TABLE roles;
 
-create table Employees (
-      id  NUMBER(10) NOT NULL,
-      age NUMBER(10),
-      name varchar2(255),
-      salary NUMBER(10,2),
-      PRIMARY KEY (id)
+CREATE TABLE roles (
+  id NUMBER(10) NOT NULL,
+  name VARCHAR(10) CHECK( name IN ('CLIENT', 'EMPLOYEE', 'ADMIN')),
+  PRIMARY KEY (id)
 );
 
-CREATE TABLE client (
+CREATE TABLE user (
   id NUMBER(10) NOT NULL,
+  role_id INTEGER,
+  password VARCHAR2(50),
   lname VARCHAR2(50),
   fname VARCHAR2(50),
   patronymic VARCHAR2(50),
@@ -22,8 +24,10 @@ CREATE TABLE client (
   citizenship VARCHAR2(100),
   address VARCHAR2(100),
   phone VARCHAR2(50),
+  FOREIGN KEY(role_id) REFERENCES roles(id),
   PRIMARY KEY (id)
 );
+
 
 INSERT INTO client (id, lname, fname, patronymic, date_of_birth, tin, email,
 citizenship, address, phone)
