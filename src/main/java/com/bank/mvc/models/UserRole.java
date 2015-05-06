@@ -16,6 +16,7 @@ public class UserRole extends AbstractModel {
     private Set<User> user = new HashSet();
 
     @Enumerated(EnumType.STRING)
+    @Column(name="name")
     private ListRole listRole;
 
     UserRole() {

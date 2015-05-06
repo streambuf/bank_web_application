@@ -34,4 +34,7 @@ public class MainController {
         return userService.getClientById(clientId);
     }
 
-}
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String root() {
+        return "login";
+    }}

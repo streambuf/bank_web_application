@@ -11,6 +11,9 @@ import java.util.*;
 @Table(name="bank_user")
 public class User extends AbstractModel implements UserDetails {
 
+    @Column(name="username")
+    private String username;
+
     @Column(name="lname")
     private String lname;
 
@@ -128,6 +131,14 @@ public class User extends AbstractModel implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getBank() {
+        return username;
+    }
+
+    public void setBank(String bank) {
+        this.username = bank;
     }
 
     @Override
