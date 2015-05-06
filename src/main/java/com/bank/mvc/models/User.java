@@ -1,14 +1,15 @@
 package com.bank.mvc.models;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
-@Table(name="client")
-public class Client {
-    @Id
-    @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+@Table(name="bank_user")
+public class User extends AbstractModel implements UserDetails {
 
     @Column(name="lname")
     private String lname;
@@ -37,8 +38,20 @@ public class Client {
     @Column(name="phone")
     private String phone;
 
-    public int getId() {
-        return id;
+    @Column(name="password")
+    private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name="user_role", joinColumns = @JoinColumn(name="user_id"),
+        inverseJoinColumns = @JoinColumn(name="role_id"))
+    private Set<UserRole> userRoles = new HashSet();
+
+    public User() {
+        super();
+    }
+
+    public User(long id) {
+        super(id);
     }
 
     public String getLname() {
@@ -53,7 +66,7 @@ public class Client {
         return patronymic;
     }
 
-    public String getDate_of_birth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -77,10 +90,6 @@ public class Client {
         return phone;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setLname(String lname) {
         this.lname = lname;
     }
@@ -93,7 +102,7 @@ public class Client {
         this.patronymic = patronymic;
     }
 
-    public void setDate_of_birth(String date_of_birth) {
+    public void setDateOfBirth(String date_of_birth) {
         this.dateOfBirth = date_of_birth;
     }
 
@@ -115,5 +124,50 @@ public class Client {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> result = new ArrayList();
+
+        for(UserRole r: userRoles) {
+            result.add(new SimpleGrantedAuthority(r.getListRole().name()));
+        }
+
+        return result;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return lname;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

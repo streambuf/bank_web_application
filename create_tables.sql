@@ -1,20 +1,22 @@
+DROP TABLE user_role;
 DROP TABLE passport;
 DROP TABLE bank_account;
-DROP TABLE client;
-DROP TABLE Employees;
-DROP TABLE user;
-DROP TABLE roles;
+DROP TABLE bank_user;
+DROP TABLE bank_role;
 
-CREATE TABLE roles (
+
+CREATE TABLE bank_role (
   id NUMBER(10) NOT NULL,
   name VARCHAR(10) CHECK( name IN ('CLIENT', 'EMPLOYEE', 'ADMIN')),
   PRIMARY KEY (id)
 );
 
-CREATE TABLE user (
+INSERT INTO bank_role VALUES( 1, 'CLIENT' );
+INSERT INTO bank_role VALUES( 2, 'EMPLOYEE' );
+INSERT INTO bank_role VALUES( 3, 'ADMIN' );
+
+CREATE TABLE bank_user (
   id NUMBER(10) NOT NULL,
-  role_id INTEGER,
-  password VARCHAR2(50),
   lname VARCHAR2(50),
   fname VARCHAR2(50),
   patronymic VARCHAR2(50),
@@ -24,15 +26,25 @@ CREATE TABLE user (
   citizenship VARCHAR2(100),
   address VARCHAR2(100),
   phone VARCHAR2(50),
-  FOREIGN KEY(role_id) REFERENCES roles(id),
+  password VARCHAR2(50),
   PRIMARY KEY (id)
 );
 
-
-INSERT INTO client (id, lname, fname, patronymic, date_of_birth, tin, email,
-citizenship, address, phone)
+INSERT INTO bank_user (id, lname, fname, patronymic, date_of_birth, tin, email,
+citizenship, address, phone, password)
 VALUES(1, 'Mois', 'Maxim', 'patronymic', '30-nov-08', 123, 'email@mail.ru',
-'rus', 'Moscow', '823423452544325');
+'rus', 'Moscow', '823423452544325', 'password');
+
+CREATE TABLE user_role (
+  id NUMBER(10) NOT NULL,
+  role_id NUMBER REFERENCES bank_role(id),
+  user_id NUMBER REFERENCES bank_user(id),
+  PRIMARY KEY (id, role_id, user_id)
+);
+
+
+INSERT INTO user_role VALUES( 1, 1, 1 );
+INSERT INTO user_role VALUES( 2, 3, 1 );
 
 CREATE TABLE passport (
   id NUMBER(10) NOT NULL,
@@ -42,7 +54,7 @@ CREATE TABLE passport (
   issued_by VARCHAR2(500),
   client_id INTEGER,
   PRIMARY KEY (id, client_id),
-  FOREIGN KEY(client_id) REFERENCES client(id) 
+  FOREIGN KEY(client_id) REFERENCES bank_user(id) 
 );
 
 CREATE TABLE bank_account (
@@ -52,10 +64,8 @@ CREATE TABLE bank_account (
   valuta VARCHAR2(500),
   client_id INTEGER,
   PRIMARY KEY (id, client_id),
-  FOREIGN KEY (client_id) REFERENCES client (id)
+  FOREIGN KEY (client_id) REFERENCES bank_user (id)
 );
-
-
 
 
 -- autoincrements for tables

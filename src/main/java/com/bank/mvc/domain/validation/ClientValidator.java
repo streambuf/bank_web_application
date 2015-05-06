@@ -1,7 +1,7 @@
 package com.bank.mvc.domain.validation;
 
-import com.bank.mvc.models.Client;
-import com.bank.mvc.domain.service.ClientService;
+import com.bank.mvc.models.User;
+import com.bank.mvc.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -10,10 +10,10 @@ import org.springframework.validation.Errors;
 public class ClientValidator {
 
     @Autowired
-    ClientService clientService;
+    UserService userService;
 
-    public void validate(Client client, Errors errors) {
-        if (client.getLname() == "test") {
+    public void validate(User user, Errors errors) {
+        if (user.getLname() == "test") {
             errors.rejectValue("lname", "validation.negative", "must be real");
         }
     }

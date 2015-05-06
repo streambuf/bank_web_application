@@ -1,7 +1,7 @@
 package com.bank.mvc.controllers;
 
-import com.bank.mvc.models.Client;
-import com.bank.mvc.domain.service.ClientService;
+import com.bank.mvc.models.User;
+import com.bank.mvc.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,23 +15,23 @@ import java.util.Collection;
 public class MainController {
 
     @Autowired
-    private ClientService clientService;
+    private UserService userService;
 
     @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.HEAD})
     @ModelAttribute("clients")
-    public Collection<Client> getClients2() {
+    public Collection<User> getClients2() {
         return null;
     }
 
     @RequestMapping(value = "/clientList", method = {RequestMethod.GET, RequestMethod.HEAD})
     @ModelAttribute("clients")
-    public Collection<Client> getClients() {
-        return clientService.getAllClients();
+    public Collection<User> getClients() {
+        return userService.getAllClients();
     }
 
     @RequestMapping("/clientDetails")
-    public Client getClient(@RequestParam(value="id", required=true) int clientId) {
-        return clientService.getClientById(clientId);
+    public User getClient(@RequestParam(value="id", required=true) int clientId) {
+        return userService.getClientById(clientId);
     }
 
 }

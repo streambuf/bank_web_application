@@ -6,7 +6,7 @@
 <head>
     <link rel="stylesheet" href="./css/world.css" type="text/css"/>
     <title>
-        tttt
+        <spring:message code="application.name"/>
     </title>
 </head>
 <body>
