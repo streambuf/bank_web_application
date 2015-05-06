@@ -7,16 +7,17 @@ DROP TABLE bank_role;
 
 CREATE TABLE bank_role (
   id NUMBER(10) NOT NULL,
-  name VARCHAR(10) CHECK( name IN ('CLIENT', 'EMPLOYEE', 'ADMIN')),
+  name VARCHAR(20) CHECK( name IN ('ROLE_CLIENT', 'ROLE_EMPLOYEE', 'ROLE_ADMIN')),
   PRIMARY KEY (id)
 );
 
-INSERT INTO bank_role VALUES( 1, 'CLIENT' );
-INSERT INTO bank_role VALUES( 2, 'EMPLOYEE' );
-INSERT INTO bank_role VALUES( 3, 'ADMIN' );
+INSERT INTO bank_role VALUES( 1, 'ROLE_CLIENT' );
+INSERT INTO bank_role VALUES( 2, 'ROLE_EMPLOYEE' );
+INSERT INTO bank_role VALUES( 3, 'ROLE_ADMIN' );
 
 CREATE TABLE bank_user (
   id NUMBER(10) NOT NULL,
+  username VARCHAR2(50),
   lname VARCHAR2(50),
   fname VARCHAR2(50),
   patronymic VARCHAR2(50),
@@ -30,10 +31,10 @@ CREATE TABLE bank_user (
   PRIMARY KEY (id)
 );
 
-INSERT INTO bank_user (id, lname, fname, patronymic, date_of_birth, tin, email,
+INSERT INTO bank_user (id, username, lname, fname, patronymic, date_of_birth, tin, email,
 citizenship, address, phone, password)
-VALUES(1, 'Mois', 'Maxim', 'patronymic', '30-nov-08', 123, 'email@mail.ru',
-'rus', 'Moscow', '823423452544325', 'password');
+VALUES(1, 'bank', 'Mois', 'Maxim', 'patronymic', '30-nov-08', 12345, 'email@mail.ru',
+'rus', 'Moscow', '823423452544325', '202cb962ac59075b964b07152d234b70');
 
 CREATE TABLE user_role (
   id NUMBER(10) NOT NULL,
