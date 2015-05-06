@@ -18,23 +18,30 @@ public class MainController {
     private UserService userService;
 
     @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.HEAD})
-    @ModelAttribute("clients")
-    public Collection<User> getClients2() {
-        return null;
-    }
-
-    @RequestMapping(value = "/clientList", method = {RequestMethod.GET, RequestMethod.HEAD})
-    @ModelAttribute("clients")
-    public Collection<User> getClients() {
-        return userService.getAllClients();
-    }
-
-    @RequestMapping("/clientDetails")
-    public User getClient(@RequestParam(value="id", required=true) int clientId) {
-        return userService.getClientById(clientId);
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String root() {
+    public String login() {
         return "login";
-    }}
+    }
+
+    @RequestMapping(value = "/dashboard", method = {RequestMethod.GET, RequestMethod.HEAD})
+    public String dashboard() {
+        return "dashboard";
+    }
+
+    @RequestMapping(value = "/access_denied", method = {RequestMethod.GET, RequestMethod.HEAD})
+    public String accessDenied() {
+        return "access_denied";
+    }
+
+//    @RequestMapping(value = "/clientList", method = {RequestMethod.GET, RequestMethod.HEAD})
+//    @ModelAttribute("clients")
+//    public Collection<User> getClients() {
+//        return userService.getAllClients();
+//    }
+//
+//    @RequestMapping("/clientDetails")
+//    public User getClient(@RequestParam(value="id", required=true) int clientId) {
+//        return userService.getClientById(clientId);
+//    }
+
+
+}

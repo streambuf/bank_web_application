@@ -48,13 +48,13 @@
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
                 <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
                 <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
-                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <!--<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>-->
             </props>
         </property>
         <property name="packagesToScan" value="com.bank.mvc.models"></property>
     </bean>
 
-    <!-- Transaction -->
+<!-- Transaction -->
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
@@ -65,35 +65,38 @@
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
           p:basename="/WEB-INF/messages"/>
 
-
     <!-- Spring Security-->
+    <security:global-method-security pre-post-annotations="enabled" />
+
     <security:http pattern="/css/**" security="none" />
     <security:http pattern="/images/**" security="none" />
     <security:http pattern="/js/**" security="none" />
 
     <security:http auto-config="true" use-expressions="true">
-        <!--<security:access-denied-handler error-page="/access_denied.jsp"/>-->
-        <security:form-login login-page="/login.jsp"
+        <!--<security:access-denied-handler error-page="/access_denied"/>-->
+        <security:form-login login-page="/"
                              login-processing-url="/login" username-parameter="username"
-                             password-parameter="password" default-target-url="/default.as"
+                             password-parameter="password" default-target-url="/dashboard"
                              always-use-default-target="true"
-                             authentication-failure-url="/login?error=invalidLoginPassword" />
-        <security:intercept-url pattern="/default.as" access="isAuthenticated()" />
-        <security:intercept-url pattern="/hello.as" access="isAuthenticated()" />
+                             authentication-failure-url="/?error=invalidLoginPassword" />
 
-        <security:logout logout-url="/logout" />
-        <security:remember-me user-service-ref="userServiceImpl" key="bank_key" />
+    <security:intercept-url pattern="/dashboard" access="hasAnyRole('ROLE_CLIENT', 'ROLE_ADMIN')" />
+    <security:logout logout-url="/logout" logout-success-url="/" />
+    <security:remember-me user-service-ref="userServiceImpl" key="bank_key" />
 
-    </security:http>
+</security:http>
 
-    <security:authentication-manager>
-        <security:authentication-provider
-                user-service-ref="userServiceImpl">
-            <security:password-encoder ref="passwordEncoder" />
-        </security:authentication-provider>
-    </security:authentication-manager>
+
+<security:authentication-manager>
+    <security:authentication-provider
+            user-service-ref="userServiceImpl">
+        <security:password-encoder ref="passwordEncoder" />
+    </security:authentication-provider>
+</security:authentication-manager>
 
     <bean id="roleVoter" class="org.springframework.security.access.vote.RoleVoter">
         <property name="rolePrefix" value="" />
     </bean>
+
+
 </beans>
