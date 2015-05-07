@@ -7,7 +7,8 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="./css/world.css" type="text/css"/>
+    <script src="js/jquery-2.1.4.min.js"></script>
+
     <title>
         <spring:message code="application.name"/>
         <sec:csrfMetaTags/>
