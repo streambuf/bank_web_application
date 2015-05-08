@@ -15,7 +15,7 @@
     <!-- Getting Database properties -->
     <context:property-placeholder location="classpath:META-INF/hibernate.properties"/>
 
-    <mvc:annotation-driven />
+    <mvc:annotation-driven/>
 
     <!-- DataSource -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
