@@ -4,31 +4,20 @@ package com.bank.mvc.controllers;
 import com.bank.mvc.models.User;
 import com.bank.mvc.domain.service.UserService;
 import com.bank.mvc.utils.JsonResponse;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-import java.beans.PropertyEditorSupport;
-import java.util.*;
 
 @Controller
 public class MainController {
 
-    @Autowired
-    private UserService userService;
+    final static Logger logger = Logger.getLogger(MainController.class);
 
     @Autowired
-    private MessageSource messages;
+    private UserService userService;
 
     @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.HEAD})
     public String login(Model model) {
@@ -48,16 +37,9 @@ public class MainController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody JsonResponse createNewUser(@RequestBody User user)  {
-        System.out.println("User data: \n" + user.toString());
+        logger.info("POST: /register");
 
         return new JsonResponse("ERROR", "errors");
-    }
-
-    public MessageSource getMessages() {
-        return messages;
-    }
-    public void setMessages(MessageSource messages) {
-        this.messages = messages;
     }
 
 

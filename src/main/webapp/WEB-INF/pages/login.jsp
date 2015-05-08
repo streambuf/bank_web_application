@@ -49,7 +49,7 @@
             <div class='fa fa-times-circle'></div>
             <spring:message code="loginform.reginfo"/>
         </div>
-        <form id="register">
+        <form id="register" action="/register">
             <input placeholder='<spring:message code="registerform.lname"/>' name='lname' type='text'>
             <input placeholder='<spring:message code="registerform.fname"/>' name='fname' type='text'>
             <input placeholder='<spring:message code="registerform.patronymic"/>' name='patronymic' type='text'>
@@ -68,65 +68,10 @@
     <footer>
     </footer>
 </div>
+
 <script src="/resources/js/jquery-2.1.4.min.js"></script>
 <script src="/resources/js/login-form.js"></script>
-
-<script>
-$(function () {
-    var token = $("input[name='_csrf']").val();
-    var header = "X-CSRF-TOKEN";
-    $(document).ajaxSend(function(e, xhr, options) {
-        xhr.setRequestHeader(header, token);
-    });
-});
-
-$(function() {
-    $("#register").submit(function(e) {
-        e.preventDefault();
-        var data = $("#register").serializeForm();
-        console.log(data);
-        $.ajax({
-            'type': 'POST',
-            'url': "/register",
-            'contentType': 'application/json',
-            'data': JSON.stringify(data),
-            'dataType': 'json',
-            'success': function(result) {
-                if (result.status=="ERROR") {
-                    alert("error");
-                    console.log(result);
-                } else {
-                    alert("success");
-                    console.log(result);
-                }
-            },
-            'error': function(result) {
-                alert("fail");
-            }
-        });
-        return false;
-    });
-
-});
-
-$.fn.serializeForm = function() {
-    var o = {};
-    var a = this.serializeArray();
-    $.each(a, function() {
-        if (o[this.name]) {
-            if (!o[this.name].push) {
-                o[this.name] = [o[this.name]];
-            }
-            o[this.name].push(this.value || '');
-        } else {
-            o[this.name] = this.value || '';
-        }
-    });
-    return o;
-};
-
-
-</script>
+<script src="/resources/js/server.js"></script>
 
 </body>
 </html>
