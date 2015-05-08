@@ -6,8 +6,8 @@ $(function () {
     });
 });
 
-function sendPost(url, callSuccess, callError) {
-    var data = $(this).serializeForm();
+function sendPost(form, callSuccess, callError) {
+    var data = $(form).serializeForm();
 
     // TODO delete log in production
     console.log("Json data for server")
@@ -15,7 +15,7 @@ function sendPost(url, callSuccess, callError) {
 
     $.ajax({
         'type': 'POST',
-        'url': url,
+        'url': $(form).attr('action'),
         'contentType': 'application/json',
         'data': JSON.stringify(data),
         'dataType': 'json',

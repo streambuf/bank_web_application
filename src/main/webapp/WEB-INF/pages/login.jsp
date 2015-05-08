@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <link rel="stylesheet" href="/resources/css/login-form-reset.css">
@@ -50,17 +51,28 @@
             <spring:message code="loginform.reginfo"/>
         </div>
         <form id="register" action="/register">
+            <div class = "error"></div>
             <input placeholder='<spring:message code="registerform.lname"/>' name='lname' type='text'>
+            <div class = "error"></div>
             <input placeholder='<spring:message code="registerform.fname"/>' name='fname' type='text'>
+            <div class = "error"></div>
             <input placeholder='<spring:message code="registerform.patronymic"/>' name='patronymic' type='text'>
-            <input placeholder='<spring:message code="registerform.date_of_birth"/>' name='date_of_birth' type='text'>
+            <div class = "error"></div>
+            <input placeholder='<spring:message code="registerform.date_of_birth"/>' name='dateOfBirth' type='text'>
+            <div class = "error"></div>
             <input placeholder='<spring:message code="registerform.tin"/>' name='tin' type='text'>
+            <div class = "error"></div>
             <input placeholder='<spring:message code="registerform.citizenship"/>' name='citizenship' type='text'>
+            <div class = "error"></div>
             <input placeholder='<spring:message code="registerform.address"/>' name='address' type='text'>
+            <div class = "error"></div>
             <input placeholder='<spring:message code="registerform.phone"/>' name='phone' type='text'>
+            <div class = "error"></div>
             <input placeholder='<spring:message code="registerform.email"/>' name='email' type='email'>
+            <div class = "error"></div>
             <input placeholder='<spring:message code="registerform.password"/>' name='password' type='password'>
-            <input placeholder='<spring:message code="registerform.confirm_password"/>' name='confirm_password' type='password'>
+            <div class = "error"></div>
+            <input placeholder='<spring:message code="registerform.confirm_password"/>' name='confirmPassword' type='password'>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <button type="submit"><spring:message code="loginform.registration"/></button>
         </form>
@@ -70,6 +82,7 @@
 </div>
 
 <script src="/resources/js/jquery-2.1.4.min.js"></script>
+<script src="/resources/js/utils.js"></script>
 <script src="/resources/js/login-form.js"></script>
 <script src="/resources/js/server.js"></script>
 

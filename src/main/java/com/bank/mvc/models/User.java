@@ -49,6 +49,19 @@ public class User extends AbstractModel implements UserDetails {
         inverseJoinColumns = @JoinColumn(name="role_id"))
     private Set<UserRole> userRoles = new HashSet();
 
+    @Transient
+    private String confirmPassword;
+
+    @Transient
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    @Transient
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
     public User() {
         super();
     }

@@ -7,14 +7,18 @@ $('.switch').click(function(){
 $(function() {
     $("#register").submit(function(e) {
         e.preventDefault();
-        sendPost($(this).attr('action'),
+        hideAndEmptyErrors(".error");
+        sendPost($(this),
             function(result) {
-                alert(result);
+                console.log(result);
+                showError(result.errors);
             },
             function(result) {
-                alert(result);
+                console.log("error");
+                console.log(result);
             }
         );
     });
 
 });
+

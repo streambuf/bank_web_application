@@ -11,7 +11,7 @@
       ">
 
     <!-- Specifying base package of the Components like Controller, Service, DAO -->
-    <context:component-scan base-package="com.bank.mvc.controllers, com.bank.mvc.domain.service, com.bank.mvc.dao, com.bank.mvc.utils"/>
+    <context:component-scan base-package="com.bank.mvc.controllers, com.bank.mvc.domain.service, com.bank.mvc.domain.validation, com.bank.mvc.dao, com.bank.mvc.utils"/>
     <!-- Getting Database properties -->
     <context:property-placeholder location="classpath:META-INF/hibernate.properties"/>
 

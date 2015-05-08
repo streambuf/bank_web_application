@@ -193,3 +193,12 @@ body {
   margin-top: 5px;
   font-size: 10px;
 }
+
+.error {
+    color: indianred;
+    font-family: "Roboto";
+    font-size: 14px;
+    align: left;
+    margin-bottom: 5px;
+    display: none;
+}
