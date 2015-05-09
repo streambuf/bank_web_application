@@ -5,14 +5,17 @@ import com.bank.mvc.domain.validation.UserValidator;
 import com.bank.mvc.models.User;
 import com.bank.mvc.domain.service.UserService;
 import com.bank.mvc.utils.JsonResponse;
+import com.bank.mvc.utils.PasswordEncoder;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -27,14 +30,18 @@ public class MainController {
     @Autowired
     private UserValidator userValidator;
 
+    @Autowired
+    MessageSource msgSrc;
+
     @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.HEAD})
     public String login(Model model) {
-        model.addAttribute("user", new User());
         return "login";
     }
 
     @RequestMapping(value = "/dashboard", method = {RequestMethod.GET, RequestMethod.HEAD})
-    public String dashboard() {
+    public String dashboard(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", user);
         return "dashboard";
     }
 
@@ -51,22 +58,14 @@ public class MainController {
         if (!data.isEmpty()) {
             return new JsonResponse("ERROR", data);
         }
-        userService.saveClient(user);
-        data.put("message", "Регистрация успешно подтверждена. Необходимо подтввердить в банке.");
+        // encode password sha256
+        PasswordEncoder passwordEncoder = new PasswordEncoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        userService.saveUser(user);
+        data.put("message", msgSrc.getMessage("registerform.successMessage", null, Locale.getDefault()));
         return new JsonResponse("OK", data);
     }
-
-
-//    @RequestMapping(value = "/clientList", method = {RequestMethod.GET, RequestMethod.HEAD})
-//    @ModelAttribute("clients")
-//    public Collection<User> getClients() {
-//        return userService.getAllClients();
-//    }
-//
-//    @RequestMapping("/clientDetails")
-//    public User getClient(@RequestParam(value="id", required=true) int clientId) {
-//        return userService.getClientById(clientId);
-//    }
 
 
 }

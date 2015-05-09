@@ -7,12 +7,12 @@ import java.util.Collection;
 
 public interface UserService {
 
-    public Collection<User> getAllClients();
+    public Collection<User> getAllUsers();
 
-    public User getClientById(int clientId);
+    public User getUserById(long userId);
 
-    public void saveClient(User user);
+    public void saveUser(User user);
 
-    public void deleteClient(User user);
+    public void deleteUser(User user);
 
 }

@@ -15,7 +15,7 @@ public class PasswordEncoder implements org.springframework.security.crypto.pass
 
     public PasswordEncoder() {
         try {
-            md = MessageDigest.getInstance("MD5");
+            md = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
