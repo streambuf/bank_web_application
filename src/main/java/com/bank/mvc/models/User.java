@@ -147,13 +147,6 @@ public class User extends AbstractModel implements UserDetails {
         this.password = password;
     }
 
-    public String getBank() {
-        return username;
-    }
-
-    public void setBank(String bank) {
-        this.username = bank;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -173,7 +166,7 @@ public class User extends AbstractModel implements UserDetails {
 
     @Override
     public String getUsername() {
-        return lname;
+        return String.valueOf(super.getId());
     }
 
     @Override

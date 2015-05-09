@@ -27,20 +27,9 @@ public class HibernateUserDao implements UserDao {
 
     //@Transactional(readOnly = true)
     @Override
-    public User getById(int userId) {
+    public User getById(long userId) {
         return (User)sessionFactory.getCurrentSession()
                 .get(User.class, userId);
-    }
-
-    @Override
-    public User getByUsername(String username) {
-
-        Query query = sessionFactory.getCurrentSession().createQuery("from User u where u.username=:username");
-        query.setParameter("username", username);
-
-        User user = (User) query.uniqueResult();
-
-        return user;
     }
 
     @Override

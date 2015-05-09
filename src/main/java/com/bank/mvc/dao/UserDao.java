@@ -8,9 +8,7 @@ public interface UserDao {
 
     public Collection<User> getAll();
 
-    public User getById(int clientId);
-
-    public User getByUsername(String username);
+    public User getById(long userId);
 
     public void save(User user);
 
