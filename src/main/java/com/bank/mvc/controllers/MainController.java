@@ -44,11 +44,16 @@ public class MainController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public @ResponseBody JsonResponse createNewUser(@RequestBody User user)  {
+    public @ResponseBody JsonResponse createNewUser(@RequestBody User user) {
         logger.info("POST: /register");
-        Map<String, String> errors = new HashMap<String, String>();
-        userValidator.validate(user, errors);
-        return new JsonResponse("OK", errors);
+        Map<String, String> data = new HashMap<String, String>();
+        userValidator.validate(user, data);
+        if (!data.isEmpty()) {
+            return new JsonResponse("ERROR", data);
+        }
+        userService.saveClient(user);
+        data.put("message", "Регистрация успешно подтверждена. Необходимо подтввердить в банке.");
+        return new JsonResponse("OK", data);
     }
 
 

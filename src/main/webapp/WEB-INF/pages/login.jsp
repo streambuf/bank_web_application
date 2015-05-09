@@ -58,7 +58,7 @@
             <div class = "error"></div>
             <input placeholder='<spring:message code="registerform.patronymic"/>' name='patronymic' type='text'>
             <div class = "error"></div>
-            <input placeholder='<spring:message code="registerform.date_of_birth"/>' name='dateOfBirth' type='text'>
+            <input type="date" max="2000-01-01" min="1900-01-1" value="2012-04-10" placeholder='<spring:message code="registerform.date_of_birth"/>' name='dateOfBirth'>
             <div class = "error"></div>
             <input placeholder='<spring:message code="registerform.tin"/>' name='tin' type='text'>
             <div class = "error"></div>
@@ -66,7 +66,7 @@
             <div class = "error"></div>
             <input placeholder='<spring:message code="registerform.address"/>' name='address' type='text'>
             <div class = "error"></div>
-            <input placeholder='<spring:message code="registerform.phone"/>' name='phone' type='text'>
+            <input type="tel" pattern="\(\d\d\d\) ?\d\d\d-\d\d-\d\d" placeholder='<spring:message code="registerform.phone"/> (###) ###-##-##' name='phone'>
             <div class = "error"></div>
             <input placeholder='<spring:message code="registerform.email"/>' name='email' type='email'>
             <div class = "error"></div>

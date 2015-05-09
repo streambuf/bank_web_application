@@ -10,12 +10,13 @@ $(function() {
         hideAndEmptyErrors(".error");
         sendPost($(this),
             function(result) {
-                console.log(result);
-                showError(result.errors);
+                console.log("OK");
+                $("#register").hide();
+                $(".alert").empty().append(result.data.message);
             },
             function(result) {
                 console.log("error");
-                console.log(result);
+                showError(result.data);
             }
         );
     });

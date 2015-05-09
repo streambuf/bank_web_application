@@ -36,7 +36,7 @@ public class UserValidator extends AbstractValidator {
             }
         }
 
-
+        errors.remove("username");
 
     }
 }

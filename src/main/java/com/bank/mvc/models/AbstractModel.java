@@ -1,9 +1,10 @@
 package com.bank.mvc.models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+
+import jdk.nashorn.internal.objects.annotations.Getter;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 /**
  * Created by Zalman on 13.04.2015.
@@ -12,7 +13,8 @@ import javax.persistence.MappedSuperclass;
 public class AbstractModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name="generator", strategy="increment")
+    @GeneratedValue(generator="generator")
     private long id;
 
     public AbstractModel() {}
@@ -26,7 +28,6 @@ public class AbstractModel {
     }
 
     public long getId() {
-
         return id;
     }
 }

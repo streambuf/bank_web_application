@@ -7,7 +7,7 @@ import java.util.Map;
  */
 public class JsonResponse {
     private String status = "";
-    private Map<String, String> errors;
+    private Map<String, String> data;
 
     public String getStatus() {
         return status;
@@ -17,16 +17,16 @@ public class JsonResponse {
         this.status = status;
     }
 
-    public Map<String, String> getErrors() {
-        return errors;
+    public Map<String, String> getData() {
+        return data;
     }
 
-    public void setErrors(Map<String, String> errors) {
-        this.errors = errors;
+    public void setData(Map<String, String> data) {
+        this.data = data;
     }
 
-    public JsonResponse(String status, Map<String, String> errors) {
+    public JsonResponse(String status, Map<String, String> data) {
         this.status = status;
-        this.errors = errors;
+        this.data = data;
     }
 }

@@ -23,8 +23,9 @@ public class User extends AbstractModel implements UserDetails {
     @Column(name="patronymic")
     private String patronymic;
 
+    @Temporal(value=TemporalType.DATE)
     @Column(name="date_of_birth")
-    private String dateOfBirth;
+    private Date dateOfBirth;
 
     @Column(name="tin")
     private int tin;
@@ -82,7 +83,7 @@ public class User extends AbstractModel implements UserDetails {
         return patronymic;
     }
 
-    public String getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -118,7 +119,7 @@ public class User extends AbstractModel implements UserDetails {
         this.patronymic = patronymic;
     }
 
-    public void setDateOfBirth(String date_of_birth) {
+    public void setDateOfBirth(Date date_of_birth) {
         this.dateOfBirth = date_of_birth;
     }
 
