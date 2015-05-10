@@ -1,5 +1,9 @@
 package com.bank.mvc.models;
 
+
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -47,8 +51,19 @@ public class User extends AbstractModel implements UserDetails {
         inverseJoinColumns = @JoinColumn(name="role_id"))
     private Set<UserRole> userRoles = new HashSet();
 
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    private Set<Account> accounts = new HashSet();
+
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
     private Passport passport;
+
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
+    }
 
     public Passport getPassport() {
         return passport;

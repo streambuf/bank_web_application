@@ -1,7 +1,9 @@
 package com.bank.mvc.controllers;
 
 
+import com.bank.mvc.domain.service.AccountService;
 import com.bank.mvc.domain.validation.UserValidator;
+import com.bank.mvc.models.Account;
 import com.bank.mvc.models.User;
 import com.bank.mvc.domain.service.UserService;
 import com.bank.mvc.utils.JsonResponse;
@@ -14,9 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -26,6 +26,9 @@ public class MainController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AccountService accountService;
 
     @Autowired
     private UserValidator userValidator;
@@ -42,6 +45,7 @@ public class MainController {
     public String dashboard(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
+
         return "dashboard";
     }
 
