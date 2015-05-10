@@ -164,8 +164,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Page Header
-                <small>Optional description</small>
+                Карты
+                <small>Информация по вашим картам</small>
             </h1>
 
         </section>
@@ -173,7 +173,50 @@
         <!-- Main content -->
         <section class="content">
 
-            <!-- Your Page Content Here -->
+
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <div class="col-lg-4 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3>15231 <i class="fa fa-rub"></i></h3>
+                            <p>Карта</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-rub"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">Подробнее <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+                <div class="col-lg-4 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>193 $</h3>
+                            <p>Карта</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-social-usd"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">Подробнее <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+                <div class="col-lg-4 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>44 €</h3>
+                            <p>Карта</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-social-euro"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">Подробнее <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+
+            </div><!-- /.row -->
 
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->

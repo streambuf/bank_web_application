@@ -3,6 +3,7 @@ DROP TABLE passport;
 DROP TABLE bank_account;
 DROP TABLE bank_user;
 DROP TABLE bank_role;
+DROP TABLE currency;
 
 
 CREATE TABLE bank_role (
@@ -17,24 +18,30 @@ INSERT INTO bank_role VALUES( 3, 'ROLE_ADMIN' );
 
 CREATE TABLE bank_user (
   id NUMBER(10) NOT NULL,
-  username VARCHAR2(50),
   lname VARCHAR2(50),
   fname VARCHAR2(50),
   patronymic VARCHAR2(50),
   date_of_birth DATE,
-  tin NUMBER(10), -- TIN - Taxpayer Identification Number
+  tin NUMBER(12), -- TIN - Taxpayer Identification Number
   email VARCHAR2(50),
   citizenship VARCHAR2(100),
   address VARCHAR2(100),
   phone VARCHAR2(50),
-  password VARCHAR2(50),
+  password VARCHAR2(64),
   PRIMARY KEY (id)
 );
 
-INSERT INTO bank_user (id, username, lname, fname, patronymic, date_of_birth, tin, email,
+INSERT INTO bank_user (id,lname, fname, patronymic, date_of_birth, tin, email,
 citizenship, address, phone, password)
-VALUES(1, 'bank', 'Mois', 'Maxim', 'patronymic', '30-nov-08', 12345, 'email@mail.ru',
-'rus', 'Moscow', '823423452544325', '202cb962ac59075b964b07152d234b70');
+select 100000,'Моисеев', 'Максим', 'Алексеевич', '15-apr-1993', 123456789126, 'streambuf@mail.ru', 
+'rus', 'Moscow', '89269262626', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+from dual union all select   
+100001,'Смирнов', 'Иван', 'Васильевич', '21-nov-1972', 423456789127, 'employee@mail.ru', 
+'rus', 'Moscow', '89261334212', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+from dual union all select   
+100002,'Дятлов', 'Виталй', 'Михайлович', '16-sep-1964', 323456789122, 'admin@mail.ru', 
+'rus', 'Moscow', '89261345432', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+from dual;
 
 CREATE TABLE user_role (
   id NUMBER(10) NOT NULL,
@@ -43,71 +50,52 @@ CREATE TABLE user_role (
   PRIMARY KEY (id, role_id, user_id)
 );
 
-
-INSERT INTO user_role VALUES( 1, 1, 1 );
-INSERT INTO user_role VALUES( 2, 3, 1 );
+INSERT INTO user_role VALUES( 1, 1, 100000 );
+INSERT INTO user_role VALUES( 1, 1, 100001 );
+INSERT INTO user_role VALUES( 1, 1, 100002 );
 
 CREATE TABLE passport (
   id NUMBER(10) NOT NULL,
-  series NUMBER(10),
-  num NUMBER(10),
+  series NUMBER(4),
+  num NUMBER(6),
   date_of_issue DATE,
   issued_by VARCHAR2(500),
-  client_id INTEGER,
-  PRIMARY KEY (id, client_id),
-  FOREIGN KEY(client_id) REFERENCES bank_user(id) 
+  PRIMARY KEY (id)
 );
+
+INSERT INTO passport (id, series, num, date_of_issue, issued_by) 
+select 100000, 1234, 123456, '15-apr-2007', 'УФМС Твери'
+from dual union all select  
+100001, 4142, 846578, '13-nov-2002', 'УФМС Твери'
+from dual union all select  
+100002, 5313, 591049, '25-sep-2001', 'УФМС Твери'
+from dual;
+
+CREATE TABLE currency (
+  id NUMBER(10) NOT NULL,
+  name VARCHAR(20) CHECK( name IN ('RUBLE', 'EUROS', 'DOLLAR')),
+  PRIMARY KEY (id)
+);
+
+INSERT INTO currency VALUES( 1, 'RUBLE' );
+INSERT INTO currency VALUES( 2, 'EUROS' );
+INSERT INTO currency VALUES( 3, 'DOLLAR' );
 
 CREATE TABLE bank_account (
   id NUMBER(10) NOT NULL,
-  bank_identifier NUMBER(10),
+  bank_identifier NUMBER(12),
   balance NUMBER(10),
-  valuta VARCHAR2(500),
+  currency_id INTEGER,
   client_id INTEGER,
   PRIMARY KEY (id, client_id),
-  FOREIGN KEY (client_id) REFERENCES bank_user (id)
+  FOREIGN KEY (client_id) REFERENCES bank_user (id) ON DELETE CASCADE,
+  FOREIGN KEY (currency_id) REFERENCES currency (id)
 );
 
-
--- autoincrements for tables
---DROP SEQUENCE client_seq;
---CREATE SEQUENCE client_seq;
---
---CREATE OR REPLACE TRIGGER client_autoincrement 
---BEFORE INSERT ON client
---FOR EACH ROW
---
---BEGIN
---  SELECT client_seq.NEXTVAL
---  INTO   :new.id
---  FROM   dual;
---END;
---/
---
---DROP SEQUENCE passport_seq;
---CREATE SEQUENCE passport_seq;
---
---CREATE OR REPLACE TRIGGER passport_autoincrement 
---BEFORE INSERT ON passport
---FOR EACH ROW
---
---BEGIN
---  SELECT passport_seq.NEXTVAL
---  INTO   :new.id
---  FROM   dual;
---END;
---/
---
---DROP SEQUENCE bank_account_seq;
---CREATE SEQUENCE bank_account_seq;
---
---CREATE OR REPLACE TRIGGER bank_account_autoincrement 
---BEFORE INSERT ON bank_account
---FOR EACH ROW
---
---BEGIN
---  SELECT bank_account_seq.NEXTVAL
---  INTO   :new.id
---  FROM   dual;
---END;
---/
+INSERT INTO bank_account (id, bank_identifier, balance, currency_id, client_id)
+select 1, 123456789123, 15231, 1, 100000
+from dual union all select  
+2, 123456789124, 193, 2, 100000
+from dual union all select  
+3, 123456789125, 44, 3, 100000
+from dual;

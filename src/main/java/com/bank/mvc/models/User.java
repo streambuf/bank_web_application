@@ -11,9 +11,6 @@ import java.util.*;
 @Table(name="bank_user")
 public class User extends AbstractModel implements UserDetails {
 
-    @Column(name="username")
-    private String username;
-
     @Column(name="lname")
     private String lname;
 
@@ -28,7 +25,7 @@ public class User extends AbstractModel implements UserDetails {
     private Date dateOfBirth;
 
     @Column(name="tin")
-    private int tin;
+    private long tin;
 
     @Column(name="email")
     private String email;
@@ -50,6 +47,17 @@ public class User extends AbstractModel implements UserDetails {
         inverseJoinColumns = @JoinColumn(name="role_id"))
     private Set<UserRole> userRoles = new HashSet();
 
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+//    private Passport passport;
+//
+//    public Passport getPassport() {
+//        return passport;
+//    }
+//
+//    public void setPassport(Passport passport) {
+//        this.passport = passport;
+//    }
+
     @Transient
     private String confirmPassword;
 
@@ -67,7 +75,7 @@ public class User extends AbstractModel implements UserDetails {
         super();
     }
 
-    public User(long id) {
+    public User(int id) {
         super(id);
     }
 
@@ -87,7 +95,7 @@ public class User extends AbstractModel implements UserDetails {
         return dateOfBirth;
     }
 
-    public int getTin() {
+    public long getTin() {
         return tin;
     }
 
@@ -123,7 +131,7 @@ public class User extends AbstractModel implements UserDetails {
         this.dateOfBirth = date_of_birth;
     }
 
-    public void setTin(int tin) {
+    public void setTin(long tin) {
         this.tin = tin;
     }
 
@@ -188,4 +196,5 @@ public class User extends AbstractModel implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
