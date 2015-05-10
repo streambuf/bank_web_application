@@ -193,6 +193,12 @@
             <version>1.2.17</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.sitemesh</groupId>
+            <artifactId>sitemesh</artifactId>
+            <version>3.0-alpha-2</version>
+        </dependency>
+
 
 
     </dependencies>

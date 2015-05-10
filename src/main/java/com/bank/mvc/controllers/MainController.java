@@ -3,7 +3,6 @@ package com.bank.mvc.controllers;
 
 import com.bank.mvc.domain.service.AccountService;
 import com.bank.mvc.domain.validation.UserValidator;
-import com.bank.mvc.models.Account;
 import com.bank.mvc.models.User;
 import com.bank.mvc.domain.service.UserService;
 import com.bank.mvc.utils.JsonResponse;
@@ -41,12 +40,12 @@ public class MainController {
         return "login";
     }
 
-    @RequestMapping(value = "/dashboard", method = {RequestMethod.GET, RequestMethod.HEAD})
+    @RequestMapping(value = "/dashboard/client/main", method = {RequestMethod.GET, RequestMethod.HEAD})
     public String dashboard(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
 
-        return "dashboard";
+        return "dashboard_client_main";
     }
 
     @RequestMapping(value = "/access_denied", method = {RequestMethod.GET, RequestMethod.HEAD})
