@@ -1,8 +1,6 @@
 package com.bank.mvc.models;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by Zalman on 10.05.2015.
@@ -24,7 +22,7 @@ public class Account extends AbstractModel  {
 
     @Enumerated(EnumType.STRING)
     @Column(name="currency")
-    private ListCurrency listCurrency;
+    private ListCurrency currency;
 
     public User getUser() {
         return user;
@@ -34,12 +32,12 @@ public class Account extends AbstractModel  {
         this.user = user;
     }
 
-    public ListCurrency getListCurrency() {
-        return listCurrency;
+    public ListCurrency getCurrency() {
+        return currency;
     }
 
-    public void setListCurrency(ListCurrency listCurrency) {
-        this.listCurrency = listCurrency;
+    public void setCurrency(ListCurrency currency) {
+        this.currency = currency;
     }
 
     public long getBankIdentifier() {

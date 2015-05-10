@@ -164,8 +164,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Карты
-                <small>Информация по вашим картам</small>
+                Счета
+                <small>Информация по вашим счетам</small>
             </h1>
 
         </section>
@@ -176,47 +176,63 @@
 
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-lg-4 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-aqua">
-                        <div class="inner">
-                            <h3>15231 <i class="fa fa-rub"></i></h3>
-                            <p>Карта</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-rub"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">Подробнее <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div><!-- ./col -->
-                <div class="col-lg-4 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-green">
-                        <div class="inner">
-                            <h3>193 $</h3>
-                            <p>Карта</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-social-usd"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">Подробнее <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div><!-- ./col -->
-                <div class="col-lg-4 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-yellow">
-                        <div class="inner">
-                            <h3>44 €</h3>
-                            <p>Карта</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-social-euro"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">Подробнее <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div><!-- ./col -->
+                <c:forEach items="${user.accounts}" var="account">
 
+                    <c:choose>
+                        <c:when test="${account.currency=='RUBLE'}">
+                            <div class="col-lg-4 col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box bg-aqua">
+                                    <div class="inner">
+                                        <h3>${account.balance} <i class="fa fa-rub"></i></h3>
+                                        <p>Номер счета: ${account.bankIdentifier}</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-rub"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">Подробнее <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div><!-- ./col -->
+                        </c:when>
+                        <c:when test="${account.currency=='EUROS'}">
+                            <div class="col-lg-4 col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box bg-green">
+                                    <div class="inner">
+                                        <h3>${account.balance} $</h3>
+                                        <p>Номер счета: ${account.bankIdentifier}</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-social-usd"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">Подробнее <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div><!-- ./col -->
+                        </c:when>
+                        <c:when test="${account.currency=='DOLLAR'}">
+                            <div class="col-lg-4 col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box bg-yellow">
+                                    <div class="inner">
+                                        <h3>${account.balance} €</h3>
+                                        <p>Номер счета: ${account.bankIdentifier}</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-social-euro"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">Подробнее <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div><!-- ./col -->
+                        </c:when>
+                    </c:choose>
+
+                </c:forEach>
             </div><!-- /.row -->
+
+
+
+
+
 
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
