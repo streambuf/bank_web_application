@@ -47,16 +47,16 @@ public class User extends AbstractModel implements UserDetails {
         inverseJoinColumns = @JoinColumn(name="role_id"))
     private Set<UserRole> userRoles = new HashSet();
 
-//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
-//    private Passport passport;
-//
-//    public Passport getPassport() {
-//        return passport;
-//    }
-//
-//    public void setPassport(Passport passport) {
-//        this.passport = passport;
-//    }
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+    private Passport passport;
+
+    public Passport getPassport() {
+        return passport;
+    }
+
+    public void setPassport(Passport passport) {
+        this.passport = passport;
+    }
 
     @Transient
     private String confirmPassword;
