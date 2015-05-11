@@ -22,10 +22,10 @@ public class OperationTransferValidator extends AbstractValidator {
 
     static String fieldAccountPayee = "accountPayee";
     static String fieldQuantityOfMoney = "quantityOfMoney";
-    static String fieldAccountSender = "accountSender";
+    static String fieldAccountSender = "accountSenderError";
     static int maxLengthAccountPayee = 19;
-    static int minQuantityOfMoney = 1;
-    static int maxQuantityOfMoney = 100000;
+    static double minQuantityOfMoney = 1;
+    static double maxQuantityOfMoney = 100000;
 
     public Map<String, String> validate(OperationTransfer operationTransfer) {
 
@@ -40,7 +40,7 @@ public class OperationTransferValidator extends AbstractValidator {
         double quantityOfMoney = operationTransfer.getQuantityOfMoney();
         if (quantityOfMoney < minQuantityOfMoney) {
             errors.put(fieldQuantityOfMoney, "Минимальная сумма составляет " + minQuantityOfMoney);
-        } else if (quantityOfMoney > maxLengthAccountPayee) {
+        } else if (quantityOfMoney > maxQuantityOfMoney) {
             errors.put(fieldQuantityOfMoney, "Максимальная сумма составляет " + maxQuantityOfMoney);
         }
 

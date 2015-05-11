@@ -8,15 +8,16 @@ $(function(){
 $(function() {
     $(".operation").submit(function(e) {
         e.preventDefault();
+        hideAndEmptyErrors(".error");
         sendPost($(this),
             function(result) {
                 console.log("OK");
-                //$("#register").hide();
+                $(".operation").hide();
                 //$(".alert").empty().append(result.data.message);
             },
             function(result) {
                 console.log("error");
-                //showError(result.data);
+                showError(result.data);
             }
         );
     });

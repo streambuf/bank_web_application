@@ -34,6 +34,8 @@
                                 <!-- select -->
                                 <div class="form-group">
                                     <label>Выберите свой счет</label>
+                                    <div class = "error"></div>
+                                    <input type="hidden" name="accountSenderError"/>
                                     <select class="form-control" name="accountSenderId">
                                         <option disabled selected>Выберите свой счет</option>
                                         <c:forEach items="${user.accounts}" var="account">
@@ -45,12 +47,14 @@
 
                                 <div class="form-group">
                                     <label for="accountPayee">Счет получателя</label>
-                                    <input type="number" class="form-control" id="accountPayee" name="accountPayee" placeholder="Введит счет"/>
+                                    <div class = "error"></div>
+                                    <input type="number" class="form-control" id="accountPayee" name="accountPayee" min="-9223372036854775807" max="9223372036854775807" placeholder="Введит счет"/>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="quantityOfMoney">Сумма</label>
-                                    <input type="number" step="0.01" class="form-control" id="quantityOfMoney" name="quantityOfMoney" placeholder="Введит сумму">
+                                    <div class = "error"></div>
+                                    <input type="number" step="0.01" class="form-control" id="quantityOfMoney" min="-9223372036854775807" max="9223372036854775807" name="quantityOfMoney" placeholder="Введит сумму">
                                 </div>
 
                             </div><!-- /.box-body -->
@@ -62,6 +66,34 @@
                     </div><!-- /.box -->
                 </div>
             </div>
+
+
+
+
+            <div class="example-modal">
+                <div class="modal modal-success">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Modal Success</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>One fine body&hellip;</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-outline">Save changes</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+            </div><!-- /.example-modal -->
+
+
+
+
+
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 

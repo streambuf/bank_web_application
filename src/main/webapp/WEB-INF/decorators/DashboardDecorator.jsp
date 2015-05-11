@@ -21,6 +21,8 @@
     <link href="/resources/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
 
     <link href="/resources/css/skin-blue.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="/resources/css/dashboard.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="skin-blue">
@@ -175,6 +177,7 @@
 <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="/resources/js/app.min.js" type="text/javascript"></script>
 <script src="/resources/js/maskedinput.min.js"></script>
+<script src="/resources/js/utils.js"></script>
 <script src="/resources/js/server.js"></script>
 <script src="/resources/js/dashboard.js"></script>
 

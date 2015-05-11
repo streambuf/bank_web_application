@@ -77,7 +77,7 @@ from dual;
 
 CREATE TABLE bank_account (
   id NUMBER(19) NOT NULL,
-  balance NUMBER(10),
+  balance  NUMBER(12,4),
   currency VARCHAR(20) CHECK( currency IN ('RUBLE', 'EUROS', 'DOLLAR')),
   client_id NUMBER(10),
   PRIMARY KEY (id, client_id),
@@ -96,7 +96,7 @@ from dual;
 CREATE TABLE operation_transfer (
   id NUMBER(10) NOT NULL,
   account_identifier NUMBER(19),
-  quantity_of_money NUMBER(10),
+  quantity_of_money NUMBER(12,4),
   operation_date DATE,
   bank_account_id NUMBER(19),
   client_id NUMBER(10),
