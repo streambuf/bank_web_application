@@ -41,11 +41,17 @@ public class MainController {
     }
 
     @RequestMapping(value = "/dashboard/client/main", method = {RequestMethod.GET, RequestMethod.HEAD})
-    public String dashboard(Model model) {
+    public String dashboardClientMain(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
-
         return "dashboard_client_main";
+    }
+
+    @RequestMapping(value = "/dashboard/client/transfer", method = {RequestMethod.GET, RequestMethod.HEAD})
+    public String dashboardClientTransfer(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", user);
+        return "dashboard_client_transfer";
     }
 
     @RequestMapping(value = "/access_denied", method = {RequestMethod.GET, RequestMethod.HEAD})

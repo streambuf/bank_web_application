@@ -3,7 +3,7 @@ DROP TABLE passport;
 DROP TABLE bank_account;
 DROP TABLE bank_user;
 DROP TABLE bank_role;
-DROP TABLE currency;
+
 
 
 CREATE TABLE bank_role (
@@ -71,31 +71,35 @@ from dual union all select
 100002, 5313, 591049, '25-sep-2001', '”‘Ã— “‚ÂË'
 from dual;
 
-CREATE TABLE currency (
-  id NUMBER(10) NOT NULL,
-  name VARCHAR(20) CHECK( name IN ('RUBLE', 'EUROS', 'DOLLAR')),
-  PRIMARY KEY (id)
-);
 
-INSERT INTO currency VALUES( 1, 'RUBLE' );
-INSERT INTO currency VALUES( 2, 'EUROS' );
-INSERT INTO currency VALUES( 3, 'DOLLAR' );
 
 CREATE TABLE bank_account (
   id NUMBER(10) NOT NULL,
   bank_identifier NUMBER(12),
   balance NUMBER(10),
-  currency_id INTEGER,
+  currency VARCHAR(20) CHECK( currency IN ('RUBLE', 'EUROS', 'DOLLAR')),
   client_id INTEGER,
   PRIMARY KEY (id, client_id),
-  FOREIGN KEY (client_id) REFERENCES bank_user (id) ON DELETE CASCADE,
-  FOREIGN KEY (currency_id) REFERENCES currency (id)
+  FOREIGN KEY (client_id) REFERENCES bank_user (id) ON DELETE CASCADE
+
 );
 
-INSERT INTO bank_account (id, bank_identifier, balance, currency_id, client_id)
-select 1, 123456789123, 15231, 1, 100000
+INSERT INTO bank_account (id, bank_identifier, balance, currency, client_id)
+select 1, 123456789123, 15231, 'RUBLE', 100000
 from dual union all select  
-2, 123456789124, 193, 2, 100000
+2, 123456789124, 193, 'EUROS', 100000
 from dual union all select  
-3, 123456789125, 44, 3, 100000
+3, 123456789125, 44, 'DOLLAR', 100000
 from dual;
+
+--CREATE TABLE operation_transfer (
+--  id NUMBER(10) NOT NULL,
+--  account_identifier NUMBER(12),
+--  quantity_of_money NUMBER(10),
+--  bank_account_id INTEGER,
+--  client_id INTEGER,
+--  PRIMARY KEY (id, client_id),
+--  FOREIGN KEY (client_id) REFERENCES bank_user (id) ON DELETE CASCADE,
+--  FOREIGN KEY (currency_id) REFERENCES currency (id)
+--);
+

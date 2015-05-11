@@ -30,7 +30,6 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <c:forEach items="${user.accounts}" var="account">
-
                     <c:choose>
                         <c:when test="${account.currency=='RUBLE'}">
                             <div class="col-lg-4 col-xs-6">
@@ -84,23 +83,12 @@
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 
-
-<sec:authorize access="hasRole('ROLE_CLIENT',)">
-
-</sec:authorize>
-
-<sec:authorize access="hasRole('ROLE_EMPLOYEE')">
-
-
-    ${user.id}
-    ${user.lname}
-
-</sec:authorize>
-<sec:authorize access="hasRole('ROLE_ADMIN')">
-
-</sec:authorize>
-
-
-
+    <!-- add class .active for li[num] in sidebar-menu -->
+    <input id="meta.page.li.num" type="hidden" value="1" />
 </body>
+
+<div id="javascript">
+
+</div>
+
 </html>

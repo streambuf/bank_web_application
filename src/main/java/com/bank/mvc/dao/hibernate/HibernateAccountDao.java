@@ -2,7 +2,6 @@ package com.bank.mvc.dao.hibernate;
 
 import com.bank.mvc.dao.AccountDao;
 import com.bank.mvc.models.Account;
-import com.bank.mvc.models.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -31,19 +30,19 @@ public class HibernateAccountDao implements AccountDao {
 
     //@Transactional(readOnly = true)
     @Override
-    public Account getById(long userId) {
+    public Account getById(long accountId) {
         return (Account)sessionFactory.getCurrentSession()
-                .get(Account.class, userId);
+                .get(Account.class, accountId);
     }
 
     @Override
-    public void save(Account user) {
-        sessionFactory.getCurrentSession().merge(user);
+    public void save(Account account) {
+        sessionFactory.getCurrentSession().merge(account);
     }
 
     @Override
-    public void delete(Account user) {
-        sessionFactory.getCurrentSession().delete(user);
+    public void delete(Account account) {
+        sessionFactory.getCurrentSession().delete(account);
     }
 
 }

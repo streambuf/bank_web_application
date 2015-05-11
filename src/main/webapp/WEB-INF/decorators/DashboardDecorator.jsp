@@ -30,7 +30,7 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="/dashboard" class="logo"><b>АИС</b> банк</a>
+        <a href="/dashboard/client/main" class="logo"><b>АИС</b> банк</a>
 
         <!-- Header Navbar -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -132,8 +132,8 @@
             <ul class="sidebar-menu">
                 <li class="header">Меню</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="#"><span><i class="fa fa-home"></i> Главная</span></a></li>
-                <li><a href="#"><span><i class="fa fa-rub"></i> Перевод средств</span></a></li>
+                <li><a href="/dashboard/client/main"><span><i class="fa fa-home"></i> Главная</span></a></li>
+                <li><a href="/dashboard/client/transfer"><span><i class="fa fa-rub"></i> Перевод средств</span></a></li>
                 <li><a href="#"><span><i class="fa fa-cutlery"></i> Оплата услуг</span></a></li>
                 <li><a href="#"><span><i class="fa fa-dollar"></i> Обмен валюты</span></a></li>
                 <li class="treeview">
@@ -175,6 +175,9 @@
 <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="/resources/js/app.min.js" type="text/javascript"></script>
 <script src="/resources/js/server.js"></script>
+<script src="/resources/js/dashboard.js"></script>
+
+<sitemesh:write property='div.javascript' />
 
 </body>
 </html>
