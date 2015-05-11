@@ -1,8 +1,10 @@
 DROP TABLE user_role;
+DROP TABLE operation_transfer;
 DROP TABLE passport;
 DROP TABLE bank_account;
 DROP TABLE bank_user;
 DROP TABLE bank_role;
+
 
 
 
@@ -77,7 +79,7 @@ CREATE TABLE bank_account (
   id NUMBER(19) NOT NULL,
   balance NUMBER(10),
   currency VARCHAR(20) CHECK( currency IN ('RUBLE', 'EUROS', 'DOLLAR')),
-  client_id INTEGER,
+  client_id NUMBER(10),
   PRIMARY KEY (id, client_id),
   FOREIGN KEY (client_id) REFERENCES bank_user (id) ON DELETE CASCADE
 
@@ -91,14 +93,22 @@ from dual union all select
 4081784000125000124, 44, 'DOLLAR', 100000
 from dual;
 
---CREATE TABLE operation_transfer (
---  id NUMBER(10) NOT NULL,
---  account_identifier NUMBER(12),
---  quantity_of_money NUMBER(10),
---  bank_account_id INTEGER,
---  client_id INTEGER,
---  PRIMARY KEY (id, client_id),
---  FOREIGN KEY (client_id) REFERENCES bank_user (id) ON DELETE CASCADE,
---  FOREIGN KEY (currency_id) REFERENCES currency (id)
---);
+CREATE TABLE operation_transfer (
+  id NUMBER(10) NOT NULL,
+  account_identifier NUMBER(19),
+  quantity_of_money NUMBER(10),
+  operation_date DATE,
+  bank_account_id NUMBER(19),
+  client_id NUMBER(10),
+  PRIMARY KEY (id, client_id, bank_account_id),
+  FOREIGN KEY (client_id) REFERENCES bank_user (id) ON DELETE CASCADE,
+  FOREIGN KEY (bank_account_id, client_id) REFERENCES bank_account (id, client_id) ON DELETE CASCADE
+);
 
+INSERT INTO operation_transfer (id, account_identifier, quantity_of_money, operation_date, bank_account_id, client_id)
+select 1, 4081781050000000019,500, '10-may-2015',  4081781050000000068, 100000
+from dual union all select  
+2, 4081784000125006763,100, '10-may-2015',  4081784000125000124, 100000
+from dual union all select  
+3, 4081781050000000462,2470, '11-may-2015',  4081781050000000068, 100000
+from dual;

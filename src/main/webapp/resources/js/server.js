@@ -20,6 +20,7 @@ function sendPost(form, callSuccess, callError) {
         'data': JSON.stringify(data),
         'dataType': 'json',
         'success': function(result) {
+            console.log(result);
             if (result.status=="OK") {
                 console.log("sendPost: OK");
                 callSuccess(result);

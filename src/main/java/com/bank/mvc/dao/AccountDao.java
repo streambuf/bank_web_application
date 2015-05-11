@@ -17,5 +17,4 @@ public interface AccountDao {
 
     public void delete(Account account);
 
-
 }

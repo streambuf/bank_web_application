@@ -28,7 +28,6 @@ public class HibernateAccountDao implements AccountDao {
                 createQuery("from Account").list();
     }
 
-    //@Transactional(readOnly = true)
     @Override
     public Account getById(long accountId) {
         return (Account)sessionFactory.getCurrentSession()

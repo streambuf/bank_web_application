@@ -4,6 +4,8 @@ import com.bank.mvc.models.User;
 import com.bank.mvc.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -15,7 +17,9 @@ public class UserValidator extends AbstractValidator {
     static String fieldPass = "password";
     static String fieldConfirmPass = "confirmPassword";
 
-    public void validate(User user, Map<String, String> errors) {
+    public Map<String, String> validate(User user) {
+
+        Map<String, String> errors = new HashMap<>();
 
         this.checkAllFieldsOnEmpty(user, errors);
 
@@ -36,7 +40,7 @@ public class UserValidator extends AbstractValidator {
             }
         }
 
-        errors.remove("username");
+        return errors;
 
     }
 }

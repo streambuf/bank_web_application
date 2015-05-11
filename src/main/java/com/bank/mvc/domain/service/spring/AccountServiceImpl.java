@@ -1,6 +1,7 @@
-package com.bank.mvc.domain.service;
+package com.bank.mvc.domain.service.spring;
 
 import com.bank.mvc.dao.AccountDao;
+import com.bank.mvc.domain.service.AccountService;
 import com.bank.mvc.models.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

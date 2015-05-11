@@ -2,7 +2,9 @@ package com.bank.mvc.controllers;
 
 
 import com.bank.mvc.domain.service.AccountService;
+import com.bank.mvc.domain.service.OperationTransferService;
 import com.bank.mvc.domain.validation.UserValidator;
+import com.bank.mvc.models.OperationTransfer;
 import com.bank.mvc.models.User;
 import com.bank.mvc.domain.service.UserService;
 import com.bank.mvc.utils.JsonResponse;
@@ -27,7 +29,7 @@ public class MainController {
     private UserService userService;
 
     @Autowired
-    private AccountService accountService;
+    private OperationTransferService operationTransferService;
 
     @Autowired
     private UserValidator userValidator;
@@ -62,8 +64,7 @@ public class MainController {
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody JsonResponse createNewUser(@RequestBody User user) {
         logger.info("POST: /register");
-        Map<String, String> data = new HashMap<String, String>();
-        userValidator.validate(user, data);
+        Map<String, String> data = userValidator.validate(user);
         if (!data.isEmpty()) {
             return new JsonResponse("ERROR", data);
         }
@@ -75,6 +76,9 @@ public class MainController {
         data.put("message", msgSrc.getMessage("registerform.successMessage", null, Locale.getDefault()));
         return new JsonResponse("OK", data);
     }
+
+
+
 
 
 }

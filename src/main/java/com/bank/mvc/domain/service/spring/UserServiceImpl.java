@@ -1,6 +1,7 @@
-package com.bank.mvc.domain.service;
+package com.bank.mvc.domain.service.spring;
 
 import com.bank.mvc.dao.UserDao;
+import com.bank.mvc.domain.service.UserService;
 import com.bank.mvc.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

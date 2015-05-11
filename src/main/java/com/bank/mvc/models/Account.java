@@ -1,6 +1,8 @@
 package com.bank.mvc.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Zalman on 10.05.2015.
@@ -11,7 +13,7 @@ import javax.persistence.*;
 public class Account extends AbstractModel  {
 
     @Column(name="balance")
-    private int balance;
+    private double balance;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
@@ -20,6 +22,9 @@ public class Account extends AbstractModel  {
     @Enumerated(EnumType.STRING)
     @Column(name="currency")
     private ListCurrency currency;
+
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "accountPayee")
+    private Set<OperationTransfer> operationsTransfer = new HashSet();
 
     public User getUser() {
         return user;
@@ -37,11 +42,11 @@ public class Account extends AbstractModel  {
         this.currency = currency;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 

@@ -17,7 +17,6 @@ public class HibernateUserDao implements UserDao {
     @Autowired
     SessionFactory sessionFactory;
 
-    //@Transactional(readOnly = true)
     @Override
     public Collection<User> getAll() {
         String hql = "from User";
@@ -25,7 +24,6 @@ public class HibernateUserDao implements UserDao {
                 createQuery("from User").list();
     }
 
-    //@Transactional(readOnly = true)
     @Override
     public User getById(long userId) {
         return (User)sessionFactory.getCurrentSession()
