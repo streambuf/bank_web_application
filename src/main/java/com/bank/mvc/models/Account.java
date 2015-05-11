@@ -10,9 +10,6 @@ import javax.persistence.*;
 @Table(name="bank_account")
 public class Account extends AbstractModel  {
 
-    @Column(name="bank_identifier")
-    private long bankIdentifier;
-
     @Column(name="balance")
     private int balance;
 
@@ -38,14 +35,6 @@ public class Account extends AbstractModel  {
 
     public void setCurrency(ListCurrency currency) {
         this.currency = currency;
-    }
-
-    public long getBankIdentifier() {
-        return bankIdentifier;
-    }
-
-    public void setBankIdentifier(long bankIdentifier) {
-        this.bankIdentifier = bankIdentifier;
     }
 
     public int getBalance() {

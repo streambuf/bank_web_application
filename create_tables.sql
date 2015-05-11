@@ -74,8 +74,7 @@ from dual;
 
 
 CREATE TABLE bank_account (
-  id NUMBER(10) NOT NULL,
-  bank_identifier NUMBER(12),
+  id NUMBER(19) NOT NULL,
   balance NUMBER(10),
   currency VARCHAR(20) CHECK( currency IN ('RUBLE', 'EUROS', 'DOLLAR')),
   client_id INTEGER,
@@ -84,12 +83,12 @@ CREATE TABLE bank_account (
 
 );
 
-INSERT INTO bank_account (id, bank_identifier, balance, currency, client_id)
-select 1, 123456789123, 15231, 'RUBLE', 100000
+INSERT INTO bank_account (id, balance, currency, client_id)
+select 4081781050000000068, 15231, 'RUBLE', 100000
 from dual union all select  
-2, 123456789124, 193, 'EUROS', 100000
+4081797860150000027, 193, 'EUROS', 100000
 from dual union all select  
-3, 123456789125, 44, 'DOLLAR', 100000
+4081784000125000124, 44, 'DOLLAR', 100000
 from dual;
 
 --CREATE TABLE operation_transfer (

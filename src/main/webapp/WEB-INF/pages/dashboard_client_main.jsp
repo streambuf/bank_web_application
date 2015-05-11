@@ -13,7 +13,6 @@
 </head>
 <body>
 
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -37,7 +36,7 @@
                                 <div class="small-box bg-aqua">
                                     <div class="inner">
                                         <h3>${account.balance} <i class="fa fa-rub"></i></h3>
-                                        <p>Номер счета: ${account.bankIdentifier}</p>
+                                        <p>Номер счета: ${account.id}</p>
                                     </div>
                                     <div class="icon">
                                         <i class="fa fa-rub"></i>
@@ -52,7 +51,7 @@
                                 <div class="small-box bg-green">
                                     <div class="inner">
                                         <h3>${account.balance} $</h3>
-                                        <p>Номер счета: ${account.bankIdentifier}</p>
+                                        <p>Номер счета: ${account.id}</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-social-usd"></i>
@@ -67,7 +66,7 @@
                                 <div class="small-box bg-yellow">
                                     <div class="inner">
                                         <h3>${account.balance} €</h3>
-                                        <p>Номер счета: ${account.bankIdentifier}</p>
+                                        <p>Номер счета: ${account.id}</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-social-euro"></i>
