@@ -51,10 +51,10 @@ public class User extends AbstractModel implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name="user_role", joinColumns = @JoinColumn(name="user_id"),
         inverseJoinColumns = @JoinColumn(name="role_id"))
-    private Set<UserRole> userRoles = new HashSet();
+    private Set<UserRole> userRoles = new HashSet<>();
 
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
-    private Set<Account> accounts = new HashSet();
+    private Set<Account> accounts = new HashSet<>();
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
     private Passport passport;
@@ -215,3 +215,6 @@ public class User extends AbstractModel implements UserDetails {
     }
 
 }
+
+
+

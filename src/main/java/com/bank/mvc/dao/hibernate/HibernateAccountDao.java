@@ -23,7 +23,6 @@ public class HibernateAccountDao implements AccountDao {
 
     @Override
     public Collection<Account> getAll() {
-        String hql = "from Account";
         return sessionFactory.getCurrentSession().
                 createQuery("from Account").list();
     }

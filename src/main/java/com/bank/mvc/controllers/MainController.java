@@ -1,7 +1,9 @@
 package com.bank.mvc.controllers;
 
 
+import com.bank.mvc.dao.ExchangeRateDao;
 import com.bank.mvc.domain.validation.UserValidator;
+import com.bank.mvc.models.ExchangeRate;
 import com.bank.mvc.models.User;
 import com.bank.mvc.domain.service.UserService;
 import com.bank.mvc.utils.JsonResponse;
@@ -29,6 +31,7 @@ public class MainController {
 
     @Autowired
     MessageSource msgSrc;
+
 
     @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.HEAD})
     public String login(Model model) {

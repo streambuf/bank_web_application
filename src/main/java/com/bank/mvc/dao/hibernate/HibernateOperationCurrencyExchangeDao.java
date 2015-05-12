@@ -22,7 +22,6 @@ public class HibernateOperationCurrencyExchangeDao implements OperationCurrencyE
 
     @Override
     public Collection<OperationCurrencyExchange> getAll() {
-        String hql = "from OperationCurrencyExchange";
         return sessionFactory.getCurrentSession().
                 createQuery("from OperationCurrencyExchange").list();
     }

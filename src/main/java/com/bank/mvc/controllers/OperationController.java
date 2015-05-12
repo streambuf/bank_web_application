@@ -78,12 +78,8 @@ public class OperationController {
         if (!data.isEmpty()) {
             return new JsonResponse("ERROR", data);
         }
-//
-//        Account account = accountService.getAccountById(operationTransfer.getAccountSenderId());
-//        operationTransfer.setAccountSender(account);
-//        operationTransfer.setUser(account.getUser());
-//        operationTransfer.setOperationDate(new Date());
-//        operationTransferService.saveOperationTransfer(operationTransfer);
+
+        operationCurrencyExchangeService.saveOperationCurrencyExchange(operationCurrencyExchange);
 
         data.put("message", msgSrc.getMessage("operationForm.successMessage", null, Locale.getDefault()));
         return new JsonResponse("OK", data);

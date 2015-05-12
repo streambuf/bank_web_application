@@ -22,7 +22,6 @@ public class HibernateOperationTransferDao implements OperationTransferDao {
 
     @Override
     public Collection<OperationTransfer> getAll() {
-        String hql = "from OperationTransfer";
         return sessionFactory.getCurrentSession().
                 createQuery("from OperationTransfer").list();
     }

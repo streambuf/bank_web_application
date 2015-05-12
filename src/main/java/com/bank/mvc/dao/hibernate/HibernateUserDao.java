@@ -19,7 +19,6 @@ public class HibernateUserDao implements UserDao {
 
     @Override
     public Collection<User> getAll() {
-        String hql = "from User";
         return sessionFactory.getCurrentSession().
                 createQuery("from User").list();
     }

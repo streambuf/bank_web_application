@@ -1,13 +1,18 @@
 package com.bank.mvc.domain.service.spring;
 
+import com.bank.mvc.dao.ExchangeRateDao;
 import com.bank.mvc.dao.OperationCurrencyExchangeDao;
 import com.bank.mvc.domain.service.AccountService;
 import com.bank.mvc.domain.service.OperationCurrencyExchangeService;
+import com.bank.mvc.models.Account;
+import com.bank.mvc.models.ExchangeRate;
+import com.bank.mvc.models.ListCurrency;
 import com.bank.mvc.models.OperationCurrencyExchange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by Zalman on 12.05.2015.
@@ -22,6 +27,9 @@ public class OperationCurrencyExchangeServiceImpl implements OperationCurrencyEx
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    ExchangeRateDao exchangeRateDao;
+
     @Override
     public Collection<OperationCurrencyExchange> getAllOperationCurrencyExchanges() {
         return operationCurrencyExchangeDao.getAll();
@@ -34,15 +42,28 @@ public class OperationCurrencyExchangeServiceImpl implements OperationCurrencyEx
 
     @Override
     public void saveOperationCurrencyExchange(OperationCurrencyExchange operationCurrencyExchange) {
-//        Account accountSender = operationCurrencyExchange.getAccountSender();
-//        accountSender.setBalance(accountSender.getBalance() - operationCurrencyExchange.getQuantityOfMoney());
-//        accountService.saveAccount(accountSender);
-//
-//        Account accountPayee = accountService.getAccountById(operationCurrencyExchange.getAccountPayee());
-//        if (accountPayee != null) {
-//            accountPayee.setBalance(accountPayee.getBalance() + operationCurrencyExchange.getQuantityOfMoney());
-//            accountService.saveAccount(accountPayee);
-//        }
+
+        Account accountSender = accountService.getAccountById(operationCurrencyExchange.getAccountSenderId());
+        Account accountPayee = accountService.getAccountById(operationCurrencyExchange.getAccountPayeeId());
+
+        operationCurrencyExchange.setAccountSender(accountSender);
+        operationCurrencyExchange.setAccountPayee(accountPayee);
+        operationCurrencyExchange.setUser(accountSender.getUser());
+        operationCurrencyExchange.setOperationDate(new Date());
+
+        double quantityOfMoney = operationCurrencyExchange.getQuantityOfMoney();
+
+        accountSender.setBalance(accountSender.getBalance() - quantityOfMoney);
+        accountService.saveAccount(accountSender);
+
+        ExchangeRate exchangeRateSend = exchangeRateDao.getByCurrency(accountSender.getCurrency());
+        double senderCur = exchangeRateSend.getRate() / exchangeRateSend.getNominal();
+
+        ExchangeRate exchangeRatePayee = exchangeRateDao.getByCurrency(accountPayee.getCurrency());
+        double payeeCur = exchangeRatePayee.getRate() / exchangeRatePayee.getNominal();
+
+        accountPayee.setBalance(accountPayee.getBalance() + quantityOfMoney * senderCur / payeeCur);
+        accountService.saveAccount(accountPayee);
 
         operationCurrencyExchangeDao.save(operationCurrencyExchange);
     }
