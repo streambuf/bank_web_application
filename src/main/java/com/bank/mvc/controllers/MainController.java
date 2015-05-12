@@ -49,6 +49,13 @@ public class MainController {
         return "dashboard_client_transfer";
     }
 
+    @RequestMapping(value = "/dashboard/client/currency-exchange", method = {RequestMethod.GET, RequestMethod.HEAD})
+    public String dashboardClientCurrencyExchange(Model model) {
+        User user = getCurrentUser();
+        model.addAttribute("user", user);
+        return "dashboard_client_currency_exchange";
+    }
+
     @RequestMapping(value = "/access_denied", method = {RequestMethod.GET, RequestMethod.HEAD})
     public String accessDenied() {
         return "access_denied";

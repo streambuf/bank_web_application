@@ -1,11 +1,14 @@
 package com.bank.mvc.controllers;
 
 import com.bank.mvc.domain.service.AccountService;
+import com.bank.mvc.domain.service.OperationCurrencyExchangeService;
 import com.bank.mvc.domain.service.OperationTransferService;
 import com.bank.mvc.domain.service.UserService;
+import com.bank.mvc.domain.validation.OperationCurrencyExchangeValidator;
 import com.bank.mvc.domain.validation.OperationTransferValidator;
 import com.bank.mvc.domain.validation.UserValidator;
 import com.bank.mvc.models.Account;
+import com.bank.mvc.models.OperationCurrencyExchange;
 import com.bank.mvc.models.OperationTransfer;
 import com.bank.mvc.utils.JsonResponse;
 import org.apache.log4j.Logger;
@@ -38,6 +41,12 @@ public class OperationController {
     private OperationTransferService operationTransferService;
 
     @Autowired
+    private OperationCurrencyExchangeService operationCurrencyExchangeService;
+
+    @Autowired
+    private OperationCurrencyExchangeValidator operationCurrencyExchangeValidator;
+
+    @Autowired
     private OperationTransferValidator operationTransferValidator;
 
     @Autowired
@@ -54,11 +63,27 @@ public class OperationController {
             return new JsonResponse("ERROR", data);
         }
 
-        Account account = accountService.getAccountById(operationTransfer.getAccountSenderId());
-        operationTransfer.setAccountSender(account);
-        operationTransfer.setUser(account.getUser());
-        operationTransfer.setOperationDate(new Date());
         operationTransferService.saveOperationTransfer(operationTransfer);
+        data.put("message", msgSrc.getMessage("operationForm.successMessage", null, Locale.getDefault()));
+        return new JsonResponse("OK", data);
+    }
+
+    @RequestMapping(value = "/dashboard/client/currency-exchange/send", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public @ResponseBody
+    JsonResponse createNewOperationCurrencyExchange(@RequestBody OperationCurrencyExchange operationCurrencyExchange) {
+        logger.info("POST: /dashboard/client/currency-exchange/send");
+
+        Map<String, String> data = operationCurrencyExchangeValidator.validate(operationCurrencyExchange);
+
+        if (!data.isEmpty()) {
+            return new JsonResponse("ERROR", data);
+        }
+//
+//        Account account = accountService.getAccountById(operationTransfer.getAccountSenderId());
+//        operationTransfer.setAccountSender(account);
+//        operationTransfer.setUser(account.getUser());
+//        operationTransfer.setOperationDate(new Date());
+//        operationTransferService.saveOperationTransfer(operationTransfer);
 
         data.put("message", msgSrc.getMessage("operationForm.successMessage", null, Locale.getDefault()));
         return new JsonResponse("OK", data);

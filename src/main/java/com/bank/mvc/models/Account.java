@@ -26,6 +26,12 @@ public class Account extends AbstractModel  {
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "accountPayee")
     private Set<OperationTransfer> operationsTransfer = new HashSet();
 
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "accountSender")
+    private Set<OperationCurrencyExchange> operationsCurrencyExchangeSender = new HashSet();
+
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "accountPayee")
+    private Set<OperationCurrencyExchange> operationsCurrencyExchangePayee = new HashSet();
+
     public User getUser() {
         return user;
     }

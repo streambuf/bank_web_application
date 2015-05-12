@@ -82,8 +82,4 @@
 
 </body>
 
-<div id="javascript">
-
-</div>
-
 </html>

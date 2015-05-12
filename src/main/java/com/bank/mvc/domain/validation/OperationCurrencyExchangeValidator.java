@@ -2,8 +2,7 @@ package com.bank.mvc.domain.validation;
 
 import com.bank.mvc.domain.service.AccountService;
 import com.bank.mvc.models.Account;
-import com.bank.mvc.models.OperationTransfer;
-import com.bank.mvc.models.User;
+import com.bank.mvc.models.OperationCurrencyExchange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,45 +10,51 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Zalman on 11.05.2015.
+ * Created by Zalman on 12.05.2015.
  */
 
 @Component
-public class OperationTransferValidator extends AbstractValidator {
+public class OperationCurrencyExchangeValidator {
 
     @Autowired
     AccountService accountService;
 
-    static String fieldAccountPayee = "accountPayee";
+    static String fieldAccountPayee = "accountPayeeError";
     static String fieldQuantityOfMoney = "quantityOfMoney";
     static String fieldAccountSender = "accountSenderError";
-    static int maxLengthAccountPayee = 19;
     static double minQuantityOfMoney = 1;
     static double maxQuantityOfMoney = 100000;
 
-    public Map<String, String> validate(OperationTransfer operationTransfer) {
+    public Map<String, String> validate(OperationCurrencyExchange operationCurrencyExchange) {
 
         Map<String, String> errors = new HashMap<>();
 
-        // num digits in accountPayee
-        int lengthAccountPayee = (int) Math.log10(operationTransfer.getAccountPayee()) + 1;
-        if (lengthAccountPayee != maxLengthAccountPayee) {
-            errors.put(fieldAccountPayee, "Неверный номер счета");
+        long accountSenderId = operationCurrencyExchange.getAccountSenderId();
+        long accountPayeeId = operationCurrencyExchange.getAccountPayeeId();
+
+        if (accountPayeeId == accountSenderId) {
+            errors.put(fieldAccountPayee, "Нельзя использовать один и тот же счет");
+            return errors;
         }
 
-        Account accountSender = accountService.getAccountById(operationTransfer.getAccountSenderId());
+        Account accountSender = accountService.getAccountById(accountSenderId);
         if (accountSender == null) {
-            errors.put(fieldAccountSender, "Не выбран счет списания");
+            errors.put(fieldAccountSender, "Не выбран счет");
             return errors;
         }
 
-        Account accountPayee = accountService.getAccountById(operationTransfer.getAccountPayee());
-        if (accountPayee!= null && !accountPayee.getCurrency().equals(accountSender.getCurrency())) {
-            errors.put(fieldAccountPayee, "Валюты счетов не совпадают: " + accountPayee.getCurrency());
+        Account accountPayee = accountService.getAccountById(accountPayeeId);
+        if (accountPayee == null) {
+            errors.put(fieldAccountPayee, "Не выбран счет");
             return errors;
         }
 
-        double quantityOfMoney = operationTransfer.getQuantityOfMoney();
+        if (accountPayee.getCurrency().equals(accountSender.getCurrency())) {
+            errors.put(fieldAccountPayee, "Валюта счетов должна быть разной, иначе воспользуйтесь обычным переводом");
+            return errors;
+        }
+
+        double quantityOfMoney = operationCurrencyExchange.getQuantityOfMoney();
         if (quantityOfMoney < minQuantityOfMoney) {
             errors.put(fieldQuantityOfMoney, "Минимальная сумма составляет: " + minQuantityOfMoney);
         } else if (quantityOfMoney > maxQuantityOfMoney) {
@@ -61,5 +66,4 @@ public class OperationTransferValidator extends AbstractValidator {
         return errors;
 
     }
-
 }

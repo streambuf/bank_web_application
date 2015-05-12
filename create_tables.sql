@@ -1,9 +1,11 @@
 DROP TABLE user_role;
+DROP TABLE operation_currency_exchange;
 DROP TABLE operation_transfer;
 DROP TABLE passport;
 DROP TABLE bank_account;
 DROP TABLE bank_user;
 DROP TABLE bank_role;
+
 
 
 
@@ -112,3 +114,21 @@ from dual union all select
 from dual union all select  
 3, 4081781050000000462,2470, '11-may-2015',  4081781050000000068, 100000
 from dual;
+
+
+
+CREATE TABLE operation_currency_exchange (
+  id NUMBER(10) NOT NULL,
+  quantity_of_money NUMBER(12,4),
+  operation_date DATE,
+  sender_bank_account_id NUMBER(19),
+  payee_bank_account_id NUMBER(19),
+  client_id NUMBER(10),
+  PRIMARY KEY (id, client_id, payee_bank_account_id, sender_bank_account_id),
+  FOREIGN KEY (client_id) REFERENCES bank_user (id) ON DELETE CASCADE,
+  FOREIGN KEY (sender_bank_account_id, client_id) REFERENCES bank_account (id, client_id) ON DELETE CASCADE,
+  FOREIGN KEY (payee_bank_account_id, client_id) REFERENCES bank_account (id, client_id) ON DELETE CASCADE
+);
+
+
+
