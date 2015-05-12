@@ -14,4 +14,6 @@ public interface AccountService {
 
     public Collection<Account> getAll();
 
+    public void saveAccount(Account account);
+
 }

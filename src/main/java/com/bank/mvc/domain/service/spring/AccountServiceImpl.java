@@ -27,4 +27,10 @@ public class AccountServiceImpl implements AccountService {
     public Collection<Account> getAll() {
         return accountDao.getAll();
     }
+
+    @Override
+    public void saveAccount(Account account) {
+        accountDao.save(account);
+    }
+
 }

@@ -83,11 +83,7 @@
 </body>
 
 <div id="javascript">
-    <script>
-        $(function($){
-            $("#accountPayee").mask("9999999999999999999");
-        });
-    </script>
+
 </div>
 
 </html>

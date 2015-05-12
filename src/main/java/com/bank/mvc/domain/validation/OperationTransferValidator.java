@@ -38,9 +38,15 @@ public class OperationTransferValidator extends AbstractValidator {
         }
 
         long accountSenderId = operationTransfer.getAccountSenderId();
-        Account account = accountService.getAccountById(operationTransfer.getAccountSenderId());
-        if (account == null) {
+        Account accountSender = accountService.getAccountById(operationTransfer.getAccountSenderId());
+        if (accountSender == null) {
             errors.put(fieldAccountSender, "Не выбран счет списания");
+            return errors;
+        }
+
+        Account accountPayee = accountService.getAccountById(operationTransfer.getAccountPayee());
+        if (accountPayee!= null && !accountPayee.getCurrency().equals(accountSender.getCurrency())) {
+            errors.put(fieldAccountPayee, "Валюты счетов не совпадают: " + accountPayee.getCurrency());
             return errors;
         }
 
@@ -49,11 +55,9 @@ public class OperationTransferValidator extends AbstractValidator {
             errors.put(fieldQuantityOfMoney, "Минимальная сумма составляет: " + minQuantityOfMoney);
         } else if (quantityOfMoney > maxQuantityOfMoney) {
             errors.put(fieldQuantityOfMoney, "Максимальная сумма составляет: " + maxQuantityOfMoney);
-        } else if (account.getBalance() < quantityOfMoney) {
-            errors.put(fieldQuantityOfMoney, "На вашем счету недостаточно средств: " + account.getBalance());
+        } else if (accountSender.getBalance() < quantityOfMoney) {
+            errors.put(fieldQuantityOfMoney, "На вашем счету недостаточно средств: " + accountSender.getBalance());
         }
-
-
 
         return errors;
 

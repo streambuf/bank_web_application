@@ -2,6 +2,7 @@ package com.bank.mvc.domain.service.spring;
 
 import com.bank.mvc.dao.AccountDao;
 import com.bank.mvc.dao.OperationTransferDao;
+import com.bank.mvc.domain.service.AccountService;
 import com.bank.mvc.domain.service.OperationTransferService;
 import com.bank.mvc.models.Account;
 import com.bank.mvc.models.OperationTransfer;
@@ -20,7 +21,7 @@ public class OperationTransferImpl implements OperationTransferService {
     private OperationTransferDao operationTransferDao;
 
     @Autowired
-    private AccountDao accountDao;
+    private AccountService accountService;
 
 
     @Override
@@ -37,7 +38,14 @@ public class OperationTransferImpl implements OperationTransferService {
     public void saveOperationTransfer(OperationTransfer operationTransfer) {
         Account accountSender = operationTransfer.getAccountSender();
         accountSender.setBalance(accountSender.getBalance() - operationTransfer.getQuantityOfMoney());
-        accountDao.save(accountSender);
+        accountService.saveAccount(accountSender);
+
+        Account accountPayee = accountService.getAccountById(operationTransfer.getAccountPayee());
+        if (accountPayee != null) {
+            accountPayee.setBalance(accountPayee.getBalance() + operationTransfer.getQuantityOfMoney());
+            accountService.saveAccount(accountPayee);
+        }
+
         operationTransferDao.save(operationTransfer);
     }
 
