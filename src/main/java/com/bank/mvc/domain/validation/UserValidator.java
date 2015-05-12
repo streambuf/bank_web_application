@@ -23,6 +23,8 @@ public class UserValidator extends AbstractValidator {
 
         this.checkAllFieldsOnEmpty(user, errors);
 
+        errors.remove("passport");
+
         // TODO validate all field
 
         if (!errors.containsKey(fieldPass) && !errors.containsKey(fieldConfirmPass)) {

@@ -36,7 +36,7 @@ public class HibernateAccountDao implements AccountDao {
 
     @Override
     public void save(Account account) {
-        sessionFactory.getCurrentSession().merge(account);
+        sessionFactory.getCurrentSession().saveOrUpdate(account);
     }
 
     @Override

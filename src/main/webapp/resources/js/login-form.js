@@ -21,5 +21,7 @@ $(function() {
         );
     });
 
+    $('input[name="phone"]').mask("(999) 999-99-99",{placeholder:"(999) 999-99-99"});
+
 });
 

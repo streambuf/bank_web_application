@@ -10,6 +10,7 @@ import com.bank.mvc.models.OperationTransfer;
 import com.bank.mvc.utils.JsonResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -38,6 +40,9 @@ public class OperationController {
     @Autowired
     private OperationTransferValidator operationTransferValidator;
 
+    @Autowired
+    MessageSource msgSrc;
+
     @RequestMapping(value = "/dashboard/client/transfer/send", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody
     JsonResponse createNewOperationTransfer(@RequestBody OperationTransfer operationTransfer) {
@@ -53,9 +58,9 @@ public class OperationController {
         operationTransfer.setAccountSender(account);
         operationTransfer.setUser(account.getUser());
         operationTransfer.setOperationDate(new Date());
-        //operationTransferService.saveOperationTransfer(operationTransfer);
+        operationTransferService.saveOperationTransfer(operationTransfer);
 
-        //data.put("message", msgSrc.getMessage("registerform.successMessage", null, Locale.getDefault()));
+        data.put("message", msgSrc.getMessage("operationForm.successMessage", null, Locale.getDefault()));
         return new JsonResponse("OK", data);
     }
 }

@@ -2,6 +2,7 @@ package com.bank.mvc.models;
 
 
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,6 +14,7 @@ import java.util.*;
 
 @Entity
 @Table(name="bank_user")
+@DynamicUpdate
 public class User extends AbstractModel implements UserDetails {
 
     @Column(name="lname")

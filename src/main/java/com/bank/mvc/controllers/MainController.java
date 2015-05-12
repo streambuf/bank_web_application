@@ -1,14 +1,10 @@
 package com.bank.mvc.controllers;
 
 
-import com.bank.mvc.domain.service.AccountService;
-import com.bank.mvc.domain.service.OperationTransferService;
 import com.bank.mvc.domain.validation.UserValidator;
-import com.bank.mvc.models.OperationTransfer;
 import com.bank.mvc.models.User;
 import com.bank.mvc.domain.service.UserService;
 import com.bank.mvc.utils.JsonResponse;
-import com.bank.mvc.utils.PasswordEncoder;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -29,9 +25,6 @@ public class MainController {
     private UserService userService;
 
     @Autowired
-    private OperationTransferService operationTransferService;
-
-    @Autowired
     private UserValidator userValidator;
 
     @Autowired
@@ -44,14 +37,14 @@ public class MainController {
 
     @RequestMapping(value = "/dashboard/client/main", method = {RequestMethod.GET, RequestMethod.HEAD})
     public String dashboardClientMain(Model model) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = getCurrentUser();
         model.addAttribute("user", user);
         return "dashboard_client_main";
     }
 
     @RequestMapping(value = "/dashboard/client/transfer", method = {RequestMethod.GET, RequestMethod.HEAD})
     public String dashboardClientTransfer(Model model) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = getCurrentUser();
         model.addAttribute("user", user);
         return "dashboard_client_transfer";
     }
@@ -68,13 +61,17 @@ public class MainController {
         if (!data.isEmpty()) {
             return new JsonResponse("ERROR", data);
         }
-        // encode password sha256
-        PasswordEncoder passwordEncoder = new PasswordEncoder();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
 
         userService.saveUser(user);
         data.put("message", msgSrc.getMessage("registerform.successMessage", null, Locale.getDefault()));
         return new JsonResponse("OK", data);
+    }
+
+    private User getCurrentUser() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // deprecated (update user)
+        return userService.getUserById(user.getId());
     }
 
 

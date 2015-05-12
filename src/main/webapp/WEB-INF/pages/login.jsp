@@ -66,7 +66,7 @@
             <div class = "error"></div>
             <input placeholder='<spring:message code="registerform.address"/>' name='address' type='text'>
             <div class = "error"></div>
-            <input type="tel" pattern="\(\d\d\d\) ?\d\d\d-\d\d-\d\d" placeholder='<spring:message code="registerform.phone"/> (###) ###-##-##' name='phone'>
+            <input type="text" placeholder='<spring:message code="registerform.phone"/>' name='phone'>
             <div class = "error"></div>
             <input placeholder='<spring:message code="registerform.email"/>' name='email' type='email'>
             <div class = "error"></div>
@@ -85,6 +85,7 @@
 <script src="/resources/js/utils.js"></script>
 <script src="/resources/js/login-form.js"></script>
 <script src="/resources/js/server.js"></script>
+<script src="/resources/js/maskedinput.min.js"></script>
 
 </body>
 </html>

@@ -48,7 +48,7 @@
                                 <div class="form-group">
                                     <label for="accountPayee">Счет получателя</label>
                                     <div class = "error"></div>
-                                    <input type="number" class="form-control" id="accountPayee" name="accountPayee" min="-9223372036854775807" max="9223372036854775807" placeholder="Введит счет"/>
+                                    <input type="text" class="form-control" id="accountPayee" name="accountPayee" placeholder="Введит счет"/>
                                 </div>
 
                                 <div class="form-group">
@@ -57,43 +57,22 @@
                                     <input type="number" step="0.01" class="form-control" id="quantityOfMoney" min="-9223372036854775807" max="9223372036854775807" name="quantityOfMoney" placeholder="Введит сумму">
                                 </div>
 
+                                <div class="callout callout-success hidediv">
+                                    <h4></h4>
+                                    <p></p>
+                                </div>
+
                             </div><!-- /.box-body -->
+
 
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Перевести</button>
                             </div>
                         </form>
+
                     </div><!-- /.box -->
                 </div>
             </div>
-
-
-
-
-            <div class="example-modal">
-                <div class="modal modal-success">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Modal Success</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>One fine body&hellip;</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-outline">Save changes</button>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-            </div><!-- /.example-modal -->
-
-
-
-
-
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 
@@ -105,9 +84,9 @@
 
 <div id="javascript">
     <script>
-//        $(function($){
-//            $("#accountPayee").mask("99999-999-9-999999999",{placeholder:"99999-999-9-999999999"});
-//        });
+        $(function($){
+            $("#accountPayee").mask("9999999999999999999");
+        });
     </script>
 </div>
 

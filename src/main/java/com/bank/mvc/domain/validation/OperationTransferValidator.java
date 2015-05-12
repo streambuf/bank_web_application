@@ -37,18 +37,23 @@ public class OperationTransferValidator extends AbstractValidator {
             errors.put(fieldAccountPayee, "Неверный номер счета");
         }
 
-        double quantityOfMoney = operationTransfer.getQuantityOfMoney();
-        if (quantityOfMoney < minQuantityOfMoney) {
-            errors.put(fieldQuantityOfMoney, "Минимальная сумма составляет " + minQuantityOfMoney);
-        } else if (quantityOfMoney > maxQuantityOfMoney) {
-            errors.put(fieldQuantityOfMoney, "Максимальная сумма составляет " + maxQuantityOfMoney);
-        }
-
         long accountSenderId = operationTransfer.getAccountSenderId();
         Account account = accountService.getAccountById(operationTransfer.getAccountSenderId());
         if (account == null) {
             errors.put(fieldAccountSender, "Не выбран счет списания");
+            return errors;
         }
+
+        double quantityOfMoney = operationTransfer.getQuantityOfMoney();
+        if (quantityOfMoney < minQuantityOfMoney) {
+            errors.put(fieldQuantityOfMoney, "Минимальная сумма составляет: " + minQuantityOfMoney);
+        } else if (quantityOfMoney > maxQuantityOfMoney) {
+            errors.put(fieldQuantityOfMoney, "Максимальная сумма составляет: " + maxQuantityOfMoney);
+        } else if (account.getBalance() < quantityOfMoney) {
+            errors.put(fieldQuantityOfMoney, "На вашем счету недостаточно средств: " + account.getBalance());
+        }
+
+
 
         return errors;
 

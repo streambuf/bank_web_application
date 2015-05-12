@@ -12,8 +12,10 @@ $(function() {
         sendPost($(this),
             function(result) {
                 console.log("OK");
-                $(".operation").hide();
-                //$(".alert").empty().append(result.data.message);
+                $(".operation .box-body .form-group").hide();
+                $(".box-footer").hide();
+                var suc = $(".callout-success").show();
+                suc.find("h4").empty().append(result.data.message);
             },
             function(result) {
                 console.log("error");

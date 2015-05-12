@@ -3,6 +3,7 @@ package com.bank.mvc.domain.service.spring;
 import com.bank.mvc.dao.UserDao;
 import com.bank.mvc.domain.service.UserService;
 import com.bank.mvc.models.User;
+import com.bank.mvc.utils.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,6 +30,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void saveUser(User user) {
+        // encode password sha256
+        PasswordEncoder passwordEncoder = new PasswordEncoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         userDao.save(user);
     }
 
