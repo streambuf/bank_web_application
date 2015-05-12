@@ -5,9 +5,7 @@ DROP TABLE passport;
 DROP TABLE bank_account;
 DROP TABLE bank_user;
 DROP TABLE bank_role;
-
-
-
+DROP TABLE exchange_rate;
 
 
 CREATE TABLE bank_role (
@@ -115,7 +113,26 @@ from dual union all select
 3, 4081781050000000462,2470, '11-may-2015',  4081781050000000068, 100000
 from dual;
 
+CREATE TABLE exchange_rate (
+  id NUMBER(10) NOT NULL,
+  currency VARCHAR(20) CHECK( currency IN ('RUBLE', 'EUROS', 'DOLLAR')),
+  nominal NUMBER(10),
+  rate NUMBER(12,4),
+  start_date DATE,
+  PRIMARY KEY (id)
+);
 
+INSERT INTO exchange_rate (id, currency, nominal, rate, start_date)
+select 1, 'RUBLE', 1, 1, '10-may-2015'
+from dual union all select 
+2, 'EUROS', 1, 56.8971, '11-may-2015'
+from dual union all select 
+3, 'DOLLAR', 1, 50.7511, '11-may-2015'
+from dual union all select 
+4, 'EUROS', 1, 56.9011, '12-may-2015'
+from dual union all select 
+5, 'DOLLAR', 1, 50.8012, '12-may-2015'
+from dual;
 
 CREATE TABLE operation_currency_exchange (
   id NUMBER(10) NOT NULL,
@@ -124,11 +141,14 @@ CREATE TABLE operation_currency_exchange (
   sender_bank_account_id NUMBER(19),
   payee_bank_account_id NUMBER(19),
   client_id NUMBER(10),
+  rate_id NUMBER(10),
   PRIMARY KEY (id, client_id, payee_bank_account_id, sender_bank_account_id),
   FOREIGN KEY (client_id) REFERENCES bank_user (id) ON DELETE CASCADE,
+  FOREIGN KEY (rate_id) REFERENCES exchange_rate (id) ON DELETE CASCADE,
   FOREIGN KEY (sender_bank_account_id, client_id) REFERENCES bank_account (id, client_id) ON DELETE CASCADE,
   FOREIGN KEY (payee_bank_account_id, client_id) REFERENCES bank_account (id, client_id) ON DELETE CASCADE
 );
+
 
 
 
