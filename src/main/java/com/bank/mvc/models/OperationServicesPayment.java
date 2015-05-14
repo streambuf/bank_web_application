@@ -32,6 +32,30 @@ public class OperationServicesPayment extends AbstractModel {
         return clientIdentifier;
     }
 
+    // for serialize html form
+    @Transient
+    private long accountSenderId;
+
+    // for serialize html form
+    @Transient
+    private long organizationId;
+
+    public long getAccountSenderId() {
+        return accountSenderId;
+    }
+
+    public void setAccountSenderId(long accountSenderId) {
+        this.accountSenderId = accountSenderId;
+    }
+
+    public long getOrganizationId() {
+        return organizationId;
+    }
+
+    public void setOrganizationId(long organizationId) {
+        this.organizationId = organizationId;
+    }
+
     public void setClientIdentifier(String clientIdentifier) {
         this.clientIdentifier = clientIdentifier;
     }

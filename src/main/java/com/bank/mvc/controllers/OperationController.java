@@ -2,10 +2,12 @@ package com.bank.mvc.controllers;
 
 import com.bank.mvc.domain.service.*;
 import com.bank.mvc.domain.validation.OperationCurrencyExchangeValidator;
+import com.bank.mvc.domain.validation.OperationServicesPaymentValidator;
 import com.bank.mvc.domain.validation.OperationTransferValidator;
 import com.bank.mvc.domain.validation.UserValidator;
 import com.bank.mvc.models.Account;
 import com.bank.mvc.models.OperationCurrencyExchange;
+import com.bank.mvc.models.OperationServicesPayment;
 import com.bank.mvc.models.OperationTransfer;
 import com.bank.mvc.utils.JsonResponse;
 import org.apache.log4j.Logger;
@@ -31,6 +33,7 @@ import java.util.Map;
 public class OperationController {
 
     final static Logger logger = Logger.getLogger(OperationController.class);
+    private static String path = "/dashboard/client/";
 
     @Autowired
     private AccountService accountService;
@@ -48,15 +51,18 @@ public class OperationController {
     private OperationTransferValidator operationTransferValidator;
 
     @Autowired
+    private OperationServicesPaymentValidator operationServicesPaymentValidator;
+
+    @Autowired
     private OperationServicesPaymentService operationServicesPaymentService;
 
     @Autowired
     MessageSource msgSrc;
 
-    @RequestMapping(value = "/dashboard/client/transfer/send", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/transfer/send", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody
     JsonResponse createNewOperationTransfer(@RequestBody OperationTransfer operationTransfer) {
-        logger.info("POST: /dashboard/client/transfer/send");
+        logger.info("POST: " + path + "transfer/send");
 
         Map<String, String> data = operationTransferValidator.validate(operationTransfer);
 
@@ -69,10 +75,10 @@ public class OperationController {
         return new JsonResponse("OK", data);
     }
 
-    @RequestMapping(value = "/dashboard/client/currency-exchange/send", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/currency-exchange/send", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody
     JsonResponse createNewOperationCurrencyExchange(@RequestBody OperationCurrencyExchange operationCurrencyExchange) {
-        logger.info("POST: /dashboard/client/currency-exchange/send");
+        logger.info("POST: " + path + "currency-exchange/send");
 
         Map<String, String> data = operationCurrencyExchangeValidator.validate(operationCurrencyExchange);
 
@@ -85,4 +91,22 @@ public class OperationController {
         data.put("message", msgSrc.getMessage("operationForm.successMessage", null, Locale.getDefault()));
         return new JsonResponse("OK", data);
     }
+
+    @RequestMapping(value = "/payment-services/send", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public @ResponseBody
+    JsonResponse createNewOperationServicesPayment(@RequestBody OperationServicesPayment operationServicesPayment) {
+        logger.info("POST: " + path + "payment-services/send");
+
+        Map<String, String> data = operationServicesPaymentValidator.validate(operationServicesPayment);
+
+        if (!data.isEmpty()) {
+            return new JsonResponse("ERROR", data);
+        }
+
+        operationServicesPaymentService.saveOperationServicesPayment(operationServicesPayment);
+
+        data.put("message", msgSrc.getMessage("operationForm.successMessage", null, Locale.getDefault()));
+        return new JsonResponse("OK", data);
+    }
+
 }

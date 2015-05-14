@@ -32,7 +32,7 @@
                             </h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" class="operation" action="/dashboard/client/transfer/send">
+                    <form role="form" class="operation" action="/dashboard/client/payment-services/send">
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Получатель</label>
@@ -59,7 +59,7 @@
                             <div class="form-group">
                                 <label for="clientIdentifier">${organization.typeClientIdentifier}</label>
                                 <div class = "error"></div>
-                                <input type="text" class="form-control" id="clientIdentifier" name="accountPayee" placeholder="Введит счет"/>
+                                <input type="text" class="form-control" id="clientIdentifier" name="clientIdentifier" placeholder="Введит счет"/>
                             </div>
 
                             <div class="form-group">
@@ -68,7 +68,7 @@
                                 <input type="number" step="0.01" class="form-control" id="quantityOfMoney" min="-9223372036854775807" max="9223372036854775807" name="quantityOfMoney" placeholder="Введит сумму">
                             </div>
 
-                            <input type="hidden" class="form-control"name="organizationId" value="${organization.id}"/>
+                            <input type="hidden" class="form-control" name="organizationId" value="${organization.id}"/>
 
                             <div class="callout callout-success hidediv">
                                 <h4></h4>
