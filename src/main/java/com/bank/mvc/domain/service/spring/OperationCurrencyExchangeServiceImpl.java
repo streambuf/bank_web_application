@@ -48,7 +48,6 @@ public class OperationCurrencyExchangeServiceImpl implements OperationCurrencyEx
 
         operationCurrencyExchange.setAccountSender(accountSender);
         operationCurrencyExchange.setAccountPayee(accountPayee);
-        operationCurrencyExchange.setUser(accountSender.getUser());
         operationCurrencyExchange.setOperationDate(new Date());
 
         double quantityOfMoney = operationCurrencyExchange.getQuantityOfMoney();

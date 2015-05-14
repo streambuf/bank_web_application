@@ -21,10 +21,6 @@ public class OperationTransfer extends AbstractModel {
     private Date operationDate;
 
     @ManyToOne
-    @JoinColumn(name = "client_id")
-    private User user;
-
-    @ManyToOne
     @JoinColumn(name = "bank_account_id")
     private Account accountSender;
 
@@ -63,14 +59,6 @@ public class OperationTransfer extends AbstractModel {
 
     public void setOperationDate(Date operationDate) {
         this.operationDate = operationDate;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Account getAccountSender() {

@@ -1,11 +1,15 @@
 DROP TABLE user_role;
 DROP TABLE operation_currency_exchange;
 DROP TABLE operation_transfer;
+DROP TABLE payment_services;
 DROP TABLE passport;
 DROP TABLE bank_account;
 DROP TABLE bank_user;
 DROP TABLE bank_role;
 DROP TABLE exchange_rate;
+DROP TABLE organization;
+DROP TABLE service;
+DROP TABLE category_services;
 
 
 CREATE TABLE bank_role (
@@ -80,7 +84,7 @@ CREATE TABLE bank_account (
   balance  NUMBER(12,4),
   currency VARCHAR(20) CHECK( currency IN ('RUBLE', 'EUROS', 'DOLLAR')),
   client_id NUMBER(10),
-  PRIMARY KEY (id, client_id),
+  PRIMARY KEY (id),
   FOREIGN KEY (client_id) REFERENCES bank_user (id) ON DELETE CASCADE
 
 );
@@ -99,18 +103,16 @@ CREATE TABLE operation_transfer (
   quantity_of_money NUMBER(12,4),
   operation_date DATE,
   bank_account_id NUMBER(19),
-  client_id NUMBER(10),
-  PRIMARY KEY (id, client_id, bank_account_id),
-  FOREIGN KEY (client_id) REFERENCES bank_user (id) ON DELETE CASCADE,
-  FOREIGN KEY (bank_account_id, client_id) REFERENCES bank_account (id, client_id) ON DELETE CASCADE
+  PRIMARY KEY (id),
+  FOREIGN KEY (bank_account_id) REFERENCES bank_account (id) ON DELETE CASCADE
 );
 
-INSERT INTO operation_transfer (id, account_identifier, quantity_of_money, operation_date, bank_account_id, client_id)
-select 1, 4081781050000000019,500, '10-may-2015',  4081781050000000068, 100000
+INSERT INTO operation_transfer (id, account_identifier, quantity_of_money, operation_date, bank_account_id)
+select 1, 4081781050000000019,500, '10-may-2015',  4081781050000000068
 from dual union all select  
-2, 4081784000125006763,100, '10-may-2015',  4081784000125000124, 100000
+2, 4081784000125006763,100, '10-may-2015',  4081784000125000124
 from dual union all select  
-3, 4081781050000000462,2470, '11-may-2015',  4081781050000000068, 100000
+3, 4081781050000000462,2470, '11-may-2015',  4081781050000000068
 from dual;
 
 CREATE TABLE exchange_rate (
@@ -140,14 +142,76 @@ CREATE TABLE operation_currency_exchange (
   operation_date DATE,
   sender_bank_account_id NUMBER(19),
   payee_bank_account_id NUMBER(19),
-  client_id NUMBER(10),
   rate_id NUMBER(10),
-  PRIMARY KEY (id, client_id, payee_bank_account_id, sender_bank_account_id),
-  FOREIGN KEY (client_id) REFERENCES bank_user (id) ON DELETE CASCADE,
+  PRIMARY KEY (id),
   FOREIGN KEY (rate_id) REFERENCES exchange_rate (id) ON DELETE CASCADE,
-  FOREIGN KEY (sender_bank_account_id, client_id) REFERENCES bank_account (id, client_id) ON DELETE CASCADE,
-  FOREIGN KEY (payee_bank_account_id, client_id) REFERENCES bank_account (id, client_id) ON DELETE CASCADE
+  FOREIGN KEY (sender_bank_account_id) REFERENCES bank_account (id) ON DELETE CASCADE,
+  FOREIGN KEY (payee_bank_account_id) REFERENCES bank_account (id) ON DELETE CASCADE
 );
+
+
+CREATE TABLE category_services (
+  id NUMBER(10) NOT NULL,
+  name VARCHAR2(200),
+  PRIMARY KEY (id)
+);
+
+INSERT INTO category_services (id, name)
+select 1, 'Мобил'
+from dual union all select  
+2, 'И'
+from dual union all select  
+3, 'д'
+from dual;
+
+CREATE TABLE service (
+  id NUMBER(10) NOT NULL,
+  name VARCHAR2(200),
+  category_services_id NUMBER(10),
+  PRIMARY KEY (id),
+  FOREIGN KEY (category_services_id) REFERENCES category_services (id) ON DELETE CASCADE
+);
+
+INSERT INTO service (id, name, category_services_id)
+select 1, 'Мобил', 1
+from dual union all select  
+2, 'И', 1
+from dual union all select  
+3, 'д', 1
+from dual;
+
+
+CREATE TABLE organization (
+  id NUMBER(10) NOT NULL,
+  name VARCHAR2(200),
+  bank_account NUMBER(19),
+  client_identifier VARCHAR2(50),
+  service_id NUMBER(10),
+  PRIMARY KEY (id),
+  FOREIGN KEY (service_id) REFERENCES service (id) ON DELETE CASCADE
+);
+
+INSERT INTO organization (id, name, bank_account, client_identifier, service_id)
+select 1, 'a', 4081781050000083420, 'логин', 1
+from dual union all select  
+2, 'с', 4081781050000047264, 'логин', 1
+from dual union all select  
+3, 'д', 4081781050000094814, 'логин', 1
+from dual;
+
+
+CREATE TABLE payment_services (
+  id NUMBER(10) NOT NULL,
+  quantity_of_money NUMBER(12,4),
+  operation_date DATE,
+  organization_id NUMBER(19),
+  bank_account_id NUMBER(10),
+  PRIMARY KEY (id),
+  FOREIGN KEY (bank_account_id) REFERENCES bank_account (id) ON DELETE CASCADE,
+  FOREIGN KEY (organization_id) REFERENCES organization (id) ON DELETE CASCADE
+);
+
+
 
 
 

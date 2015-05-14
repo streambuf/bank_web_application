@@ -18,10 +18,6 @@ public class OperationCurrencyExchange extends  AbstractModel {
     private Date operationDate;
 
     @ManyToOne
-    @JoinColumn(name = "client_id")
-    private User user;
-
-    @ManyToOne
     @JoinColumn(name = "sender_bank_account_id")
     private Account accountSender;
 
@@ -51,14 +47,6 @@ public class OperationCurrencyExchange extends  AbstractModel {
 
     public void setOperationDate(Date operationDate) {
         this.operationDate = operationDate;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Account getAccountSender() {

@@ -39,7 +39,6 @@ public class OperationTransferServiceImpl implements OperationTransferService {
     public void saveOperationTransfer(OperationTransfer operationTransfer) {
         Account accountSender = accountService.getAccountById(operationTransfer.getAccountSenderId());
         operationTransfer.setAccountSender(accountSender);
-        operationTransfer.setUser(accountSender.getUser());
         operationTransfer.setOperationDate(new Date());
 
         accountSender.setBalance(accountSender.getBalance() - operationTransfer.getQuantityOfMoney());
