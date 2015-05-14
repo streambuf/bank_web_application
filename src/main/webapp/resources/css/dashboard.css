@@ -26,5 +26,14 @@ li {
 .service {
     color: #1c2d3f;
     font-size: 16px;
+}
 
+.organization {
+    color: #1c2d3f;
+    font-size: 24px;
+}
+
+.image-category {
+    width: 75px;
+    height: 75px;
 }

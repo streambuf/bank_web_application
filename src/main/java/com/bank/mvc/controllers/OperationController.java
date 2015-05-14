@@ -30,6 +30,7 @@ import java.util.Map;
  */
 
 @Controller
+@RequestMapping("/dashboard/client/*")
 public class OperationController {
 
     final static Logger logger = Logger.getLogger(OperationController.class);

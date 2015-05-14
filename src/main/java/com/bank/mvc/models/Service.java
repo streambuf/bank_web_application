@@ -1,6 +1,8 @@
 package com.bank.mvc.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Zalman on 14.05.2015.
@@ -16,6 +18,14 @@ public class Service extends AbstractModel {
     @ManyToOne
     @JoinColumn(name = "category_services_id")
     private CategoryServices categoryServices;
+
+    @OneToMany(cascade= CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "service")
+    @OrderBy("name")
+    private List<Organization> organizations = new ArrayList<>();
+
+    public List<Organization> getOrganizations() {
+        return organizations;
+    }
 
     public String getName() {
         return name;

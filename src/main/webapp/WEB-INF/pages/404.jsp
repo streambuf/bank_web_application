@@ -25,8 +25,8 @@
             <div class="error-content">
                 <h3><i class="fa fa-warning text-yellow"></i> Страница не найдена.</h3>
                 <p>
-                    Страница, которую вы запросили не существует
-                    Вы можете  <a href='/dashboard/client/main'>вернуться на главную страницу</a> 
+                    Страница, которую вы запросили не существует.
+                    Вы можете  <a href='/dashboard/client/main'>вернуться на главную страницу</a>
                 </p>
 
             </div><!-- /.error-content -->

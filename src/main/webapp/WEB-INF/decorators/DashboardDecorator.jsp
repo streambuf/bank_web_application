@@ -136,7 +136,7 @@
                 <!-- Optionally, you can add icons to the links -->
                 <li><a href="/dashboard/client/main"><span><i class="fa fa-home"></i> Главная</span></a></li>
                 <li><a href="/dashboard/client/transfer"><span><i class="fa fa-rub"></i> Перевод средств</span></a></li>
-                <li><a href="#"><span><i class="fa fa-cutlery"></i> Оплата услуг</span></a></li>
+                <li><a href="/dashboard/client/services"><span><i class="fa fa-cutlery"></i> Оплата услуг</span></a></li>
                 <li><a href="/dashboard/client/currency-exchange"><span><i class="fa fa-dollar"></i> Обмен валюты</span></a></li>
                 <li class="treeview">
                     <a href="#"><span><i class="fa fa-money"></i> Вклад</span> <i class="fa fa-angle-left pull-right"></i></a>
