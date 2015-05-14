@@ -1,9 +1,6 @@
 package com.bank.mvc.controllers;
 
-import com.bank.mvc.domain.service.AccountService;
-import com.bank.mvc.domain.service.OperationCurrencyExchangeService;
-import com.bank.mvc.domain.service.OperationTransferService;
-import com.bank.mvc.domain.service.UserService;
+import com.bank.mvc.domain.service.*;
 import com.bank.mvc.domain.validation.OperationCurrencyExchangeValidator;
 import com.bank.mvc.domain.validation.OperationTransferValidator;
 import com.bank.mvc.domain.validation.UserValidator;
@@ -49,6 +46,9 @@ public class OperationController {
 
     @Autowired
     private OperationTransferValidator operationTransferValidator;
+
+    @Autowired
+    private OperationServicesPaymentService operationServicesPaymentService;
 
     @Autowired
     MessageSource msgSrc;

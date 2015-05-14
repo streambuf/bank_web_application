@@ -39,5 +39,4 @@ public class HibernateUserDao implements UserDao {
         sessionFactory.getCurrentSession().delete(user);
     }
 
-
 }

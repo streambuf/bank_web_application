@@ -1,8 +1,7 @@
 package com.bank.mvc.controllers;
 
-import com.bank.mvc.domain.service.CategoryServicesService;
-import com.bank.mvc.domain.service.UserService;
-import com.bank.mvc.domain.service.UtilitiesService;
+import com.bank.mvc.domain.service.*;
+import com.bank.mvc.models.Organization;
 import com.bank.mvc.models.Service;
 import com.bank.mvc.models.User;
 import org.apache.log4j.Logger;
@@ -37,6 +36,9 @@ public class DashboardClientController {
     private UtilitiesService utilitiesService;
 
     @Autowired
+    private OrganizationService organizationService;
+
+    @Autowired
     MessageSource msgSrc;
 
     @RequestMapping(value = "/main", method = {RequestMethod.GET, RequestMethod.HEAD})
@@ -69,7 +71,9 @@ public class DashboardClientController {
         logger.info("GET: " + path + "payment-services/" + organizationId);
         User user = getCurrentUser();
         model.addAttribute("user", user);
-        return "dashboard_client_payment_services";
+        Organization organization = organizationService.getOrganizationById(organizationId);
+        model.addAttribute("organization", organization);
+        return organization == null ? "404" : "dashboard_client_payment_services";
     }
 
     @RequestMapping(value = "services", method = {RequestMethod.GET, RequestMethod.HEAD})

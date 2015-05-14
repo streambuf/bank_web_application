@@ -16,8 +16,8 @@ public class Organization extends AbstractModel {
     @Column(name="logotype")
     private String logotype;
 
-    @Column(name="client_identifier")
-    private String clientIdentifier;
+    @Column(name="type_client_identifier")
+    private String typeClientIdentifier;
 
     @ManyToOne
     @JoinColumn(name = "service_id")
@@ -39,12 +39,12 @@ public class Organization extends AbstractModel {
         this.logotype = logotype;
     }
 
-    public String getClientIdentifier() {
-        return clientIdentifier;
+    public String getTypeClientIdentifier() {
+        return typeClientIdentifier;
     }
 
-    public void setClientIdentifier(String clientIdentifier) {
-        this.clientIdentifier = clientIdentifier;
+    public void setTypeClientIdentifier(String typeClientIdentifier) {
+        this.typeClientIdentifier = typeClientIdentifier;
     }
 
     public Service getService() {

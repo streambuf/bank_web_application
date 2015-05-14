@@ -158,13 +158,13 @@ CREATE TABLE category_services (
 );
 
 INSERT INTO category_services (id, name, logotype)
-select 1, 'ЖКХ', '1.jpg'
+select 1, 'ЖКХ', '1.png'
 from dual union all select  
-2, 'ГИБДД, налоги, пошлиы', '2.jpg'
+2, 'ГИБДД, налоги, пошлиы', '2.png'
 from dual union all select  
-3, 'Товары и услуги', '3.jpg'
+3, 'Товары и услуги', '3.png'
 from dual union all select  
-4, 'Коммуникации', '4.jpg'
+4, 'Коммуникации', '4.png'
 from dual;
 
 CREATE TABLE service (
@@ -216,23 +216,23 @@ CREATE TABLE organization (
   id NUMBER(10) NOT NULL,
   name VARCHAR2(200),
   bank_account NUMBER(19),
-  client_identifier VARCHAR2(50),
+  type_client_identifier VARCHAR2(50),
   logotype VARCHAR2(50),
   service_id NUMBER(10),
   PRIMARY KEY (id),
   FOREIGN KEY (service_id) REFERENCES service (id) ON DELETE CASCADE
 );
 
-INSERT INTO organization (id, name, bank_account, client_identifier, service_id, logotype)
+INSERT INTO organization (id, name, bank_account, type_client_identifier, service_id, logotype)
 select 1, 'Freedom', 4081781050000083420, 'Логин', 15, '1.jpg'
 from dual union all select  
-2, 'АТК', 4081781050000047264, 'Лицевой счет', 15, '2.jpg'
+2, 'АТК', 4081781050000047264, 'Лицевой счет', 15, '2.png'
 from dual union all select  
-3, 'Интерсвязь', 4081781050000094814, 'Лицевой счет', 15, '3.jpg'
+3, 'Интерсвязь', 4081781050000094814, 'Лицевой счет', 15, '3.png'
 from dual union all select  
-4, 'Интерсвязь', 4081781050000094811, 'Лицевой счет', 15, '4.jpg'
+4, 'МТС', 4081781050000094811, 'Лицевой счет', 15, '4.jpg'
 from dual union all select  
-5, 'Мобилтелеком', 4081781050000094812, 'Логин', 15, '5.jpg'
+5, 'Мобилтелеком', 4081781050000094812, 'Логин', 15, '5.gif'
 from dual;
 
 
@@ -242,6 +242,7 @@ CREATE TABLE payment_services (
   operation_date DATE,
   organization_id NUMBER(19),
   bank_account_id NUMBER(10),
+  client_identifier VARCHAR2(50),
   PRIMARY KEY (id),
   FOREIGN KEY (bank_account_id) REFERENCES bank_account (id) ON DELETE CASCADE,
   FOREIGN KEY (organization_id) REFERENCES organization (id) ON DELETE CASCADE

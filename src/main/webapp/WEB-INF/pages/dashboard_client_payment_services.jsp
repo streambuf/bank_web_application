@@ -26,11 +26,22 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Перевод средств</h3>
+                        <h3 class="box-title">
+                            <img src="/resources/img/organization/${organization.logotype}" class="image-category" alt="category"/>
+                            Оплата: ${organization.name}
+                            </h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
                     <form role="form" class="operation" action="/dashboard/client/transfer/send">
                         <div class="box-body">
+                            <div class="form-group">
+                                <label>Получатель</label>
+                                <input type="text" class="form-control" value="${organization.name}" disabled/>
+                            </div>
+                            <div class="form-group">
+                                <label>Услуга</label>
+                                <input type="text" class="form-control" value="${organization.service.name}" disabled/>
+                            </div>
                             <!-- select -->
                             <div class="form-group">
                                 <label>Выберите свой счет</label>
@@ -46,9 +57,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="accountPayee">Счет получателя</label>
+                                <label for="clientIdentifier">${organization.typeClientIdentifier}</label>
                                 <div class = "error"></div>
-                                <input type="text" class="form-control" id="accountPayee" name="accountPayee" placeholder="Введит счет"/>
+                                <input type="text" class="form-control" id="clientIdentifier" name="accountPayee" placeholder="Введит счет"/>
                             </div>
 
                             <div class="form-group">
@@ -56,6 +67,8 @@
                                 <div class = "error"></div>
                                 <input type="number" step="0.01" class="form-control" id="quantityOfMoney" min="-9223372036854775807" max="9223372036854775807" name="quantityOfMoney" placeholder="Введит сумму">
                             </div>
+
+                            <input type="hidden" class="form-control"name="organizationId" value="${organization.id}"/>
 
                             <div class="callout callout-success hidediv">
                                 <h4></h4>
