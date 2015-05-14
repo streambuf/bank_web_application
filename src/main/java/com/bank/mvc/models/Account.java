@@ -15,7 +15,7 @@ public class Account extends AbstractModel  {
     @Column(name="balance")
     private double balance;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "client_id")
     private User user;
 

@@ -12,7 +12,7 @@ public interface AccountService {
 
     public Account getAccountById(long accountId);
 
-    public Collection<Account> getAll();
+    public Collection<Account> getAllAccounts();
 
     public void saveAccount(Account account);
 

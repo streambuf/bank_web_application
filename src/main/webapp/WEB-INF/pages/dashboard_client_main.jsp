@@ -79,6 +79,29 @@
 
                 </c:forEach>
             </div><!-- /.row -->
+
+            <div class="row">
+                <div class="content-header">
+                    <h1>Оплата покупок и услуг</h1>
+
+                </div>
+
+                <c:forEach items="${categoryServices}" var="categoryService">
+                    <div class="col-lg-3 col-xs-6">
+
+                        <h4 class="category"> <img src="/resources/img/category_service/${categoryService.logotype}" alt="category"/>  <strong>${categoryService.name}</strong></h4>
+                        <ul>
+                            <c:forEach items="${categoryService.services}" var="service">
+                                <li>
+                                   <a href="/dashboard/client/service/${service.id}" class="service"><i class="fa fa-circle-o"></i> ${service.name}</a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div><!-- ./col -->
+                </c:forEach>
+
+            </div><!-- /.row -->
+
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 

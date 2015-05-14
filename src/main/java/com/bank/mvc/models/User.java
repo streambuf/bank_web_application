@@ -54,17 +54,14 @@ public class User extends AbstractModel implements UserDetails {
     private Set<UserRole> userRoles = new HashSet<>();
 
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
-    private Set<Account> accounts = new HashSet<>();
+    @OrderBy("id")
+    private List<Account> accounts = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
     private Passport passport;
 
-    public Set<Account> getAccounts() {
+    public List<Account> getAccounts() {
         return accounts;
-    }
-
-    public void setAccounts(Set<Account> accounts) {
-        this.accounts = accounts;
     }
 
     public Passport getPassport() {

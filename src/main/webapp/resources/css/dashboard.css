@@ -11,3 +11,20 @@
 .hidediv {
     display: none;
 }
+
+.category {
+    margin-left: 35px;
+}
+ul {
+    list-style-type: none;
+}
+
+li {
+    margin-top: 8px;
+}
+
+.service {
+    color: #1c2d3f;
+    font-size: 16px;
+
+}

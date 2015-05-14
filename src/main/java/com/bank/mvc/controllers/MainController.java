@@ -2,6 +2,7 @@ package com.bank.mvc.controllers;
 
 
 import com.bank.mvc.dao.ExchangeRateDao;
+import com.bank.mvc.domain.service.CategoryServicesService;
 import com.bank.mvc.domain.validation.UserValidator;
 import com.bank.mvc.models.ExchangeRate;
 import com.bank.mvc.models.User;
@@ -27,6 +28,9 @@ public class MainController {
     private UserService userService;
 
     @Autowired
+    private CategoryServicesService categoryServicesService;
+
+    @Autowired
     private UserValidator userValidator;
 
     @Autowired
@@ -42,6 +46,7 @@ public class MainController {
     public String dashboardClientMain(Model model) {
         User user = getCurrentUser();
         model.addAttribute("user", user);
+        model.addAttribute("categoryServices", categoryServicesService.getAllCategoryServices());
         return "dashboard_client_main";
     }
 
@@ -59,6 +64,12 @@ public class MainController {
         return "dashboard_client_currency_exchange";
     }
 
+    @RequestMapping("/dashboard/client/service/{serviceId}")
+    public String dashboardClientService(@PathVariable("serviceId") int serviceId) {
+
+        return "1234";
+    }
+
     @RequestMapping(value = "/access_denied", method = {RequestMethod.GET, RequestMethod.HEAD})
     public String accessDenied() {
         return "access_denied";
@@ -71,7 +82,6 @@ public class MainController {
         if (!data.isEmpty()) {
             return new JsonResponse("ERROR", data);
         }
-
 
         userService.saveUser(user);
         data.put("message", msgSrc.getMessage("registerform.successMessage", null, Locale.getDefault()));

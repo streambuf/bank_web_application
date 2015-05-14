@@ -24,7 +24,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Collection<Account> getAll() {
+    public Collection<Account> getAllAccounts() {
         return accountDao.getAll();
     }
 

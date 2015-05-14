@@ -26,7 +26,7 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Перевод средств</h3>
+                        <h3 class="box-title">Обмен валюты</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
                     <form role="form" class="operation" action="/dashboard/client/currency-exchange/send">

@@ -153,15 +153,18 @@ CREATE TABLE operation_currency_exchange (
 CREATE TABLE category_services (
   id NUMBER(10) NOT NULL,
   name VARCHAR2(200),
+  logotype VARCHAR2(10),
   PRIMARY KEY (id)
 );
 
-INSERT INTO category_services (id, name)
-select 1, 'Мобил'
+INSERT INTO category_services (id, name, logotype)
+select 1, 'ЖКХ', '1.jpg'
 from dual union all select  
-2, 'И'
+2, 'ГИБДД, налоги, пошлиы', '2.jpg'
 from dual union all select  
-3, 'д'
+3, 'Товары и услуги', '3.jpg'
+from dual union all select  
+4, 'Коммуникации', '4.jpg'
 from dual;
 
 CREATE TABLE service (
@@ -173,11 +176,39 @@ CREATE TABLE service (
 );
 
 INSERT INTO service (id, name, category_services_id)
-select 1, 'Мобил', 1
+select 1, 'Квартплата', 1
 from dual union all select  
-2, 'И', 1
+2, 'Электроэнергия', 1
 from dual union all select  
-3, 'д', 1
+3, 'Водоснабжения', 1
+from dual union all select  
+4, 'ЖЭКи', 1
+from dual union all select  
+5, 'Газ', 1
+from dual union all select  
+6, 'Теплоснабжение', 1
+from dual union all select  
+7, 'ГИБДД', 2
+from dual union all select  
+8, 'Федеральная налоговая служба', 2
+from dual union all select  
+9, 'Пенсионные фонды', 2
+from dual union all select  
+10, 'Фонды социального страхования', 2
+from dual union all select  
+11, 'Транспорт', 3
+from dual union all select  
+12, 'Здоровье', 3
+from dual union all select  
+13, 'Спорт и отдых', 3
+from dual union all select  
+14, 'Мобильная связь', 4
+from dual union all select  
+15, 'Интернет', 4
+from dual union all select  
+16, 'ТВ', 4
+from dual union all select  
+17, 'Домашний телефон', 4
 from dual;
 
 
@@ -186,17 +217,22 @@ CREATE TABLE organization (
   name VARCHAR2(200),
   bank_account NUMBER(19),
   client_identifier VARCHAR2(50),
+  logotype VARCHAR2(50),
   service_id NUMBER(10),
   PRIMARY KEY (id),
   FOREIGN KEY (service_id) REFERENCES service (id) ON DELETE CASCADE
 );
 
-INSERT INTO organization (id, name, bank_account, client_identifier, service_id)
-select 1, 'a', 4081781050000083420, 'логин', 1
+INSERT INTO organization (id, name, bank_account, client_identifier, service_id, logotype)
+select 1, 'Freedom', 4081781050000083420, 'Логин', 15, '1.jpg'
 from dual union all select  
-2, 'с', 4081781050000047264, 'логин', 1
+2, 'АТК', 4081781050000047264, 'Лицевой счет', 15, '2.jpg'
 from dual union all select  
-3, 'д', 4081781050000094814, 'логин', 1
+3, 'Интерсвязь', 4081781050000094814, 'Лицевой счет', 15, '3.jpg'
+from dual union all select  
+4, 'Интерсвязь', 4081781050000094811, 'Лицевой счет', 15, '4.jpg'
+from dual union all select  
+5, 'Мобилтелеком', 4081781050000094812, 'Логин', 15, '5.jpg'
 from dual;
 
 
