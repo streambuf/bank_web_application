@@ -2,6 +2,8 @@ DROP TABLE user_role;
 DROP TABLE operation_currency_exchange;
 DROP TABLE operation_transfer;
 DROP TABLE payment_services;
+DROP TABLE credit_repayment;
+DROP TABLE credit;
 DROP TABLE passport;
 DROP TABLE bank_account;
 DROP TABLE bank_user;
@@ -241,11 +243,36 @@ CREATE TABLE payment_services (
   quantity_of_money NUMBER(12,4),
   operation_date DATE,
   organization_id NUMBER(19),
-  bank_account_id NUMBER(10),
+  bank_account_id NUMBER(19),
   client_identifier VARCHAR2(50),
   PRIMARY KEY (id),
   FOREIGN KEY (bank_account_id) REFERENCES bank_account (id) ON DELETE CASCADE,
   FOREIGN KEY (organization_id) REFERENCES organization (id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE credit (
+  id NUMBER(10) NOT NULL,
+  quantity_of_money NUMBER(12,4),
+  annual_percentage_rate NUMBER(12,4),
+  start_date DATE,
+  expiration_date DATE,
+  bank_account_id NUMBER(19),
+  place_of_work VARCHAR2(100),
+  salary NUMBER(12,4),
+  PRIMARY KEY (id),
+  FOREIGN KEY (bank_account_id) REFERENCES bank_account (id) ON DELETE CASCADE
+);
+
+CREATE TABLE credit_repayment (
+  id NUMBER(10) NOT NULL,
+  quantity_of_money NUMBER(12,4),
+  operation_date DATE,
+  credit_id NUMBER(19),
+  bank_account_id NUMBER(19),
+  PRIMARY KEY (id),
+  FOREIGN KEY (bank_account_id) REFERENCES bank_account (id) ON DELETE CASCADE,
+  FOREIGN KEY (credit_id) REFERENCES credit (id) ON DELETE CASCADE
 );
 
 

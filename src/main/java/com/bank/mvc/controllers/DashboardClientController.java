@@ -66,6 +66,14 @@ public class DashboardClientController {
         return "dashboard_client_currency_exchange";
     }
 
+    @RequestMapping(value = "credit", method = {RequestMethod.GET, RequestMethod.HEAD})
+    public String dashboardClientCredit(Model model) {
+        logger.info("GET: " + path + "credit");
+        User user = getCurrentUser();
+        model.addAttribute("user", user);
+        return "dashboard_client_credit";
+    }
+
     @RequestMapping(value = "payment-services/{organizationId}", method = {RequestMethod.GET, RequestMethod.HEAD})
     public String dashboardClientPaymentServices(@PathVariable("organizationId") int organizationId, Model model) {
         logger.info("GET: " + path + "payment-services/" + organizationId);

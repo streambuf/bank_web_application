@@ -1,7 +1,10 @@
 $(function(){
+
     var li_num = document.getElementById('meta.page.li.num').value;
     $($(".sidebar-menu > li")[li_num]).addClass("active");
 
+    var tree_li_num = document.getElementById('meta.page.tree.li.num').value;
+    $($($(".sidebar-menu > li")[6]).find("li")[tree_li_num]).addClass("active")
 });
 
 
