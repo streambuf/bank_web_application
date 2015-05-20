@@ -1,14 +1,8 @@
 package com.bank.mvc.controllers;
 
 import com.bank.mvc.domain.service.*;
-import com.bank.mvc.domain.validation.OperationCurrencyExchangeValidator;
-import com.bank.mvc.domain.validation.OperationServicesPaymentValidator;
-import com.bank.mvc.domain.validation.OperationTransferValidator;
-import com.bank.mvc.domain.validation.UserValidator;
-import com.bank.mvc.models.Account;
-import com.bank.mvc.models.OperationCurrencyExchange;
-import com.bank.mvc.models.OperationServicesPayment;
-import com.bank.mvc.models.OperationTransfer;
+import com.bank.mvc.domain.validation.*;
+import com.bank.mvc.models.*;
 import com.bank.mvc.utils.JsonResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +49,12 @@ public class OperationController {
 
     @Autowired
     private OperationServicesPaymentService operationServicesPaymentService;
+
+    @Autowired
+    private CreditValidator creditValidator;
+
+    @Autowired
+    private CreditService creditService;
 
     @Autowired
     MessageSource msgSrc;
@@ -104,6 +104,23 @@ public class OperationController {
         }
 
         operationServicesPaymentService.saveOperationServicesPayment(operationServicesPayment);
+
+        data.put("message", msgSrc.getMessage("operationForm.successMessage", null, Locale.getDefault()));
+        return new JsonResponse("OK", data);
+    }
+
+    @RequestMapping(value = "/credit/send", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public @ResponseBody
+    JsonResponse createNewOperationCredit(@RequestBody Credit credit) {
+        logger.info("POST: " + path + "credit/send");
+
+        Map<String, String> data = creditValidator.validate(credit);
+
+        if (!data.isEmpty()) {
+            return new JsonResponse("ERROR", data);
+        }
+
+        creditService.saveCredit(credit);
 
         data.put("message", msgSrc.getMessage("operationForm.successMessage", null, Locale.getDefault()));
         return new JsonResponse("OK", data);

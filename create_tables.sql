@@ -41,13 +41,13 @@ CREATE TABLE bank_user (
 
 INSERT INTO bank_user (id,lname, fname, patronymic, date_of_birth, tin, email,
 citizenship, address, phone, password)
-select 100000,'Моисеев', 'Максим', 'Алексеевич', '15-apr-1993', 123456789126, 'streambuf@mail.ru', 
+select 100000,'РњРѕРёСЃРµРµРІ', 'РњР°РєСЃРёРј', 'РђР»РµРєСЃРµРµРІРёС‡', '15-apr-1993', 123456789126, 'streambuf@mail.ru', 
 'rus', 'Moscow', '89269262626', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
 from dual union all select   
-100001,'Смирнов', 'Иван', 'Васильевич', '21-nov-1972', 423456789127, 'employee@mail.ru', 
+100001,'РРІР°РЅРѕРІ', 'РРІР°РЅ', 'РРІР°РЅРѕРІРёС‡', '21-nov-1972', 423456789127, 'employee@mail.ru', 
 'rus', 'Moscow', '89261334212', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
 from dual union all select   
-100002,'Дятлов', 'Виталй', 'Михайлович', '16-sep-1964', 323456789122, 'admin@mail.ru', 
+100002,'РњРёС…Р°Р»РєРѕРІ', 'РњРёС…Р°РёР»', 'РњРёС…Р°Р№Р»РѕРІРёС‡', '16-sep-1964', 323456789122, 'admin@mail.ru', 
 'rus', 'Moscow', '89261345432', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
 from dual;
 
@@ -72,11 +72,11 @@ CREATE TABLE passport (
 );
 
 INSERT INTO passport (id, series, num, date_of_issue, issued_by) 
-select 100000, 1234, 123456, '15-apr-2007', 'УФМС Твери'
+select 100000, 1234, 123456, '15-apr-2007', 'РЈР¤РњРЎ РњРѕСЃРєРІС‹'
 from dual union all select  
-100001, 4142, 846578, '13-nov-2002', 'УФМС Твери'
+100001, 4142, 846578, '13-nov-2002', 'РЈР¤РњРЎ РњРѕСЃРєРІС‹'
 from dual union all select  
-100002, 5313, 591049, '25-sep-2001', 'УФМС Твери'
+100002, 5313, 591049, '25-sep-2001', 'РЈР¤РњРЎ РњРѕСЃРєРІС‹'
 from dual;
 
 
@@ -160,13 +160,13 @@ CREATE TABLE category_services (
 );
 
 INSERT INTO category_services (id, name, logotype)
-select 1, 'ЖКХ', '1.png'
+select 1, 'Р–РљРҐ', '1.png'
 from dual union all select  
-2, 'ГИБДД, налоги, пошлиы', '2.png'
+2, 'Р“РР‘Р”Р”, РЅР°Р»РѕРіРё, РїРѕС€Р»РёРЅС‹', '2.png'
 from dual union all select  
-3, 'Товары и услуги', '3.png'
+3, 'РўРѕРІР°СЂС‹ Рё СѓСЃР»СѓРіРё', '3.png'
 from dual union all select  
-4, 'Коммуникации', '4.png'
+4, 'РљРѕРјРјСѓРЅРёРєР°С†РёРё', '4.png'
 from dual;
 
 CREATE TABLE service (
@@ -178,39 +178,39 @@ CREATE TABLE service (
 );
 
 INSERT INTO service (id, name, category_services_id)
-select 1, 'Квартплата', 1
+select 1, 'Р’РѕРґРѕСЃРЅР°Р±Р¶РµРЅРёРµ', 1
 from dual union all select  
-2, 'Электроэнергия', 1
+2, 'Р“Р°Р·', 1
 from dual union all select  
-3, 'Водоснабжения', 1
+3, 'Р–Р­РљРё', 1
 from dual union all select  
-4, 'ЖЭКи', 1
+4, 'РљРІР°СЂС‚РїР»Р°С‚Р°', 1
 from dual union all select  
-5, 'Газ', 1
+5, 'РўРµРїР»РѕСЃРЅР°Р±Р¶РµРЅРёРµ', 1
 from dual union all select  
-6, 'Теплоснабжение', 1
+6, 'Р­Р»РµРЅС‚СЂРѕСЌРЅРµСЂРіРёСЏ', 1
 from dual union all select  
-7, 'ГИБДД', 2
+7, 'Р“РР‘Р”Р”', 2
 from dual union all select  
-8, 'Федеральная налоговая служба', 2
+8, 'РџРµРЅСЃРёРѕРЅРЅС‹Рµ С„РѕРЅРґС‹', 2
 from dual union all select  
-9, 'Пенсионные фонды', 2
+9, 'Р¤РµРґРµСЂР°Р»СЊРЅР°СЏ РЅР°Р»РѕРіРѕРІР°СЏ СЃР»СѓР¶Р±Р°', 2
 from dual union all select  
-10, 'Фонды социального страхования', 2
+10, 'Р¤РѕРЅРґС‹ СЃРѕС†РёР°Р»СЊРЅРѕРіРѕ СЃС‚СЂР°С…РѕРІР°РЅРёСЏ', 2
 from dual union all select  
-11, 'Транспорт', 3
+11, 'Р—РґРѕСЂРѕРІСЊРµ', 3
 from dual union all select  
-12, 'Здоровье', 3
+12, 'РЎРїРѕСЂС‚ Рё РѕС‚РґС‹С…', 3
 from dual union all select  
-13, 'Спорт и отдых', 3
+13, 'РўСЂР°РЅСЃРїРѕСЂС‚', 3
 from dual union all select  
-14, 'Мобильная связь', 4
+14, 'Р”РѕРјР°С€РЅРёР№ С‚РµР»РµС„РѕРЅ', 4
 from dual union all select  
-15, 'Интернет', 4
+15, 'РРЅС‚РµСЂРЅРµС‚', 4
 from dual union all select  
-16, 'ТВ', 4
+16, 'РњРѕР±РёР»СЊРЅР°СЏ СЃРІСЏР·СЊ', 4
 from dual union all select  
-17, 'Домашний телефон', 4
+17, 'РўР’', 4
 from dual;
 
 
@@ -226,15 +226,15 @@ CREATE TABLE organization (
 );
 
 INSERT INTO organization (id, name, bank_account, type_client_identifier, service_id, logotype)
-select 1, 'Freedom', 4081781050000083420, 'Логин', 15, '1.jpg'
+select 1, 'Freedom', 4081781050000083420, 'Р›РѕРіРёРЅ', 15, '1.jpg'
 from dual union all select  
-2, 'АТК', 4081781050000047264, 'Лицевой счет', 15, '2.png'
+2, 'РђРўРљ', 4081781050000047264, 'Р›РёС†РµРІРѕР№ СЃС‡РµС‚', 15, '2.png'
 from dual union all select  
-3, 'Интерсвязь', 4081781050000094814, 'Лицевой счет', 15, '3.png'
+3, 'РРќРўР•Р РЎР’РЇР—Р¬', 4081781050000094814, 'Р›РёС†РµРІРѕР№ СЃС‡РµС‚', 15, '3.png'
 from dual union all select  
-4, 'МТС', 4081781050000094811, 'Лицевой счет', 15, '4.jpg'
+4, 'РњРўРЎ', 4081781050000094811, 'Р›РёС†РµРІРѕР№ СЃС‡РµС‚', 15, '4.jpg'
 from dual union all select  
-5, 'Мобилтелеком', 4081781050000094812, 'Логин', 15, '5.gif'
+5, 'Burnet', 4081781050000094812, 'Р›РѕРіРёРЅ', 15, '5.gif'
 from dual;
 
 
@@ -254,9 +254,9 @@ CREATE TABLE payment_services (
 CREATE TABLE credit (
   id NUMBER(10) NOT NULL,
   quantity_of_money NUMBER(12,4),
-  annual_percentage_rate NUMBER(12,4),
+  annualPercentageRate NUMBER(12,4),
   start_date DATE,
-  expiration_date DATE,
+  period NUMBER(10),
   bank_account_id NUMBER(19),
   place_of_work VARCHAR2(100),
   salary NUMBER(12,4),

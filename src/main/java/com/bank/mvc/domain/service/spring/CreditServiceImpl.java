@@ -1,12 +1,15 @@
 package com.bank.mvc.domain.service.spring;
 
 import com.bank.mvc.dao.CreditDao;
+import com.bank.mvc.domain.service.AccountService;
 import com.bank.mvc.domain.service.CreditService;
+import com.bank.mvc.models.Account;
 import com.bank.mvc.models.Credit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by Zalman on 19.05.2015.
@@ -15,8 +18,13 @@ import java.util.Collection;
 @Service
 public class CreditServiceImpl implements CreditService {
 
+    static double annualPercentageRate = 20;
+
     @Autowired
     private CreditDao creditDao;
+
+    @Autowired
+    private AccountService accountService;
 
     @Override
     public Credit getCreditById(long creditId) {
@@ -30,6 +38,15 @@ public class CreditServiceImpl implements CreditService {
 
     @Override
     public void saveCredit(Credit credit) {
+        Account account = accountService.getAccountById(credit.getAccountId());
+        credit.setAccount(account);
+        credit.setAnnualPercentageRate(annualPercentageRate);
+        credit.setStartDate(new Date());
+
+        double quantityOfMoney = credit.getQuantityOfMoney();
+        account.setBalance(account.getBalance() + quantityOfMoney);
+        accountService.saveAccount(account);
+
         creditDao.save(credit);
     }
 

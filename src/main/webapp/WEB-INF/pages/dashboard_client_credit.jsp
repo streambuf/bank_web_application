@@ -31,7 +31,7 @@
                         </h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" class="operation" action="/dashboard/client/payment-services/send">
+                    <form role="form" class="operation" action="/dashboard/client/credit/send">
                         <div class="box-body">
 
 
@@ -39,8 +39,8 @@
                             <div class="form-group">
                                 <label>Выберите свой счет</label>
                                 <div class = "error"></div>
-                                <input type="hidden" name="accountSenderError"/>
-                                <select class="form-control" name="accountSenderId">
+                                <input type="hidden" name="accountError"/>
+                                <select class="form-control" name="accountId">
                                     <option disabled selected>Выберите свой счет</option>
                                     <c:forEach items="${user.accounts}" var="account">
                                         <option value="${account.id}">${account.id} ${account.currency}</option>
@@ -50,23 +50,35 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="clientIdentifier">${organization.typeClientIdentifier}</label>
-                                <div class = "error"></div>
-                                <input type="text" class="form-control" id="clientIdentifier" name="clientIdentifier" placeholder="Введит счет"/>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Процентная ставка</label>
-                                <input type="text" class="form-control" value="${organization.service.name}" disabled/>
-                            </div>
-
-                            <div class="form-group">
                                 <label for="quantityOfMoney">Сумма</label>
                                 <div class = "error"></div>
                                 <input type="number" step="0.01" class="form-control" id="quantityOfMoney" min="-9223372036854775807" max="9223372036854775807" name="quantityOfMoney" placeholder="Введит сумму">
                             </div>
 
-                            <input type="hidden" class="form-control" name="organizationId" value="${organization.id}"/>
+
+                            <div class="form-group">
+                                <label for="period">На срок (в месяцах)</label>
+                                <div class = "error"></div>
+                                <input type="number" step="1" min="-9223372036854775807" max="9223372036854775807" class="form-control" id="period" name="period" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="annualPercentageRate">Процентная ставка (%)</label>
+                                <input type="number" class="form-control" id="annualPercentageRate" name="annualPercentageRate" value="20" disabled/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="salary">Зарплата</label>
+                                <div class = "error"></div>
+                                <input type="number" step="0.01" class="form-control" min="-9223372036854775807" max="9223372036854775807" class="form-control" id="salary" name="salary" placeholder="Введит вашу зарплату"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="placeOfWork">Место работы</label>
+                                <div class = "error"></div>
+                                <input type="text" class="form-control" id="placeOfWork" name="placeOfWork" placeholder="Введит счет"/>
+                            </div>
+
 
                             <div class="callout callout-success hidediv">
                                 <h4></h4>

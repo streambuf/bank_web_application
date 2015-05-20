@@ -16,14 +16,14 @@ public class Credit extends AbstractModel {
     @Column(name="quantity_of_money")
     private double quantityOfMoney;
 
-    @Column(name="annual_percentage_rate")
-    private double annual_percentage_rate;
+    @Column(name="annualPercentageRate")
+    private double annualPercentageRate;
 
     @Column(name="start_date")
     private Date startDate;
 
-    @Column(name="expiration_date")
-    private Date expirationDate;
+    @Column(name="period")
+    private int period;
 
     @Column(name="place_of_work")
     private String placeOfWork;
@@ -59,12 +59,12 @@ public class Credit extends AbstractModel {
         this.quantityOfMoney = quantityOfMoney;
     }
 
-    public double getAnnual_percentage_rate() {
-        return annual_percentage_rate;
+    public double getAnnualPercentageRate() {
+        return annualPercentageRate;
     }
 
-    public void setAnnual_percentage_rate(double annual_percentage_rate) {
-        this.annual_percentage_rate = annual_percentage_rate;
+    public void setAnnualPercentageRate(double annualPercentageRate) {
+        this.annualPercentageRate = annualPercentageRate;
     }
 
     public Date getStartDate() {
@@ -75,12 +75,12 @@ public class Credit extends AbstractModel {
         this.startDate = startDate;
     }
 
-    public Date getExpirationDate() {
-        return expirationDate;
+    public int getPeriod() {
+        return period;
     }
 
-    public void setExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
+    public void setPeriod(int period) {
+        this.period = period;
     }
 
     public String getPlaceOfWork() {
