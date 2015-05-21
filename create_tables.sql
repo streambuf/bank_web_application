@@ -281,12 +281,150 @@ CREATE TABLE credit_repayment (
 
 CREATE TABLE contribution_rate (
   id NUMBER(10) NOT NULL,
-  period VARCHAR(20) CHECK( period IN ('1-2', '2-3', '3-6', '6-12', '12-24', '24-36')),
+  period VARCHAR(20) CHECK( period IN ('M1_6', 'M6_12', 'M12_24', 'M24_36')),
+  quantity_of_money  VARCHAR(20) CHECK( quantity_of_money IN ('M100', 'M1000', 'M3000', 'M10000', 'M20000', 'M100000', 'M400000', 'M900000', 'M2000000')),
   currency VARCHAR(20) CHECK( currency IN ('RUBLE', 'EUROS', 'DOLLAR')),
   rate NUMBER(12,4),
   start_date DATE,
   PRIMARY KEY (id)
 );
+
+INSERT INTO contribution_rate (id, period, currency, quantity_of_money, rate, start_date)
+select 1, 'M1_6', 'RUBLE', 'M1000', 7.25, SYSDATE
+from dual union all select  
+2, 'M6_12', 'RUBLE', 'M1000', 9.05, SYSDATE
+from dual union all select  
+3, 'M12_24', 'RUBLE', 'M1000', 8.20, SYSDATE
+from dual union all select  
+4, 'M24_36', 'RUBLE', 'M1000', 8.40, SYSDATE
+from dual union all select  
+
+5, 'M1_6', 'RUBLE', 'M10000', 7.70, SYSDATE
+from dual union all select  
+6, 'M6_12', 'RUBLE', 'M10000', 9.50, SYSDATE
+from dual union all select  
+7, 'M12_24', 'RUBLE', 'M10000', 8.65, SYSDATE
+from dual union all select  
+8, 'M24_36', 'RUBLE', 'M10000', 8.85, SYSDATE
+
+from dual union all select  
+9, 'M1_6', 'RUBLE', 'M400000', 7.95, SYSDATE
+from dual union all select  
+10, 'M6_12', 'RUBLE', 'M400000', 9.75, SYSDATE
+from dual union all select  
+11, 'M12_24', 'RUBLE', 'M400000', 8.90, SYSDATE
+from dual union all select  
+12, 'M24_36', 'RUBLE', 'M400000', 9.10, SYSDATE
+
+from dual union all select  
+13, 'M1_6', 'RUBLE', 'M900000', 8.25, SYSDATE
+from dual union all select  
+14, 'M6_12', 'RUBLE', 'M900000', 10.05, SYSDATE
+from dual union all select  
+15, 'M12_24', 'RUBLE', 'M900000', 9.20, SYSDATE
+from dual union all select  
+16, 'M24_36', 'RUBLE', 'M900000', 9.40, SYSDATE
+
+from dual union all select  
+17, 'M1_6', 'RUBLE', 'M900000', 8.45, SYSDATE
+from dual union all select  
+18, 'M6_12', 'RUBLE', 'M900000', 10.35, SYSDATE
+from dual union all select  
+19, 'M12_24', 'RUBLE', 'M900000', 9.35, SYSDATE
+from dual union all select  
+20, 'M24_36', 'RUBLE', 'M900000', 9.55, SYSDATE
+
+from dual union all select  
+21, 'M1_6', 'DOLLAR', 'M100', 1.50, SYSDATE
+from dual union all select  
+22, 'M6_12', 'DOLLAR', 'M100', 2.30, SYSDATE
+from dual union all select  
+23, 'M12_24', 'DOLLAR', 'M100', 3.10, SYSDATE
+from dual union all select  
+24, 'M24_36', 'DOLLAR', 'M100', 3.00, SYSDATE
+
+from dual union all select  
+25, 'M1_6', 'DOLLAR', 'M3000', 1.60, SYSDATE
+from dual union all select  
+26, 'M6_12', 'DOLLAR', 'M3000', 2.40, SYSDATE
+from dual union all select  
+27, 'M12_24', 'DOLLAR', 'M3000', 3.20, SYSDATE
+from dual union all select  
+28, 'M24_36', 'DOLLAR', 'M3000', 3.10, SYSDATE
+
+from dual union all select  
+29, 'M1_6', 'DOLLAR', 'M10000', 1.75, SYSDATE
+from dual union all select  
+30, 'M6_12', 'DOLLAR', 'M10000', 2.55, SYSDATE
+from dual union all select  
+31, 'M12_24', 'DOLLAR', 'M10000', 3.35, SYSDATE
+from dual union all select  
+32, 'M24_36', 'DOLLAR', 'M10000', 3.25, SYSDATE
+
+from dual union all select  
+33, 'M1_6', 'DOLLAR', 'M20000', 1.90, SYSDATE
+from dual union all select  
+34, 'M6_12', 'DOLLAR', 'M20000', 2.70, SYSDATE
+from dual union all select  
+35, 'M12_24', 'DOLLAR', 'M20000', 3.50, SYSDATE
+from dual union all select  
+36, 'M24_36', 'DOLLAR', 'M20000', 3.40, SYSDATE
+
+from dual union all select  
+37, 'M1_6', 'DOLLAR', 'M100000', 2.00, SYSDATE
+from dual union all select  
+38, 'M6_12', 'DOLLAR', 'M100000', 2.90, SYSDATE
+from dual union all select  
+39, 'M12_24', 'DOLLAR', 'M100000', 3.60, SYSDATE
+from dual union all select  
+40, 'M24_36', 'DOLLAR', 'M100000', 3.50, SYSDATE
+
+from dual union all select  
+41, 'M1_6', 'EUROS', 'M100', 1.10, SYSDATE
+from dual union all select  
+42, 'M6_12', 'EUROS', 'M100', 1.65, SYSDATE
+from dual union all select  
+43, 'M12_24', 'EUROS', 'M100', 2.15, SYSDATE
+from dual union all select  
+44, 'M24_36', 'EUROS', 'M100', 1.95, SYSDATE
+
+from dual union all select  
+45, 'M1_6', 'EUROS', 'M3000', 1.20, SYSDATE
+from dual union all select  
+46, 'M6_12', 'EUROS', 'M3000', 1.80, SYSDATE
+from dual union all select  
+47, 'M12_24', 'EUROS', 'M3000', 2.30, SYSDATE
+from dual union all select  
+48, 'M24_36', 'EUROS', 'M3000', 2.10, SYSDATE
+
+from dual union all select  
+49, 'M1_6', 'EUROS', 'M10000', 1.30, SYSDATE
+from dual union all select  
+50, 'M6_12', 'EUROS', 'M10000', 1.95, SYSDATE
+from dual union all select  
+51, 'M12_24', 'EUROS', 'M10000', 2.45, SYSDATE
+from dual union all select  
+52, 'M24_36', 'EUROS', 'M10000', 2.25, SYSDATE
+
+from dual union all select  
+53, 'M1_6', 'EUROS', 'M20000', 1.40, SYSDATE
+from dual union all select  
+54, 'M6_12', 'EUROS', 'M20000', 2.10, SYSDATE
+from dual union all select  
+55, 'M12_24', 'EUROS', 'M20000', 2.60, SYSDATE
+from dual union all select  
+56, 'M24_36', 'EUROS', 'M20000', 2.40, SYSDATE
+
+from dual union all select  
+57, 'M1_6', 'EUROS', 'M100000', 1.50, SYSDATE
+from dual union all select  
+58, 'M6_12', 'EUROS', 'M100000', 2.20, SYSDATE
+from dual union all select  
+59, 'M12_24', 'EUROS', 'M100000', 2.74, SYSDATE
+from dual union all select  
+60, 'M24_36', 'EUROS', 'M100000', 2.55, SYSDATE
+
+from dual;
 
 CREATE TABLE contribution (
   id NUMBER(10) NOT NULL,
