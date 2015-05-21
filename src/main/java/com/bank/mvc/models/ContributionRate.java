@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="contribution_rate")
-public class ContributionRate {
+public class ContributionRate extends AbstractModel {
 
     @Enumerated(EnumType.STRING)
     @Column(name="period")

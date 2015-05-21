@@ -1,10 +1,11 @@
 package com.bank.mvc.controllers;
 
 import com.bank.mvc.domain.service.*;
-import com.bank.mvc.models.Credit;
+import com.bank.mvc.models.ContributionRate;
 import com.bank.mvc.models.Organization;
 import com.bank.mvc.models.Service;
 import com.bank.mvc.models.User;
+import com.bank.mvc.utils.ViewHelper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.View;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,12 +47,16 @@ public class DashboardClientController {
     private CreditService creditService;
 
     @Autowired
+    private ContributionRateService contributionRateService;
+
+    @Autowired
     MessageSource msgSrc;
 
     @RequestMapping(value = "/main", method = {RequestMethod.GET, RequestMethod.HEAD})
     public String dashboardClientMain(Model model) {
         logger.info("GET: " + path + "main");
         User user = getCurrentUser();
+        if (user == null) return "redirect:/";
         model.addAttribute("user", user);
         model.addAttribute("categoryServices", categoryServicesService.getAllCategoryServices());
         return "dashboard_client_main";
@@ -60,6 +66,7 @@ public class DashboardClientController {
     public String dashboardClientTransfer(Model model) {
         logger.info("GET: " + path + "transfer");
         User user = getCurrentUser();
+        if (user == null) return "redirect:/";
         model.addAttribute("user", user);
         return "dashboard_client_transfer";
     }
@@ -68,6 +75,7 @@ public class DashboardClientController {
     public String dashboardClientCurrencyExchange(Model model) {
         logger.info("GET: " + path + "currency-exchange");
         User user = getCurrentUser();
+        if (user == null) return "/";
         model.addAttribute("user", user);
         return "dashboard_client_currency_exchange";
     }
@@ -76,6 +84,7 @@ public class DashboardClientController {
     public String dashboardClientCredit(Model model) {
         logger.info("GET: " + path + "credit");
         User user = getCurrentUser();
+        if (user == null) return "redirect:/";
         model.addAttribute("user", user);
         return "dashboard_client_credit";
     }
@@ -85,16 +94,37 @@ public class DashboardClientController {
     public String dashboardClientCreditRepayment(Model model) {
         logger.info("GET: " + path + "credit-repayment");
         User user = getCurrentUser();
-        List<Credit> credits = (ArrayList<Credit>)creditService.getCreditsByUserId(user.getId());
+        if (user == null) return "redirect:/";
         model.addAttribute("user", user);
-        model.addAttribute("credits", credits);
         return "dashboard_client_credit_repayment";
+    }
+
+    @RequestMapping(value = "contribution", method = {RequestMethod.GET, RequestMethod.HEAD})
+    public String dashboardClientContribution(Model model) {
+        logger.info("GET: " + path + "contribution");
+        User user = getCurrentUser();
+        if (user == null) return "redirect:/";
+        model.addAttribute("user", user);
+        List<ContributionRate> contributionRateList = (ArrayList<ContributionRate>)contributionRateService.getAllContributionRates();
+        List<List<String>> table = ViewHelper.contributionRateToTable(contributionRateList);
+        model.addAttribute("table", table);
+        return "dashboard_client_contribution";
+    }
+
+    @RequestMapping(value = "contribution-info", method = {RequestMethod.GET, RequestMethod.HEAD})
+    public String dashboardClientContributionInfot(Model model) {
+        logger.info("GET: " + path + "contribution-info");
+        User user = getCurrentUser();
+        if (user == null) return "redirect:/";
+        model.addAttribute("user", user);
+        return "dashboard_client_contribution_info";
     }
 
     @RequestMapping(value = "payment-services/{organizationId}", method = {RequestMethod.GET, RequestMethod.HEAD})
     public String dashboardClientPaymentServices(@PathVariable("organizationId") int organizationId, Model model) {
         logger.info("GET: " + path + "payment-services/" + organizationId);
         User user = getCurrentUser();
+        if (user == null) return "redirect:/";
         model.addAttribute("user", user);
         Organization organization = organizationService.getOrganizationById(organizationId);
         model.addAttribute("organization", organization);
@@ -105,6 +135,7 @@ public class DashboardClientController {
     public String dashboardClientServices(Model model) {
         logger.info("GET: " + path + "services");
         User user = getCurrentUser();
+        if (user == null) return "redirect:/";
         model.addAttribute("user", user);
         model.addAttribute("categoryServices", categoryServicesService.getAllCategoryServices());
         return "dashboard_client_services";
@@ -119,9 +150,15 @@ public class DashboardClientController {
     }
 
     private User getCurrentUser() {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            return userService.getUserById(user.getId());
+        } catch (ClassCastException ex) {
+            logger.info("GET: " + ex.getMessage());
+            return null;
+        }
         // deprecated (update user)
-        return userService.getUserById(user.getId());
+
     }
 
 }

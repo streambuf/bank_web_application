@@ -141,8 +141,8 @@
                 <li class="treeview">
                     <a href="#"><span><i class="fa fa-money"></i> Вклад</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Открыть вклад</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Мои вклады</a></li>
+                        <li><a href="/dashboard/client/contribution"><i class="fa fa-circle-o"></i> Открыть вклад</a></li>
+                        <li><a href="/dashboard/client/contribution-info"><i class="fa fa-circle-o"></i> Мои вклады</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

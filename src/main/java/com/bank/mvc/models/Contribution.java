@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="contribution")
-public class Contribution {
+public class Contribution extends AbstractModel {
 
     @Enumerated(EnumType.STRING)
     @Column(name="payment_procedure")
