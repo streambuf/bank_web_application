@@ -149,7 +149,7 @@
                     <a href="#"><span><i class="fa fa-sort-amount-asc"></i> Кредит</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                         <li><a href="/dashboard/client/credit"><i class="fa fa-circle-o"></i> Взять кредит</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Погасить кредит</a></li>
+                        <li><a href="/dashboard/client/credit-repayment"><i class="fa fa-circle-o"></i> Погасить кредит</a></li>
                     </ul>
                 </li>
 

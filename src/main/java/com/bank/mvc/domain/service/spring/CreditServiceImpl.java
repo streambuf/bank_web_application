@@ -37,6 +37,11 @@ public class CreditServiceImpl implements CreditService {
     }
 
     @Override
+    public Collection<Credit> getCreditsByUserId(long userId) {
+        return creditDao.getByUserId(userId);
+    };
+
+    @Override
     public void saveCredit(Credit credit) {
         Account account = accountService.getAccountById(credit.getAccountId());
         credit.setAccount(account);
@@ -46,6 +51,10 @@ public class CreditServiceImpl implements CreditService {
         double quantityOfMoney = credit.getQuantityOfMoney();
         account.setBalance(account.getBalance() + quantityOfMoney);
         accountService.saveAccount(account);
+
+
+        double monthlyPayment = (quantityOfMoney*(annualPercentageRate/100/12))/(1-1/Math.pow((1+annualPercentageRate/100/12),credit.getPeriod()));
+        credit.setMonthlyPayment(monthlyPayment);
 
         creditDao.save(credit);
     }

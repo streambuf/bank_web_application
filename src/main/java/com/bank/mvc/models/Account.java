@@ -1,5 +1,7 @@
 package com.bank.mvc.models;
 
+import com.bank.mvc.models.enums.ListCurrency;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;

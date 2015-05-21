@@ -2,7 +2,7 @@ package com.bank.mvc.dao.hibernate;
 
 import com.bank.mvc.dao.ExchangeRateDao;
 import com.bank.mvc.models.ExchangeRate;
-import com.bank.mvc.models.ListCurrency;
+import com.bank.mvc.models.enums.ListCurrency;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

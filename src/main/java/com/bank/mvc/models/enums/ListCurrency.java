@@ -1,4 +1,4 @@
-package com.bank.mvc.models;
+package com.bank.mvc.models.enums;
 
 /**
  * Created by Zalman on 10.05.2015.

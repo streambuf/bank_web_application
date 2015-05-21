@@ -3,6 +3,7 @@ package com.bank.mvc.domain.validation;
 import com.bank.mvc.domain.service.AccountService;
 import com.bank.mvc.domain.service.OrganizationService;
 import com.bank.mvc.models.*;
+import com.bank.mvc.models.enums.ListCurrency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

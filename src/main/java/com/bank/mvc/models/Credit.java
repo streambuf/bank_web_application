@@ -31,6 +31,9 @@ public class Credit extends AbstractModel {
     @Column(name="salary")
     private double salary;
 
+    @Column(name="monthly_payment")
+    private double monthlyPayment;
+
     @ManyToOne
     @JoinColumn(name = "bank_account_id")
     private Account account;
@@ -42,6 +45,10 @@ public class Credit extends AbstractModel {
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "credit")
     @OrderBy("operation_date")
     private List<CreditRepayment> repayments = new ArrayList<>();
+
+    public List<CreditRepayment> getRepayments() {
+        return repayments;
+    }
 
     public long getAccountId() {
         return accountId;
@@ -105,5 +112,13 @@ public class Credit extends AbstractModel {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public double getMonthlyPayment() {
+        return monthlyPayment;
+    }
+
+    public void setMonthlyPayment(double monthlyPayment) {
+        this.monthlyPayment = monthlyPayment;
     }
 }

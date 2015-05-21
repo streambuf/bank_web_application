@@ -3,6 +3,7 @@ DROP TABLE operation_currency_exchange;
 DROP TABLE operation_transfer;
 DROP TABLE payment_services;
 DROP TABLE credit_repayment;
+DROP TABLE contribution;
 DROP TABLE credit;
 DROP TABLE passport;
 DROP TABLE bank_account;
@@ -12,6 +13,7 @@ DROP TABLE exchange_rate;
 DROP TABLE organization;
 DROP TABLE service;
 DROP TABLE category_services;
+DROP TABLE contribution_rate;
 
 
 CREATE TABLE bank_role (
@@ -260,6 +262,7 @@ CREATE TABLE credit (
   bank_account_id NUMBER(19),
   place_of_work VARCHAR2(100),
   salary NUMBER(12,4),
+  monthly_payment NUMBER(12,4),
   PRIMARY KEY (id),
   FOREIGN KEY (bank_account_id) REFERENCES bank_account (id) ON DELETE CASCADE
 );
@@ -276,7 +279,27 @@ CREATE TABLE credit_repayment (
 );
 
 
+CREATE TABLE contribution_rate (
+  id NUMBER(10) NOT NULL,
+  period VARCHAR(20) CHECK( period IN ('1-2', '2-3', '3-6', '6-12', '12-24', '24-36')),
+  currency VARCHAR(20) CHECK( currency IN ('RUBLE', 'EUROS', 'DOLLAR')),
+  rate NUMBER(12,4),
+  start_date DATE,
+  PRIMARY KEY (id)
+);
 
+CREATE TABLE contribution (
+  id NUMBER(10) NOT NULL,
+  payment_procedure VARCHAR(20) CHECK( payment_procedure IN ('CAPITALIZATION', 'TRANSFER')),
+  quantity_of_money NUMBER(12,4),
+  start_date DATE,
+  period NUMBER(10),
+  bank_account_id NUMBER(19),
+  contribution_rate_id NUMBER(19),
+  PRIMARY KEY (id),
+  FOREIGN KEY (bank_account_id) REFERENCES bank_account (id) ON DELETE CASCADE,
+  FOREIGN KEY (contribution_rate_id) REFERENCES contribution_rate (id) ON DELETE CASCADE
+);
 
 
 

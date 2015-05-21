@@ -11,6 +11,8 @@ public interface CreditDao {
 
     public Collection<Credit> getAll();
 
+    public Collection<Credit> getByUserId(long userId);
+
     public Credit getById(long creditId);
 
     public void save(Credit credit);

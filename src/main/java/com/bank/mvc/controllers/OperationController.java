@@ -57,6 +57,12 @@ public class OperationController {
     private CreditService creditService;
 
     @Autowired
+    private  CreditRepaymentService creditRepaymentService;
+
+    @Autowired
+    private CreditRepaymentValidator creditRepaymentValidator;
+
+    @Autowired
     MessageSource msgSrc;
 
     @RequestMapping(value = "/transfer/send", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
@@ -121,6 +127,23 @@ public class OperationController {
         }
 
         creditService.saveCredit(credit);
+
+        data.put("message", msgSrc.getMessage("operationForm.successMessage", null, Locale.getDefault()));
+        return new JsonResponse("OK", data);
+    }
+
+    @RequestMapping(value = "/credit-repayment/send", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public @ResponseBody
+    JsonResponse createNewOperationCreditRepayment(@RequestBody CreditRepayment creditRepayment) {
+        logger.info("POST: " + path + "credit/send");
+
+        Map<String, String> data = creditRepaymentValidator.validate(creditRepayment);
+
+        if (!data.isEmpty()) {
+            return new JsonResponse("ERROR", data);
+        }
+
+        creditRepaymentService.saveCreditRepayment(creditRepayment);
 
         data.put("message", msgSrc.getMessage("operationForm.successMessage", null, Locale.getDefault()));
         return new JsonResponse("OK", data);

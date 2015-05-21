@@ -1,6 +1,7 @@
 package com.bank.mvc.controllers;
 
 import com.bank.mvc.domain.service.*;
+import com.bank.mvc.models.Credit;
 import com.bank.mvc.models.Organization;
 import com.bank.mvc.models.Service;
 import com.bank.mvc.models.User;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -37,6 +40,9 @@ public class DashboardClientController {
 
     @Autowired
     private OrganizationService organizationService;
+
+    @Autowired
+    private CreditService creditService;
 
     @Autowired
     MessageSource msgSrc;
@@ -72,6 +78,17 @@ public class DashboardClientController {
         User user = getCurrentUser();
         model.addAttribute("user", user);
         return "dashboard_client_credit";
+    }
+
+
+    @RequestMapping(value = "credit-repayment", method = {RequestMethod.GET, RequestMethod.HEAD})
+    public String dashboardClientCreditRepayment(Model model) {
+        logger.info("GET: " + path + "credit-repayment");
+        User user = getCurrentUser();
+        List<Credit> credits = (ArrayList<Credit>)creditService.getCreditsByUserId(user.getId());
+        model.addAttribute("user", user);
+        model.addAttribute("credits", credits);
+        return "dashboard_client_credit_repayment";
     }
 
     @RequestMapping(value = "payment-services/{organizationId}", method = {RequestMethod.GET, RequestMethod.HEAD})

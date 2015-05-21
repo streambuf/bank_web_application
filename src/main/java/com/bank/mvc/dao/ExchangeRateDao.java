@@ -2,7 +2,7 @@ package com.bank.mvc.dao;
 
 
 import com.bank.mvc.models.ExchangeRate;
-import com.bank.mvc.models.ListCurrency;
+import com.bank.mvc.models.enums.ListCurrency;
 
 /**
  * Created by Zalman on 12.05.2015.

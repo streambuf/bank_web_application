@@ -6,7 +6,6 @@ import com.bank.mvc.domain.service.AccountService;
 import com.bank.mvc.domain.service.OperationCurrencyExchangeService;
 import com.bank.mvc.models.Account;
 import com.bank.mvc.models.ExchangeRate;
-import com.bank.mvc.models.ListCurrency;
 import com.bank.mvc.models.OperationCurrencyExchange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -11,6 +11,8 @@ public interface CreditService {
 
     public Collection<Credit> getAllCredits();
 
+    public Collection<Credit> getCreditsByUserId(long userId);
+
     public Credit getCreditById(long creditId);
 
     public void saveCredit(Credit credit);

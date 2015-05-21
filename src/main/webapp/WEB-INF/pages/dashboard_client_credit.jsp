@@ -64,7 +64,12 @@
 
                             <div class="form-group">
                                 <label for="annualPercentageRate">Процентная ставка (%)</label>
-                                <input type="number" class="form-control" id="annualPercentageRate" name="annualPercentageRate" value="20" disabled/>
+                                <input type="number" class="form-control" id="annualPercentageRate" value="20" disabled/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="type">Тип платежа</label>
+                                <input type="text" class="form-control" id="type" value="Аннуительный" disabled/>
                             </div>
 
                             <div class="form-group">
@@ -89,7 +94,7 @@
 
 
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Перевести</button>
+                            <button type="submit" class="btn btn-primary">Оформить кредит</button>
                         </div>
                     </form>
 
