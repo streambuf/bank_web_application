@@ -51,6 +51,18 @@ from dual union all select
 from dual union all select   
 100002,'Михалков', 'Михаил', 'Михайлович', '16-sep-1964', 323456789122, 'admin@mail.ru', 
 'rus', 'Moscow', '89261345432', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+from dual union all select   
+100004,'Светлаков', 'Юрий', 'Алексеевич', '16-sep-1964', 323456789123, 'svetlakov@mail.ru', 
+'rus', 'Moscow', '89261345432', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+from dual union all select   
+100005,'Колобков', 'Александр', 'Сергеевич', '16-sep-1964', 323456789124, 'ermakov@mail.ru', 
+'rus', 'Moscow', '89261345432', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+from dual union all select   
+100006,'Ефремов', 'Сергей', 'Владимирович', '16-sep-1964', 323456789125, 'efremov@mail.ru', 
+'rus', 'Moscow', '89261345432', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+from dual union all select   
+100007,'Людмилов', 'Иван', 'Михайлович', '16-sep-1964', 323456789126, 'ivanov@mail.ru', 
+'rus', 'Moscow', '89261345432', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
 from dual;
 
 CREATE TABLE user_role (
@@ -152,6 +164,14 @@ CREATE TABLE operation_currency_exchange (
   FOREIGN KEY (sender_bank_account_id) REFERENCES bank_account (id) ON DELETE CASCADE,
   FOREIGN KEY (payee_bank_account_id) REFERENCES bank_account (id) ON DELETE CASCADE
 );
+
+INSERT INTO OPERATION_CURRENCY_EXCHANGE (id, sender_bank_account_id, quantity_of_money, operation_date, payee_bank_account_id, rate_id)
+select 1, 4081781050000000068, 500, '10-may-2015',  4081797860150000027, 5
+from dual union all select  
+2, 4081781050000000068, 100, '10-may-2015',  4081784000125000124, 4
+from dual union all select  
+3, 4081784000125000124, 70, '11-may-2015',  4081797860150000027, 5
+from dual;
 
 
 CREATE TABLE category_services (
@@ -263,9 +283,18 @@ CREATE TABLE credit (
   place_of_work VARCHAR2(100),
   salary NUMBER(12,4),
   monthly_payment NUMBER(12,4),
+  status VARCHAR(20) CHECK( status IN ('CONFIRMED', 'UNCONFIRMED', 'FINISHED')),
   PRIMARY KEY (id),
   FOREIGN KEY (bank_account_id) REFERENCES bank_account (id) ON DELETE CASCADE
 );
+
+INSERT INTO credit (id, quantity_of_money, annualPercentageRate, start_date, period, bank_account_id, place_of_work, salary, monthly_payment, status)
+select 1, 50000, 20, '10-may-2010', 12, 4081781050000000068, 'ATK', 35000, 4631.73, 'FINISHED'  
+from dual union all select  
+2, 100000, 20, '11-feb-2015', 24, 4081781050000000068, 'BBC', 55000, 5089.58, 'CONFIRMED'   
+from dual union all select  
+3, 90000, 20, '26-may-2015', 12, 4081781050000000068, 'MTC', 75000, 8337.11, 'UNCONFIRMED' 
+from dual;
 
 CREATE TABLE credit_repayment (
   id NUMBER(10) NOT NULL,

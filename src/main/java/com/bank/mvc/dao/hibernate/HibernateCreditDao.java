@@ -25,11 +25,6 @@ public class HibernateCreditDao implements CreditDao {
                 createQuery("from Credit").list();
     }
 
-
-//    Query query = sessionFactory.getCurrentSession()
-//            .createQuery("from ExchangeRate e where e.currency=:currency order by e.id desc")
-//            .setParameter("currency", currency);
-
     @Override
     public Collection<Credit> getByUserId(long userId) {
         return sessionFactory.getCurrentSession().

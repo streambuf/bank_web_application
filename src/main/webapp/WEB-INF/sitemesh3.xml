@@ -1,5 +1,5 @@
 <sitemesh>
-    <mapping path="/dashboard/client/*" decorator="/WEB-INF/decorators/DashboardDecorator.jsp"/>
+    <mapping path="/dashboard/*/*" decorator="/WEB-INF/decorators/DashboardDecorator.jsp"/>
     <content-processor>
         <tag-rule-bundle class="org.sitemesh.content.tagrules.html.DivExtractingTagRuleBundle" />
     </content-processor>

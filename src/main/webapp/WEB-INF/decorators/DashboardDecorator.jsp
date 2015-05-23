@@ -157,9 +157,9 @@
                 </security:authorize>
                 <security:authorize access="hasRole('ROLE_EMPLOYEE')">
                     <li><a href="/dashboard/employee/main"><span><i class="fa fa-home"></i> Главная</span></a></li>
-                    <li><a href="/dashboard/employee/main"><span><i class="fa fa-home"></i> Оформить клиента</span></a></li>
-                    <li><a href="/dashboard/employee/main"><span><i class="fa fa-home"></i> Разрешить кредит</span></a></li>
-                    <li><a href="/dashboard/employee/main"><span><i class="fa fa-home"></i> Создать счет</span></a></li>
+                    <li><a href="/dashboard/employee/clients"><span><i class="fa fa-home"></i> Оформить клиента</span></a></li>
+                    <li><a href="/dashboard/employee/credits"><span><i class="fa fa-home"></i> Разрешить кредит</span></a></li>
+                    <li><a href="/dashboard/employee/accounts"><span><i class="fa fa-home"></i> Создать счет</span></a></li>
                 </security:authorize>
             </ul><!-- /.sidebar-menu -->
         </section>

@@ -8,6 +8,8 @@ public interface UserDao {
 
     public Collection<User> getAll();
 
+    public Collection<User> getAllUnconfirmed();
+
     public User getById(long userId);
 
     public void save(User user);

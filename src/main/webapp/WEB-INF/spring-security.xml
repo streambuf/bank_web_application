@@ -19,7 +19,7 @@
         <!--<security:access-denied-handler error-page="/access_denied"/>-->
         <security:form-login login-page="/"
                              login-processing-url="/login" username-parameter="username"
-                             password-parameter="password" default-target-url="/dashboard/client/main"
+                             password-parameter="password" default-target-url="/dashboard/redirect"
                              always-use-default-target="true"
                              authentication-failure-url="/?error=invalidLoginPassword" />
 

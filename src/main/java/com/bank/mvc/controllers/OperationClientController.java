@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -25,9 +24,9 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/dashboard/client/*")
-public class OperationController {
+public class OperationClientController {
 
-    final static Logger logger = Logger.getLogger(OperationController.class);
+    final static Logger logger = Logger.getLogger(OperationClientController.class);
     private static String path = "/dashboard/client/";
 
     @Autowired

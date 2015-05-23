@@ -39,6 +39,23 @@ $(function() {
         );
     });
 
+    $(".delete").submit(function(e) {
+        e.preventDefault();
+        var form = $(this);
+        sendPost($(this),
+            function(result) {
+                console.log("OK");
+                if (result.data.delete == "OK") {
+                    $(form).parents("tr").hide();
+                }
+            },
+            function(result) {
+                console.log("error");
+                showError(result.data);
+            }
+        );
+    });
+
     $("#accountPayee").mask("9999999999999999999");
 
 });

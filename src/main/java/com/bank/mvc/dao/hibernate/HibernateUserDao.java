@@ -23,6 +23,11 @@ public class HibernateUserDao implements UserDao {
                 createQuery("from User").list();
     }
 
+    public Collection<User> getAllUnconfirmed() {
+        return sessionFactory.getCurrentSession().
+                createQuery("select u.id, u.lname, u.fname, u.patronymic from User u left join u.userRoles r group by u.id, u.lname, u.fname, u.patronymic having count(r)=0").list();
+    }
+
     @Override
     public User getById(long userId) {
         return (User)sessionFactory.getCurrentSession()

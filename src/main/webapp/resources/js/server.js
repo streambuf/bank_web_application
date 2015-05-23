@@ -6,9 +6,10 @@ $(function () {
     });
 });
 
-function sendPost(form, callSuccess, callError) {
-    var data = $(form).serializeForm();
-
+function sendPost(form, callSuccess, callError, data) {
+    if (data == null) {
+        data = $(form).serializeForm();
+    }
     // TODO delete log in production
     console.log("Json data for server")
     console.log(data);

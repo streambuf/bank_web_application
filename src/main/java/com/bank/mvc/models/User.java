@@ -55,6 +55,7 @@ public class User extends AbstractModel implements UserDetails {
 
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     @OrderBy("id")
+    @Fetch(FetchMode.SELECT)
     private List<Account> accounts = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
@@ -211,6 +212,9 @@ public class User extends AbstractModel implements UserDetails {
         return true;
     }
 
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
 }
 
 

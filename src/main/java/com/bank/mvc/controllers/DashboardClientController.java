@@ -157,8 +157,6 @@ public class DashboardClientController {
             logger.info("GET: " + ex.getMessage());
             return null;
         }
-        // deprecated (update user)
-
     }
 
 }
