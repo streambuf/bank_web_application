@@ -1,8 +1,12 @@
 package com.bank.mvc.domain.service.spring;
 
+import com.bank.mvc.dao.PassportDao;
 import com.bank.mvc.dao.UserDao;
 import com.bank.mvc.domain.service.UserService;
+import com.bank.mvc.models.Passport;
 import com.bank.mvc.models.User;
+import com.bank.mvc.models.UserRole;
+import com.bank.mvc.models.enums.ListRole;
 import com.bank.mvc.utils.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +21,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private PassportDao passportDao;
 
     @Override
     public Collection<User> getAllUsers() {
@@ -52,5 +59,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (user == null) throw new UsernameNotFoundException("username: " + username + " not found!");
 
         return user;
+    }
+
+    @Override
+    public void savePassport(Passport passport) {
+        User user = getUserById(passport.getUserId());
+        passport.setUser(user);
+        user.setPassport(passport);
+        UserRole userRole = new UserRole();
+        userRole.setId(1);
+        userRole.setListRole(ListRole.ROLE_CLIENT);
+        userRole.addUser(user);
+        user.addUserRole(userRole);
+        userDao.saveOrUpdate(user);
     }
 }

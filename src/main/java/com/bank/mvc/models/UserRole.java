@@ -21,11 +21,11 @@ public class UserRole extends AbstractModel {
     @Column(name="name")
     private ListRole listRole;
 
-    UserRole() {
+    public UserRole() {
         super();
     }
 
-    UserRole(long id) {
+    public UserRole(long id) {
         super(id);
     }
 
@@ -35,5 +35,9 @@ public class UserRole extends AbstractModel {
 
     public void setListRole(ListRole listRole) {
         this.listRole = listRole;
+    }
+
+    public void addUser(User user) {
+        this.user.add(user);
     }
 }

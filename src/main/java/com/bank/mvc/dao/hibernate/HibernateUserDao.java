@@ -40,6 +40,9 @@ public class HibernateUserDao implements UserDao {
     }
 
     @Override
+    public void saveOrUpdate(User user) { sessionFactory.getCurrentSession().saveOrUpdate(user);}
+
+    @Override
     public void delete(User user) {
         sessionFactory.getCurrentSession().delete(user);
     }

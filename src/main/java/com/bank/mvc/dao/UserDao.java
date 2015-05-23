@@ -14,6 +14,8 @@ public interface UserDao {
 
     public void save(User user);
 
+    public void saveOrUpdate(User user);
+
     public void delete(User user);
 
 }

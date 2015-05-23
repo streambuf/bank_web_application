@@ -58,13 +58,7 @@
                                         <td>${u[2]}</td>
                                         <td>${u[3]}</td>
                                         <td>
-                                            <form role="form" class="operation" action="/dashboard/employee/clients/delete2">
-                                                <input type="hidden" name="lname" value="${u[0]}"/>
-                                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                                <button type="submit" class="confirm btn btn-block btn-success">
-                                                    <i class="fa plus-square"></i>
-                                                </button>
-                                            </form>
+                                            <a class="confirm btn btn-block btn-success" href="/dashboard/employee/client/${u[0]}"><i class="fa plus-square"></i></a>
                                         </td>
                                         <td>
                                             <form role="form" class="delete" action="/dashboard/employee/clients/delete">

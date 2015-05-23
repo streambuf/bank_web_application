@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -36,7 +37,7 @@ public class DashboardEmployeeController {
     }
 
     @RequestMapping(value = "/clients", method = {RequestMethod.GET, RequestMethod.HEAD})
-    public String dashboardClientClients(Model model) {
+    public String dashboardEmployeeClients(Model model) {
         logger.info("GET: " + path + "main");
         User user = getCurrentUser();
         if (user == null) return "redirect:/";
@@ -44,6 +45,19 @@ public class DashboardEmployeeController {
         List<User> users = (List<User>)userService.getAllUnconfirmedUsers();
         model.addAttribute("users", users);
         return "dashboard_employee_clients";
+    }
+
+    @RequestMapping(value = "client/{clientId}", method = {RequestMethod.GET, RequestMethod.HEAD})
+    public String dashboardEmployeeClient(@PathVariable("clientId") long clientId, Model model) {
+        logger.info("GET: " + path + "client/" + clientId);
+        User user = getCurrentUser();
+        if (user == null) return "redirect:/";
+        model.addAttribute("user", user);
+
+        User client = userService.getUserById(clientId);
+
+        model.addAttribute("client", client);
+        return client == null ? "404" : "dashboard_employee_client";
     }
 
     private User getCurrentUser() {

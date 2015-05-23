@@ -58,11 +58,15 @@ public class User extends AbstractModel implements UserDetails {
     @Fetch(FetchMode.SELECT)
     private List<Account> accounts = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private Passport passport;
 
     public List<Account> getAccounts() {
         return accounts;
+    }
+
+    public void addUserRole(UserRole userRole) {
+        userRoles.add(userRole);
     }
 
     public Passport getPassport() {
@@ -215,6 +219,7 @@ public class User extends AbstractModel implements UserDetails {
     public Set<UserRole> getUserRoles() {
         return userRoles;
     }
+
 }
 
 
