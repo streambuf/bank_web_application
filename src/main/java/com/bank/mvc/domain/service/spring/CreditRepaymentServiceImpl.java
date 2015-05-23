@@ -5,12 +5,16 @@ import com.bank.mvc.domain.service.AccountService;
 import com.bank.mvc.domain.service.CreditRepaymentService;
 import com.bank.mvc.domain.service.CreditService;
 import com.bank.mvc.models.Account;
+import com.bank.mvc.models.Contribution;
+import com.bank.mvc.models.ContributionRate;
 import com.bank.mvc.models.CreditRepayment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Zalman on 19.05.2015.

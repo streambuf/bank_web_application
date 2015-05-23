@@ -44,7 +44,6 @@
                                     <option disabled selected>Выберите свой кредит для погашения</option>
                                     <c:forEach items="${credits}" var="credit">
                                             <option value="${credit.id}">Кредит на сумму ${credit.quantityOfMoney}</option>
-                                        <input type="hidden" id="${credit.id}" value="${credit.monthlyPayment}" />
                                     </c:forEach>
                                 </select>
 
@@ -95,6 +94,9 @@
 <!-- add class .active for li[num] in sidebar-menu -->
 <input id="meta.page.li.num" type="hidden" value="6" />
 <input id="meta.page.tree.li.num" type="hidden" value="1" />
+<c:forEach items="${credits}" var="credit">
+    <input type="hidden" id="${credit.id}" value="${credit.monthlyPayment}" />
+</c:forEach>
 </body>
 
 <div id="javascript">

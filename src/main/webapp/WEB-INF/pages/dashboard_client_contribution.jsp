@@ -7,6 +7,7 @@
 
 <html>
 <head>
+    <link href="/resources/css/icheck-blue.css" rel="stylesheet" type="text/css" />
     <title>
         <spring:message code="application.name"/>
     </title>
@@ -40,7 +41,7 @@
                                 <label>Выберите свой счет</label>
                                 <div class = "error"></div>
                                 <input type="hidden" name="accountError"/>
-                                <select class="form-control" name="accountId">
+                                <select class="form-control" name="accountId" id="accountId">
                                     <option disabled selected>Выберите свой счет</option>
                                     <c:forEach items="${user.accounts}" var="account">
                                         <option value="${account.id}">${account.id} ${account.currency}</option>
@@ -57,31 +58,22 @@
 
 
                             <div class="form-group">
-                                <label for="period">На срок (в месяцах)</label>
+                                <label for="period">На срок (от 1 до 36 месяцев)</label>
                                 <div class = "error"></div>
-                                <input type="number" step="1" min="-9223372036854775807" max="9223372036854775807" class="form-control" id="period" name="period" />
+                                <input type="number" step="1" min="1" max="36" class="form-control" id="period" name="period" />
                             </div>
 
                             <div class="form-group">
-                                <label for="annualPercentageRate">Процентная ставка (%)</label>
-                                <input type="number" class="form-control" id="annualPercentageRate" value="20" disabled/>
+                                <label for="contributionRate">Процентная ставка (%)</label>
+                                <input type="text" class="form-control" id="contributionRate"disabled/>
                             </div>
 
                             <div class="form-group">
-                                <label for="type">Тип платежа</label>
-                                <input type="text" class="form-control" id="type" value="Аннуительный" disabled/>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="salary">Зарплата</label>
+                                <label>Порядок уплаты прцоентов</label>
                                 <div class = "error"></div>
-                                <input type="number" step="0.01" class="form-control" min="-9223372036854775807" max="9223372036854775807" class="form-control" id="salary" name="salary" placeholder="Введит вашу зарплату"/>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="placeOfWork">Место работы</label>
-                                <div class = "error"></div>
-                                <input type="text" class="form-control" id="placeOfWork" name="placeOfWork" placeholder="Введит счет"/>
+                                <p><input type="radio" value="TRANSFER" name="listPaymentProcedure"> перечисление процентов на счет банковской карты</p>
+                                <p><input type="radio" value="CAPITALIZATION" name="listPaymentProcedure" checked> капитализация процентов на счете по вкладу</p>
                             </div>
 
 
@@ -94,7 +86,7 @@
 
 
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Оформить кредит</button>
+                            <button type="submit" class="btn btn-primary">Оформить вклад</button>
                         </div>
                     </form>
 
@@ -141,7 +133,83 @@
 <input id="meta.page.li.num" type="hidden" value="5" />
 <input id="meta.page.tree.li.num" type="hidden" value="0" />
 
+<c:forEach items="${user.accounts}" var="account">
+    <input style="display: none" type="hidden" id="${account.id}" value="${account.currency}" />
+</c:forEach>
 </body>
+
+<div id="javascript">
+    <script src="/resources/js/icheck.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+
+            var money = null, period = null, currency = null;
+            chooseRate(money, period, currency);
+
+            $("#accountId").change(function() {
+                var inputId = $(this).val();
+                currency = $("#" + inputId).val();
+                if (typeof currency == 'undefined') {
+                    currency = null;
+                }
+            }).change();
+
+
+
+            $("#quantityOfMoney").bind("change paste", function() {
+                money = $(this).text();
+                chooseRate(money, period);
+            });
+
+            $("#period").bind("change paste", function() {
+                period = $(this).val();
+                chooseRate(money, period);
+            });
+
+
+
+
+        });
+
+        function chooseRate(money, period, currency) {
+            var locator = "#contributionRate";
+            if (!money && !period && !currency) {
+                $(locator).val("Для отображениии ставки необходимо указать счет, сумму и срок");
+            } else {
+                getContributionRate();
+            }
+        }
+
+        function getContributionRate() {
+            var locator = ".operation";
+            var oldAction = $(locator).attr('action');
+            $(locator).get(0).setAttribute('action', '/dashboard/client/contribution-rate/get');
+            console.log($(locator).attr('action'));
+            sendPost($(locator),
+                    function(result) {
+                        console.log("OK");
+                        var locator = "#contributionRate";
+                        $(locator).val(result.data.rate);
+                    },
+                    function(result) {
+                        console.log("error");
+                        showError(result.data);
+                    }
+            );
+            $(locator).get(0).setAttribute('action', oldAction);
+
+        }
+
+
+    </script>
+</div>
+
+
 
 </html>
 

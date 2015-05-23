@@ -7,6 +7,7 @@ import com.bank.mvc.utils.JsonResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,9 +64,20 @@ public class OperationController {
     private CreditRepaymentValidator creditRepaymentValidator;
 
     @Autowired
+    private ContributionRateService contributionRateService;
+
+    @Autowired
+    private ContributionService contributionService;
+
+    @Autowired
+    private ContributionValidator contributionValidator;
+
+    @Autowired
     MessageSource msgSrc;
 
+
     @RequestMapping(value = "/transfer/send", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @PreAuthorize("hasRole('ROLE_CLIENT')")
     public @ResponseBody
     JsonResponse createNewOperationTransfer(@RequestBody OperationTransfer operationTransfer) {
         logger.info("POST: " + path + "transfer/send");
@@ -144,6 +156,37 @@ public class OperationController {
         }
 
         creditRepaymentService.saveCreditRepayment(creditRepayment);
+
+        data.put("message", msgSrc.getMessage("operationForm.successMessage", null, Locale.getDefault()));
+        return new JsonResponse("OK", data);
+    }
+
+    @RequestMapping(value = "/contribution-rate/get", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public @ResponseBody
+    JsonResponse createNewOperationContributionRate(@RequestBody Contribution contribution) {
+        logger.info("POST: " + path + "credit/send");
+        Map<String, String> data = new HashMap<>();
+        ContributionRate contributionRate = contributionRateService.getRepaymentByContribution(contribution);
+        if (contributionRate != null) {
+            data.put("rate", String.valueOf(contributionRate.getRate()) + "%");
+        } else {
+            data.put("rate", "0%");
+        }
+        return new JsonResponse("OK", data);
+    }
+
+    @RequestMapping(value = "/contribution/send", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public @ResponseBody
+    JsonResponse createNewOperationContribution(@RequestBody Contribution contribution) {
+        logger.info("POST: " + path + "contribution/send");
+
+        Map<String, String> data = contributionValidator.validate(contribution);
+
+        if (!data.isEmpty()) {
+            return new JsonResponse("ERROR", data);
+        }
+
+        contributionService.saveContribution(contribution);
 
         data.put("message", msgSrc.getMessage("operationForm.successMessage", null, Locale.getDefault()));
         return new JsonResponse("OK", data);

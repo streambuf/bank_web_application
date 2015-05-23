@@ -3,6 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -134,25 +135,32 @@
             <ul class="sidebar-menu">
                 <li class="header">Меню</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li><a href="/dashboard/client/main"><span><i class="fa fa-home"></i> Главная</span></a></li>
-                <li><a href="/dashboard/client/transfer"><span><i class="fa fa-rub"></i> Перевод средств</span></a></li>
-                <li><a href="/dashboard/client/services"><span><i class="fa fa-cutlery"></i> Оплата услуг</span></a></li>
-                <li><a href="/dashboard/client/currency-exchange"><span><i class="fa fa-dollar"></i> Обмен валюты</span></a></li>
-                <li class="treeview">
-                    <a href="#"><span><i class="fa fa-money"></i> Вклад</span> <i class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="/dashboard/client/contribution"><i class="fa fa-circle-o"></i> Открыть вклад</a></li>
-                        <li><a href="/dashboard/client/contribution-info"><i class="fa fa-circle-o"></i> Мои вклады</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#"><span><i class="fa fa-sort-amount-asc"></i> Кредит</span> <i class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="/dashboard/client/credit"><i class="fa fa-circle-o"></i> Взять кредит</a></li>
-                        <li><a href="/dashboard/client/credit-repayment"><i class="fa fa-circle-o"></i> Погасить кредит</a></li>
-                    </ul>
-                </li>
-
+                <security:authorize access="hasRole('ROLE_CLIENT')">
+                    <li><a href="/dashboard/client/main"><span><i class="fa fa-home"></i> Главная</span></a></li>
+                    <li><a href="/dashboard/client/transfer"><span><i class="fa fa-rub"></i> Перевод средств</span></a></li>
+                    <li><a href="/dashboard/client/services"><span><i class="fa fa-cutlery"></i> Оплата услуг</span></a></li>
+                    <li><a href="/dashboard/client/currency-exchange"><span><i class="fa fa-dollar"></i> Обмен валюты</span></a></li>
+                    <li class="treeview">
+                        <a href="#"><span><i class="fa fa-money"></i> Вклад</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="/dashboard/client/contribution"><i class="fa fa-circle-o"></i> Открыть вклад</a></li>
+                            <li><a href="/dashboard/client/contribution-info"><i class="fa fa-circle-o"></i> Мои вклады</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#"><span><i class="fa fa-sort-amount-asc"></i> Кредит</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="/dashboard/client/credit"><i class="fa fa-circle-o"></i> Взять кредит</a></li>
+                            <li><a href="/dashboard/client/credit-repayment"><i class="fa fa-circle-o"></i> Погасить кредит</a></li>
+                        </ul>
+                    </li>
+                </security:authorize>
+                <security:authorize access="hasRole('ROLE_EMPLOYEE')">
+                    <li><a href="/dashboard/employee/main"><span><i class="fa fa-home"></i> Главная</span></a></li>
+                    <li><a href="/dashboard/employee/main"><span><i class="fa fa-home"></i> Оформить клиента</span></a></li>
+                    <li><a href="/dashboard/employee/main"><span><i class="fa fa-home"></i> Разрешить кредит</span></a></li>
+                    <li><a href="/dashboard/employee/main"><span><i class="fa fa-home"></i> Создать счет</span></a></li>
+                </security:authorize>
             </ul><!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->

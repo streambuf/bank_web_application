@@ -1,5 +1,6 @@
 package com.bank.mvc.domain.service;
 
+import com.bank.mvc.models.Contribution;
 import com.bank.mvc.models.CreditRepayment;
 
 import java.util.Collection;
@@ -16,4 +17,6 @@ public interface CreditRepaymentService {
     public void saveCreditRepayment(CreditRepayment creditRepayment);
 
     public void deleteCreditRepayment(CreditRepayment creditRepayment);
+
+
 }

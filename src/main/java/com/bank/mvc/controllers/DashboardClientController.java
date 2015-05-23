@@ -1,14 +1,12 @@
 package com.bank.mvc.controllers;
 
 import com.bank.mvc.domain.service.*;
-import com.bank.mvc.models.ContributionRate;
-import com.bank.mvc.models.Organization;
-import com.bank.mvc.models.Service;
-import com.bank.mvc.models.User;
+import com.bank.mvc.models.*;
 import com.bank.mvc.utils.ViewHelper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -95,6 +93,8 @@ public class DashboardClientController {
         logger.info("GET: " + path + "credit-repayment");
         User user = getCurrentUser();
         if (user == null) return "redirect:/";
+        List<Credit> credits = (ArrayList<Credit>)creditService.getCreditsByUserId(user.getId());
+        model.addAttribute("credits", credits);
         model.addAttribute("user", user);
         return "dashboard_client_credit_repayment";
     }

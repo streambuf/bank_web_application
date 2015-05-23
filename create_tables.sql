@@ -61,8 +61,8 @@ CREATE TABLE user_role (
 );
 
 INSERT INTO user_role VALUES( 1, 1, 100000 );
-INSERT INTO user_role VALUES( 1, 1, 100001 );
-INSERT INTO user_role VALUES( 1, 1, 100002 );
+INSERT INTO user_role VALUES( 1, 2, 100001 );
+INSERT INTO user_role VALUES( 1, 3, 100002 );
 
 CREATE TABLE passport (
   id NUMBER(10) NOT NULL,
@@ -299,13 +299,13 @@ from dual union all select
 4, 'M24_36', 'RUBLE', 'M1000', 8.40, SYSDATE
 from dual union all select  
 
-5, 'M1_6', 'RUBLE', 'M10000', 7.70, SYSDATE
+5, 'M1_6', 'RUBLE', 'M100000', 7.70, SYSDATE
 from dual union all select  
-6, 'M6_12', 'RUBLE', 'M10000', 9.50, SYSDATE
+6, 'M6_12', 'RUBLE', 'M100000', 9.50, SYSDATE
 from dual union all select  
-7, 'M12_24', 'RUBLE', 'M10000', 8.65, SYSDATE
+7, 'M12_24', 'RUBLE', 'M100000', 8.65, SYSDATE
 from dual union all select  
-8, 'M24_36', 'RUBLE', 'M10000', 8.85, SYSDATE
+8, 'M24_36', 'RUBLE', 'M100000', 8.85, SYSDATE
 
 from dual union all select  
 9, 'M1_6', 'RUBLE', 'M400000', 7.95, SYSDATE
@@ -326,13 +326,13 @@ from dual union all select
 16, 'M24_36', 'RUBLE', 'M900000', 9.40, SYSDATE
 
 from dual union all select  
-17, 'M1_6', 'RUBLE', 'M900000', 8.45, SYSDATE
+17, 'M1_6', 'RUBLE', 'M2000000', 8.45, SYSDATE
 from dual union all select  
-18, 'M6_12', 'RUBLE', 'M900000', 10.35, SYSDATE
+18, 'M6_12', 'RUBLE', 'M2000000', 10.35, SYSDATE
 from dual union all select  
-19, 'M12_24', 'RUBLE', 'M900000', 9.35, SYSDATE
+19, 'M12_24', 'RUBLE', 'M2000000', 9.35, SYSDATE
 from dual union all select  
-20, 'M24_36', 'RUBLE', 'M900000', 9.55, SYSDATE
+20, 'M24_36', 'RUBLE', 'M2000000', 9.55, SYSDATE
 
 from dual union all select  
 21, 'M1_6', 'DOLLAR', 'M100', 1.50, SYSDATE

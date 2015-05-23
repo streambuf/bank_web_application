@@ -1,5 +1,6 @@
 package com.bank.mvc.domain.service;
 
+import com.bank.mvc.models.Contribution;
 import com.bank.mvc.models.ContributionRate;
 
 import java.util.Collection;
@@ -16,5 +17,7 @@ public interface ContributionRateService {
     public void saveContributionRate(ContributionRate contributionRate);
 
     public void deleteContributionRate(ContributionRate contributionRate);
+
+    public ContributionRate getRepaymentByContribution(Contribution contribution);
 
 }

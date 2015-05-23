@@ -58,7 +58,7 @@ public class ViewHelper {
             case M10000: return "10 000";
             case M20000: return "20 000";
             case M100000: return "100 000";
-            case M2000000: return "200 000";
+            case M2000000: return "2 000 000";
             case M400000: return "400 000";
             case M900000: return "900 000";
             default: return "ошибка";

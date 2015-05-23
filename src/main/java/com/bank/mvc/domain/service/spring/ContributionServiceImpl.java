@@ -1,12 +1,17 @@
 package com.bank.mvc.domain.service.spring;
 
 import com.bank.mvc.dao.ContributionDao;
+import com.bank.mvc.domain.service.AccountService;
+import com.bank.mvc.domain.service.ContributionRateService;
 import com.bank.mvc.domain.service.ContributionService;
+import com.bank.mvc.models.Account;
 import com.bank.mvc.models.Contribution;
+import com.bank.mvc.models.ContributionRate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by Zalman on 21.05.2015.
@@ -17,6 +22,12 @@ public class ContributionServiceImpl implements ContributionService {
 
     @Autowired
     private ContributionDao contributionDao;
+
+    @Autowired
+    AccountService accountService;
+
+    @Autowired
+    private ContributionRateService contributionRateService;
 
     @Override
     public Contribution getContributionById(long contributionId) {
@@ -30,6 +41,19 @@ public class ContributionServiceImpl implements ContributionService {
 
     @Override
     public void saveContribution(Contribution contribution) {
+
+        Account account = accountService.getAccountById(contribution.getAccountId());
+        contribution.setAccount(account);
+        contribution.setStartDate(new Date());
+
+        ContributionRate contributionRate = contributionRateService.getRepaymentByContribution(contribution);
+
+        contribution.setContributionRate(contributionRate);
+
+        double money = contribution.getQuantityOfMoney();
+        account.setBalance(account.getBalance() - money);
+        accountService.saveAccount(account);
+
         contributionDao.save(contribution);
     }
 
