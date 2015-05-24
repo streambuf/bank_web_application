@@ -25,6 +25,9 @@ public class Account extends AbstractModel  {
     @Column(name="currency")
     private ListCurrency currency;
 
+    @Transient
+    private long userId;
+
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "accountPayee")
     private Set<OperationTransfer> operationsTransfer = new HashSet();
 
@@ -58,5 +61,11 @@ public class Account extends AbstractModel  {
         this.balance = balance;
     }
 
+    public long getUserId() {
+        return userId;
+    }
 
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 }

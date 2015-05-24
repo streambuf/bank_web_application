@@ -2,6 +2,7 @@ package com.bank.mvc.dao.hibernate;
 
 import com.bank.mvc.dao.UserDao;
 import com.bank.mvc.models.User;
+import com.bank.mvc.models.enums.ListRole;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,16 @@ public class HibernateUserDao implements UserDao {
                 createQuery("from User").list();
     }
 
+    @Override
     public Collection<User> getAllUnconfirmed() {
         return sessionFactory.getCurrentSession().
                 createQuery("select u.id, u.lname, u.fname, u.patronymic from User u left join u.userRoles r group by u.id, u.lname, u.fname, u.patronymic having count(r)=0").list();
+    }
+
+    @Override
+    public Collection<User> getAllConfirmed() {
+        return sessionFactory.getCurrentSession().
+                createQuery("select u from User u join u.userRoles r where r.listRole=:role").setParameter("role", ListRole.ROLE_CLIENT).list();
     }
 
     @Override

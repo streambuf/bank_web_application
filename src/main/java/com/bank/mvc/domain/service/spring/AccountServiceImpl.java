@@ -2,6 +2,7 @@ package com.bank.mvc.domain.service.spring;
 
 import com.bank.mvc.dao.AccountDao;
 import com.bank.mvc.domain.service.AccountService;
+import com.bank.mvc.domain.service.UserService;
 import com.bank.mvc.models.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountDao accountDao;
 
+    @Autowired
+    private UserService userService;
+
     @Override
     public Account getAccountById(long accountId) {
         return accountDao.getById(accountId);
@@ -30,6 +34,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void saveAccount(Account account) {
+        account.setUser(userService.getUserById(account.getUserId()));
         accountDao.save(account);
     }
 

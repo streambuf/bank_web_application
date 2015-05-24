@@ -34,6 +34,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public Collection<User> getAllUnconfirmedUsers() { return userDao.getAllUnconfirmed(); }
 
     @Override
+    public Collection<User> getAllConfirmedUsers() { return userDao.getAllConfirmed(); }
+
+    @Override
     public User getUserById(long userId) {
         return userDao.getById(userId);
     }

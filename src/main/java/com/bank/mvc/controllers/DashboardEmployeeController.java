@@ -52,6 +52,17 @@ public class DashboardEmployeeController {
         return "dashboard_employee_clients";
     }
 
+    @RequestMapping(value = "/clients-account", method = {RequestMethod.GET, RequestMethod.HEAD})
+    public String dashboardEmployeeClientsAccount(Model model) {
+        logger.info("GET: " + path + "clients-account");
+        User user = getCurrentUser();
+        if (user == null) return "redirect:/";
+        model.addAttribute("user", user);
+        List<User> users = (List<User>)userService.getAllConfirmedUsers();
+        model.addAttribute("users", users);
+        return "dashboard_employee_clients_account";
+    }
+
     @RequestMapping(value = "/credits", method = {RequestMethod.GET, RequestMethod.HEAD})
     public String dashboardEmployeeCredits(Model model) {
         logger.info("GET: " + path + "credits");
@@ -78,7 +89,7 @@ public class DashboardEmployeeController {
 
     @RequestMapping(value = "credit/{creditId}", method = {RequestMethod.GET, RequestMethod.HEAD})
     public String dashboardEmployeeCredit(@PathVariable("creditId") long creditId, Model model) {
-        logger.info("GET: " + path + "client/" + creditId);
+        logger.info("GET: " + path + "credit/" + creditId);
         User user = getCurrentUser();
         if (user == null) return "redirect:/";
         model.addAttribute("user", user);
@@ -87,6 +98,19 @@ public class DashboardEmployeeController {
 
         model.addAttribute("credit", credit);
         return credit == null ? "404" : "dashboard_employee_credit";
+    }
+
+    @RequestMapping(value = "account/{clientId}", method = {RequestMethod.GET, RequestMethod.HEAD})
+    public String dashboardEmployeeAccount(@PathVariable("clientId") long clientId, Model model) {
+        logger.info("GET: " + path + "client/" + clientId);
+        User user = getCurrentUser();
+        if (user == null) return "redirect:/";
+        model.addAttribute("user", user);
+
+        User client = userService.getUserById(clientId);
+
+        model.addAttribute("client", client);
+        return client == null ? "404" : "dashboard_employee_account";
     }
 
     private User getCurrentUser() {

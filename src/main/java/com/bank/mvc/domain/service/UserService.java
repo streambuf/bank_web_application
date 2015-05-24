@@ -12,6 +12,8 @@ public interface UserService {
 
     public Collection<User> getAllUnconfirmedUsers();
 
+    public Collection<User> getAllConfirmedUsers();
+
     public User getUserById(long userId);
 
     public void saveUser(User user);

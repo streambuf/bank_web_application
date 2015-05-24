@@ -1,11 +1,9 @@
 package com.bank.mvc.controllers;
 
+import com.bank.mvc.domain.service.AccountService;
 import com.bank.mvc.domain.service.CreditService;
 import com.bank.mvc.domain.service.UserService;
-import com.bank.mvc.models.Contribution;
-import com.bank.mvc.models.Credit;
-import com.bank.mvc.models.Passport;
-import com.bank.mvc.models.User;
+import com.bank.mvc.models.*;
 import com.bank.mvc.utils.JsonRequest;
 import com.bank.mvc.utils.JsonResponse;
 import org.apache.log4j.Logger;
@@ -34,6 +32,9 @@ public class OperationEmployeeController {
 
     @Autowired
     private CreditService creditService;
+
+    @Autowired
+    private AccountService accountService;
 
     @Autowired
     MessageSource msgSrc;
@@ -81,6 +82,16 @@ public class OperationEmployeeController {
         logger.info("POST: " + path + "/credit/confirm/send");
         Credit credit = creditService.getCreditById(request.getLongParam());
         creditService.confirmCredit(credit);
+        Map<String, String> data = new HashMap<>();
+        data.put("message", msgSrc.getMessage("operationForm.successMessage", null, Locale.getDefault()));
+        return new JsonResponse("OK", data);
+    }
+
+    @RequestMapping(value = "/account/create/send", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public @ResponseBody
+    JsonResponse createNewAccount(@RequestBody Account account) {
+        logger.info("POST: " + path + "/account/create/send");
+        accountService.saveAccount(account);
         Map<String, String> data = new HashMap<>();
         data.put("message", msgSrc.getMessage("operationForm.successMessage", null, Locale.getDefault()));
         return new JsonResponse("OK", data);
