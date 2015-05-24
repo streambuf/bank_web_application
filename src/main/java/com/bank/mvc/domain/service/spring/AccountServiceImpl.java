@@ -34,7 +34,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void saveAccount(Account account) {
-        account.setUser(userService.getUserById(account.getUserId()));
+        if (account.getUser() == null) {
+            account.setUser(userService.getUserById(account.getUserId()));
+        }
         accountDao.save(account);
     }
 

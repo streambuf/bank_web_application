@@ -52,12 +52,7 @@ public class CreditServiceImpl implements CreditService {
         credit.setAnnualPercentageRate(annualPercentageRate);
         credit.setStartDate(new Date());
         credit.setListStatus(ListStatus.UNCONFIRMED);
-
         double quantityOfMoney = credit.getQuantityOfMoney();
-        account.setBalance(account.getBalance() + quantityOfMoney);
-        accountService.saveAccount(account);
-
-
         double monthlyPayment = (quantityOfMoney*(annualPercentageRate/100/12))/(1-1/Math.pow((1+annualPercentageRate/100/12),credit.getPeriod()));
         credit.setMonthlyPayment(monthlyPayment);
 
@@ -71,6 +66,10 @@ public class CreditServiceImpl implements CreditService {
 
     @Override
     public void confirmCredit(Credit credit) {
+        Account account = credit.getAccount();
+        double quantityOfMoney = credit.getQuantityOfMoney();
+        account.setBalance(account.getBalance() + quantityOfMoney);
+        accountService.saveAccount(account);
         credit.setListStatus(ListStatus.CONFIRMED);
         creditDao.save(credit);
     }
