@@ -1,5 +1,7 @@
 package com.bank.mvc.models;
 
+import com.bank.mvc.models.enums.ListStatus;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,6 +47,18 @@ public class Credit extends AbstractModel {
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "credit")
     @OrderBy("operation_date")
     private List<CreditRepayment> repayments = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="status")
+    private ListStatus listStatus;
+
+    public ListStatus getListStatus() {
+        return listStatus;
+    }
+
+    public void setListStatus(ListStatus listStatus) {
+        this.listStatus = listStatus;
+    }
 
     public List<CreditRepayment> getRepayments() {
         return repayments;

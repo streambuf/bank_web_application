@@ -11,6 +11,8 @@ public interface CreditService {
 
     public Collection<Credit> getAllCredits();
 
+    public Collection<Credit> getAllUnconfirmedCredits();
+
     public Collection<Credit> getCreditsByUserId(long userId);
 
     public Credit getCreditById(long creditId);
@@ -18,4 +20,6 @@ public interface CreditService {
     public void saveCredit(Credit credit);
 
     public void deleteCredit(Credit credit);
+
+    public void confirmCredit(Credit credit);
 }

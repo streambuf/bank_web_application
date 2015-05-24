@@ -13,6 +13,8 @@ public interface CreditDao {
 
     public Collection<Credit> getByUserId(long userId);
 
+    public Collection<Credit> getAllUnconfirmed();
+
     public Credit getById(long creditId);
 
     public void save(Credit credit);

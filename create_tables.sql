@@ -66,15 +66,14 @@ from dual union all select
 from dual;
 
 CREATE TABLE user_role (
-  id NUMBER(10) NOT NULL,
   role_id NUMBER REFERENCES bank_role(id),
   user_id NUMBER REFERENCES bank_user(id),
-  PRIMARY KEY (id, role_id, user_id)
+  PRIMARY KEY (role_id, user_id)
 );
 
-INSERT INTO user_role VALUES( 1, 1, 100000 );
-INSERT INTO user_role VALUES( 1, 2, 100001 );
-INSERT INTO user_role VALUES( 1, 3, 100002 );
+INSERT INTO user_role (role_id, user_id) VALUES(1, 100000 );
+INSERT INTO user_role (role_id, user_id) VALUES(2, 100001 );
+INSERT INTO user_role (role_id, user_id) VALUES(3, 100002 );
 
 CREATE TABLE passport (
   id NUMBER(10) NOT NULL,

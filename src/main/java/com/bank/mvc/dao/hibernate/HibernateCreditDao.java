@@ -2,6 +2,7 @@ package com.bank.mvc.dao.hibernate;
 
 import com.bank.mvc.dao.CreditDao;
 import com.bank.mvc.models.Credit;
+import com.bank.mvc.models.enums.ListStatus;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,6 +30,12 @@ public class HibernateCreditDao implements CreditDao {
     public Collection<Credit> getByUserId(long userId) {
         return sessionFactory.getCurrentSession().
                 createQuery("select c from Credit as c inner join c.account as ac where ac.user.id=:userId ").setParameter("userId", userId).list();
+    }
+
+    @Override
+    public Collection<Credit> getAllUnconfirmed() {
+        return sessionFactory.getCurrentSession().
+                createQuery("from Credit c where c.listStatus=:status").setParameter("status", ListStatus.UNCONFIRMED).list();
     }
 
     @Override

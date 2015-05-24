@@ -5,6 +5,7 @@ import com.bank.mvc.domain.service.AccountService;
 import com.bank.mvc.domain.service.CreditService;
 import com.bank.mvc.models.Account;
 import com.bank.mvc.models.Credit;
+import com.bank.mvc.models.enums.ListStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,9 @@ public class CreditServiceImpl implements CreditService {
     }
 
     @Override
+    public Collection<Credit> getAllUnconfirmedCredits() { return  creditDao.getAllUnconfirmed(); }
+
+    @Override
     public Collection<Credit> getCreditsByUserId(long userId) {
         return creditDao.getByUserId(userId);
     };
@@ -47,6 +51,7 @@ public class CreditServiceImpl implements CreditService {
         credit.setAccount(account);
         credit.setAnnualPercentageRate(annualPercentageRate);
         credit.setStartDate(new Date());
+        credit.setListStatus(ListStatus.UNCONFIRMED);
 
         double quantityOfMoney = credit.getQuantityOfMoney();
         account.setBalance(account.getBalance() + quantityOfMoney);
@@ -62,5 +67,11 @@ public class CreditServiceImpl implements CreditService {
     @Override
     public void deleteCredit(Credit credit) {
         creditDao.delete(credit);
+    }
+
+    @Override
+    public void confirmCredit(Credit credit) {
+        credit.setListStatus(ListStatus.CONFIRMED);
+        creditDao.save(credit);
     }
 }

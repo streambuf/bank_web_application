@@ -1,7 +1,9 @@
 package com.bank.mvc.controllers;
 
+import com.bank.mvc.domain.service.CreditService;
 import com.bank.mvc.domain.service.UserService;
 import com.bank.mvc.models.Contribution;
+import com.bank.mvc.models.Credit;
 import com.bank.mvc.models.Passport;
 import com.bank.mvc.models.User;
 import com.bank.mvc.utils.JsonRequest;
@@ -31,6 +33,9 @@ public class OperationEmployeeController {
     private UserService userService;
 
     @Autowired
+    private CreditService creditService;
+
+    @Autowired
     MessageSource msgSrc;
 
 
@@ -47,11 +52,35 @@ public class OperationEmployeeController {
         return new JsonResponse("OK", data);
     }
 
+    @RequestMapping(value = "/credit/delete", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public @ResponseBody
+    JsonResponse deleteCredit(@RequestBody JsonRequest request) {
+        logger.info("POST: " + path + "clients/delete");
+
+        Credit credit = creditService.getCreditById(request.getLongParam());
+        creditService.deleteCredit(credit);
+
+        Map<String, String> data = new HashMap<>();
+        data.put("delete", "OK");
+        return new JsonResponse("OK", data);
+    }
+
     @RequestMapping(value = "/client/passport/send", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody
     JsonResponse createNewOperationPassport(@RequestBody Passport passport) {
         logger.info("POST: " + path + "/client/passport/send");
         userService.savePassport(passport);
+        Map<String, String> data = new HashMap<>();
+        data.put("message", msgSrc.getMessage("operationForm.successMessage", null, Locale.getDefault()));
+        return new JsonResponse("OK", data);
+    }
+
+    @RequestMapping(value = "/credit/confirm/send", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public @ResponseBody
+    JsonResponse createNewOperationPassport(@RequestBody JsonRequest request) {
+        logger.info("POST: " + path + "/credit/confirm/send");
+        Credit credit = creditService.getCreditById(request.getLongParam());
+        creditService.confirmCredit(credit);
         Map<String, String> data = new HashMap<>();
         data.put("message", msgSrc.getMessage("operationForm.successMessage", null, Locale.getDefault()));
         return new JsonResponse("OK", data);

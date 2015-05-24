@@ -1,6 +1,8 @@
 package com.bank.mvc.controllers;
 
+import com.bank.mvc.domain.service.CreditService;
 import com.bank.mvc.domain.service.UserService;
+import com.bank.mvc.models.Credit;
 import com.bank.mvc.models.User;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class DashboardEmployeeController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CreditService creditService;
+
     @RequestMapping(value = "/main", method = {RequestMethod.GET, RequestMethod.HEAD})
     public String dashboardClientMain(Model model) {
         logger.info("GET: " + path + "main");
@@ -38,13 +43,24 @@ public class DashboardEmployeeController {
 
     @RequestMapping(value = "/clients", method = {RequestMethod.GET, RequestMethod.HEAD})
     public String dashboardEmployeeClients(Model model) {
-        logger.info("GET: " + path + "main");
+        logger.info("GET: " + path + "clients");
         User user = getCurrentUser();
         if (user == null) return "redirect:/";
         model.addAttribute("user", user);
         List<User> users = (List<User>)userService.getAllUnconfirmedUsers();
         model.addAttribute("users", users);
         return "dashboard_employee_clients";
+    }
+
+    @RequestMapping(value = "/credits", method = {RequestMethod.GET, RequestMethod.HEAD})
+    public String dashboardEmployeeCredits(Model model) {
+        logger.info("GET: " + path + "credits");
+        User user = getCurrentUser();
+        if (user == null) return "redirect:/";
+        model.addAttribute("user", user);
+        List<Credit> credits = (List<Credit>)creditService.getAllUnconfirmedCredits();
+        model.addAttribute("credits", credits);
+        return "dashboard_employee_credits";
     }
 
     @RequestMapping(value = "client/{clientId}", method = {RequestMethod.GET, RequestMethod.HEAD})
@@ -58,6 +74,19 @@ public class DashboardEmployeeController {
 
         model.addAttribute("client", client);
         return client == null ? "404" : "dashboard_employee_client";
+    }
+
+    @RequestMapping(value = "credit/{creditId}", method = {RequestMethod.GET, RequestMethod.HEAD})
+    public String dashboardEmployeeCredit(@PathVariable("creditId") long creditId, Model model) {
+        logger.info("GET: " + path + "client/" + creditId);
+        User user = getCurrentUser();
+        if (user == null) return "redirect:/";
+        model.addAttribute("user", user);
+
+        Credit credit = creditService.getCreditById(creditId);
+
+        model.addAttribute("credit", credit);
+        return credit == null ? "404" : "dashboard_employee_credit";
     }
 
     private User getCurrentUser() {
