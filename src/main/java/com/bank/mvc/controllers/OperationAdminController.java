@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -48,6 +49,18 @@ public class OperationAdminController {
         data.put("delete", "OK");
         return new JsonResponse("OK", data);
     }
+
+    @RequestMapping(value = "/get-memory", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public @ResponseBody
+    JsonResponse getMemory() {
+        Map<String, String> data = new HashMap<>();
+        Double mem = ((double) Runtime.getRuntime().freeMemory() / Runtime.getRuntime().totalMemory()) * 100 ;
+        data.put("memory", String.valueOf(mem.intValue()));
+        return new JsonResponse("OK", data);
+    }
+
+
+
 
 
 }

@@ -48,8 +48,8 @@
                                     <th>Фамилия</th>
                                     <th>Имя</th>
                                     <th>Отчество</th>
-                                    <th style="width: 10px">Подтверждение</th>
-                                    <th style="width: 10px">Удаление</th>
+                                    <th style="width: 143px">Подтверждение</th>
+                                    <th style="width: 143px">Удаление</th>
                                 </tr>
                                 <c:forEach items="${users}" var="u">
                                     <tr>
@@ -58,7 +58,7 @@
                                         <td>${u[2]}</td>
                                         <td>${u[3]}</td>
                                         <td>
-                                            <a class="confirm btn btn-block btn-success" href="/dashboard/employee/client/${u[0]}"><i class="fa plus-square"></i></a>
+                                            <a class="confirm btn btn-block btn-success" href="/dashboard/employee/client/${u[0]}"><i class="fa fa-plus-square"></i></a>
                                         </td>
                                         <td>
                                             <form role="form" class="delete" action="/dashboard/employee/clients/delete">

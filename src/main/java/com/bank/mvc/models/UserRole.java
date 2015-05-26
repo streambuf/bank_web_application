@@ -14,7 +14,7 @@ import java.util.Set;
 @Table(name="bank_role")
 public class UserRole extends AbstractModel {
 
-    @ManyToMany(mappedBy = "userRoles")
+    @ManyToMany(mappedBy = "userRoles", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<User> user = new HashSet();
 
     @Enumerated(EnumType.STRING)

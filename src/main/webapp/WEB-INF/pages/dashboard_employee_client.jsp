@@ -42,13 +42,13 @@
                                 <div class="form-group">
                                     <label for="series">Серия</label>
                                     <div class = "error"></div>
-                                    <input type="text" class="form-control" id="series" name="series" placeholder="Введит серию паспорта"/>
+                                    <input type="number" min="1000" max="9999" class="form-control" id="series" name="series" placeholder="Введит серию паспорта"/>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="num">Номер</label>
                                     <div class = "error"></div>
-                                    <input type="text" class="form-control" id="num" name="num" placeholder="Введит номер паспорта"/>
+                                    <input type="number" min="100000" max="999999" class="form-control" id="num" name="num" placeholder="Введит номер паспорта"/>
                                 </div>
 
                                 <div class="form-group">

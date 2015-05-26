@@ -48,7 +48,7 @@
                                     <th>Фамилия</th>
                                     <th>Имя</th>
                                     <th>Отчество</th>
-                                    <th style="width: 40px">Создать счет</th>
+                                    <th style="width: 143px">Создать счет</th>
                                 </tr>
                                 <c:forEach items="${users}" var="user">
                                     <tr>
@@ -57,7 +57,7 @@
                                         <td>${user.fname}</td>
                                         <td>${user.patronymic}</td>
                                         <td>
-                                            <a class="confirm btn btn-block btn-success" href="/dashboard/employee/account/${user.id}"><i class="fa plus-square"></i></a>
+                                            <a class="confirm btn btn-block btn-success" href="/dashboard/employee/account/${user.id}"><i class="fa fa-plus-square"></i></a>
                                         </td>
 
                                     </tr>

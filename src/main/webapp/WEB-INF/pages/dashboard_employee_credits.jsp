@@ -50,8 +50,8 @@
                                     <th>Ставка</th>
                                     <th>Срок (мес.)</th>
                                     <th>Платеж в мес.</th>
-                                    <th style="width: 10px">Подтверждение</th>
-                                    <th style="width: 10px">Удаление</th>
+                                    <th style="width: 143px">Подтверждение</th>
+                                    <th style="width: 143px">Удаление</th>
                                 </tr>
                                 <c:forEach items="${credits}" var="credit">
                                     <tr>
@@ -62,7 +62,7 @@
                                         <td>${credit.period}</td>
                                         <td>${credit.monthlyPayment} руб.</td>
                                         <td>
-                                            <a class="confirm btn btn-block btn-success" href="/dashboard/employee/credit/${credit.id}"><i class="fa plus-square"></i></a>
+                                            <a class="confirm btn btn-block btn-success" href="/dashboard/employee/credit/${credit.id}"><i class="fa fa-plus-square"></i></a>
                                         </td>
                                         <td>
                                             <form role="form" class="delete" action="/dashboard/employee/credit/delete">

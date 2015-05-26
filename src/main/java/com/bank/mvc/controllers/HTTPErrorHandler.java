@@ -1,6 +1,8 @@
 package com.bank.mvc.controllers;
 
+import com.bank.mvc.models.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -8,10 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
-public class HTTPErrorHandler {
+public class HTTPErrorHandler extends AbstractController {
 
     @RequestMapping(value="/error/404")
-    public String error404() {
+    public String error404(Model model) {
+        User user = getCurrentUser();
+        if (user == null) return "redirect:/";
+        model.addAttribute("user", user);
         return "404";
     }
 }

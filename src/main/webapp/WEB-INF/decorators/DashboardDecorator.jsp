@@ -157,13 +157,8 @@
                     <li><a href="/dashboard/client/transfer"><span><i class="fa fa-rub"></i> Перевод средств</span></a></li>
                     <li><a href="/dashboard/client/services"><span><i class="fa fa-cutlery"></i> Оплата услуг</span></a></li>
                     <li><a href="/dashboard/client/currency-exchange"><span><i class="fa fa-dollar"></i> Обмен валюты</span></a></li>
-                    <li class="treeview">
-                        <a href="#"><span><i class="fa fa-money"></i> Вклад</span> <i class="fa fa-angle-left pull-right"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a href="/dashboard/client/contribution"><i class="fa fa-circle-o"></i> Открыть вклад</a></li>
-                            <li><a href="/dashboard/client/contribution-info"><i class="fa fa-circle-o"></i> Мои вклады</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="/dashboard/client/contribution"><i class="fa fa-money"></i> Открыть вклад</a></li>
+
                     <li class="treeview">
                         <a href="#"><span><i class="fa fa-sort-amount-asc"></i> Кредит</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
@@ -174,13 +169,13 @@
                 </security:authorize>
                 <security:authorize access="hasRole('ROLE_EMPLOYEE')">
                     <li><a href="/dashboard/employee/main"><span><i class="fa fa-home"></i> Главная</span></a></li>
-                    <li><a href="/dashboard/employee/clients"><span><i class="fa fa-home"></i> Оформить клиента</span></a></li>
-                    <li><a href="/dashboard/employee/credits"><span><i class="fa fa-home"></i> Разрешить кредит</span></a></li>
-                    <li><a href="/dashboard/employee/clients-account"><span><i class="fa fa-home"></i> Создать счет</span></a></li>
+                    <li><a href="/dashboard/employee/clients"><span><i class="fa fa-edit"></i> Оформить клиента</span></a></li>
+                    <li><a href="/dashboard/employee/credits"><span><i class="fa fa-book"></i> Разрешить кредит</span></a></li>
+                    <li><a href="/dashboard/employee/clients-account"><span><i class="fa fa-money"></i> Создать счет</span></a></li>
                 </security:authorize>
                 <security:authorize access="hasRole('ROLE_ADMIN')">
                     <li><a href="/dashboard/admin/main"><span><i class="fa fa-home"></i> Главная</span></a></li>
-                    <li><a href="/dashboard/admin/users"><span><i class="fa fa-home"></i> Пользователи</span></a></li>
+                    <li><a href="/dashboard/admin/users"><span><i class="fa fa-group"></i> Пользователи</span></a></li>
                 </security:authorize>
             </ul><!-- /.sidebar-menu -->
         </section>
