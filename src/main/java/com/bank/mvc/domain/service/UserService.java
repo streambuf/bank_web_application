@@ -22,4 +22,6 @@ public interface UserService {
 
     public void savePassport(Passport passport);
 
+    public void addRoleEmployee(long userId);
+
 }

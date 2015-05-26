@@ -44,25 +44,25 @@ CREATE TABLE bank_user (
 INSERT INTO bank_user (id,lname, fname, patronymic, date_of_birth, tin, email,
 citizenship, address, phone, password)
 select 100000,'Моисеев', 'Максим', 'Алексеевич', '15-apr-1993', 123456789126, 'streambuf@mail.ru', 
-'rus', 'Moscow', '89269262626', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+'rus', 'Moscow', '89269262626', 'a7bff3ddb37995a6790cec68380bc7b4fea327b2dbbdd4ab3adeff8712718833'
 from dual union all select   
 100001,'Иванов', 'Иван', 'Иванович', '21-nov-1972', 423456789127, 'employee@mail.ru', 
-'rus', 'Moscow', '89261334212', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+'rus', 'Moscow', '89261334212', 'a7bff3ddb37995a6790cec68380bc7b4fea327b2dbbdd4ab3adeff8712718833'
 from dual union all select   
 100002,'Михалков', 'Михаил', 'Михайлович', '16-sep-1964', 323456789122, 'admin@mail.ru', 
-'rus', 'Moscow', '89261345432', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+'rus', 'Moscow', '89261345432', 'a7bff3ddb37995a6790cec68380bc7b4fea327b2dbbdd4ab3adeff8712718833'
 from dual union all select   
 100004,'Светлаков', 'Юрий', 'Алексеевич', '16-sep-1964', 323456789123, 'svetlakov@mail.ru', 
-'rus', 'Moscow', '89261345432', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+'rus', 'Moscow', '89261345432', 'a7bff3ddb37995a6790cec68380bc7b4fea327b2dbbdd4ab3adeff8712718833'
 from dual union all select   
 100005,'Колобков', 'Александр', 'Сергеевич', '16-sep-1964', 323456789124, 'ermakov@mail.ru', 
-'rus', 'Moscow', '89261345432', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+'rus', 'Moscow', '89261345432', 'a7bff3ddb37995a6790cec68380bc7b4fea327b2dbbdd4ab3adeff8712718833'
 from dual union all select   
 100006,'Ефремов', 'Сергей', 'Владимирович', '16-sep-1964', 323456789125, 'efremov@mail.ru', 
-'rus', 'Moscow', '89261345432', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+'rus', 'Moscow', '89261345432', 'a7bff3ddb37995a6790cec68380bc7b4fea327b2dbbdd4ab3adeff8712718833'
 from dual union all select   
 100007,'Людмилов', 'Иван', 'Михайлович', '16-sep-1964', 323456789126, 'ivanov@mail.ru', 
-'rus', 'Moscow', '89261345432', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+'rus', 'Moscow', '89261345432', 'a7bff3ddb37995a6790cec68380bc7b4fea327b2dbbdd4ab3adeff8712718833'
 from dual;
 
 CREATE TABLE user_role (

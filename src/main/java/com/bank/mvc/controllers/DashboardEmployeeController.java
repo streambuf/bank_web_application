@@ -21,13 +21,10 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/dashboard/employee/*")
-public class DashboardEmployeeController {
+public class DashboardEmployeeController extends AbstractController {
     final static Logger logger = Logger.getLogger(DashboardEmployeeController.class);
 
     private static String path = "/dashboard/employee/";
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private CreditService creditService;
@@ -111,16 +108,6 @@ public class DashboardEmployeeController {
 
         model.addAttribute("client", client);
         return client == null ? "404" : "dashboard_employee_account";
-    }
-
-    private User getCurrentUser() {
-        try {
-            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            return userService.getUserById(user.getId());
-        } catch (ClassCastException ex) {
-            logger.info("GET: " + ex.getMessage());
-            return null;
-        }
     }
 
 }

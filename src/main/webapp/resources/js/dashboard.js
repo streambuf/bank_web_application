@@ -56,6 +56,25 @@ $(function() {
         );
     });
 
+
+    $(".add-role-employee").submit(function(e) {
+        e.preventDefault();
+        var form = $(this);
+        sendPost($(this),
+            function(result) {
+                console.log("OK");
+                if (result.data.add == "OK") {
+                    $($(form)).parents("tr").find(".badge").html("Сотрудник").addClass("bg-yellow")
+                    $($(form)).parents("tr").find(".confirm").prop('disabled', true);
+                }
+            },
+            function(result) {
+                console.log("error");
+                showError(result.data);
+            }
+        );
+    });
+
     $("#accountPayee").mask("9999999999999999999");
 
 });

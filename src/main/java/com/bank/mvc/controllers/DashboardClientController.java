@@ -23,14 +23,11 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/dashboard/client/*")
-public class DashboardClientController {
+public class DashboardClientController extends AbstractController {
 
     final static Logger logger = Logger.getLogger(DashboardClientController.class);
 
     private static String path = "/dashboard/client/";
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private CategoryServicesService categoryServicesService;
@@ -147,16 +144,6 @@ public class DashboardClientController {
         Service service = utilitiesService.getServiceById(serviceId);
         model.addAttribute("service", service);
         return service.getOrganizations().isEmpty() ? "404" : "dashboard_client_organizations";
-    }
-
-    private User getCurrentUser() {
-        try {
-            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            return userService.getUserById(user.getId());
-        } catch (ClassCastException ex) {
-            logger.info("GET: " + ex.getMessage());
-            return null;
-        }
     }
 
 }

@@ -76,4 +76,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.addUserRole(userRole);
         userDao.saveOrUpdate(user);
     }
+
+    @Override
+    public void addRoleEmployee(long userId) {
+        User user = getUserById(userId);
+        UserRole userRole = new UserRole();
+        userRole.setId(2);
+        userRole.setListRole(ListRole.ROLE_EMPLOYEE);
+        userRole.addUser(user);
+        user.addUserRole(userRole);
+        userDao.saveOrUpdate(user);
+    }
 }

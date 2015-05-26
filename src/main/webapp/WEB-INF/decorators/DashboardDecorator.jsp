@@ -33,7 +33,24 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="/dashboard/client/main" class="logo"><b>АИС</b> банк</a>
+        <a href=
+           <c:forEach items="${user.userRoles}" var="role">
+           <c:choose>
+           <c:when test="${role.listRole=='ROLE_CLIENT'}">
+                   "/dashboard/client/main"
+            </c:when>
+            <c:when test="${role.listRole=='ROLE_EMPLOYEE'}">
+                "/dashboard/employee/main"
+            </c:when>
+            <c:when test="${role.listRole=='ROLE_ADMIN'}">
+                "/dashboard/admin/main"
+            </c:when>
+            </c:choose>
+            </c:forEach>
+
+
+
+           class="logo"><b>АИС</b> банк</a>
 
         <!-- Header Navbar -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -72,14 +89,14 @@
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="/resources/img/avatar.png" class="user-image" alt="User Image"/>
+                            <img src="/resources/img/avatars/${user.id}.png" class="user-image" alt="User Image"/>
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">${user.lname} ${user.fname}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="/resources/img/avatar.png" class="img-circle" alt="User Image" />
+                                <img src="/resources/img/avatars/${user.id}.png" class="img-circle" alt="User Image" />
                                 <p>
                                     ${user.lname} ${user.fname} ${user.patronymic}
                                     <small>${user.email}</small>
@@ -111,7 +128,7 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="/resources/img/avatar.png" class="img-circle" alt="User Image" />
+                    <img src="/resources/img/avatars/${user.id}.png" class="img-circle" alt="User Image" />
                 </div>
                 <div class="pull-left info">
                     <p> ${user.lname} ${user.fname}</p>
@@ -160,6 +177,10 @@
                     <li><a href="/dashboard/employee/clients"><span><i class="fa fa-home"></i> Оформить клиента</span></a></li>
                     <li><a href="/dashboard/employee/credits"><span><i class="fa fa-home"></i> Разрешить кредит</span></a></li>
                     <li><a href="/dashboard/employee/clients-account"><span><i class="fa fa-home"></i> Создать счет</span></a></li>
+                </security:authorize>
+                <security:authorize access="hasRole('ROLE_ADMIN')">
+                    <li><a href="/dashboard/admin/main"><span><i class="fa fa-home"></i> Главная</span></a></li>
+                    <li><a href="/dashboard/admin/users"><span><i class="fa fa-home"></i> Пользователи</span></a></li>
                 </security:authorize>
             </ul><!-- /.sidebar-menu -->
         </section>
