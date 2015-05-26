@@ -8,9 +8,9 @@
 <html>
 <head>
     <link rel="stylesheet" href="/resources/css/login-form-reset.css">
-    <link rel='stylesheet prefetch' href='http://daneden.github.io/animate.css/animate.min.css'>
-    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,400italic,700italic,700'>
-    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+    <link rel='stylesheet prefetch' href='//daneden.github.io/animate.css/animate.min.css'>
+    <link rel='stylesheet prefetch' href='//fonts.googleapis.com/css?family=Roboto:400,100,400italic,700italic,700'>
+    <link rel='stylesheet prefetch' href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
     <link rel="stylesheet" href="/resources/css/login-form.css">
     <title><spring:message code="application.title"/></title>
     <sec:csrfMetaTags/>

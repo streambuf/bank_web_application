@@ -24,9 +24,9 @@
                              authentication-failure-url="/?error=invalidLoginPassword" />
 
 
-        <security:intercept-url pattern="/dashboard/client/**" access="hasRole('ROLE_CLIENT')" />
-        <security:intercept-url pattern="/dashboard/employee/**" access="hasRole('ROLE_EMPLOYEE')" />
-        <security:intercept-url pattern="/dashboard/admin/**" access="hasRole('ROLE_ADMIN')" />
+        <security:intercept-url pattern="/dashboard/client/**" access="hasRole('ROLE_CLIENT')" requires-channel="https" />
+        <security:intercept-url pattern="/dashboard/employee/**" access="hasRole('ROLE_EMPLOYEE')" requires-channel="https" />
+        <security:intercept-url pattern="/dashboard/admin/**" access="hasRole('ROLE_ADMIN')" requires-channel="https" />
 
         <security:logout logout-url="/logout" logout-success-url="/" />
         <security:remember-me user-service-ref="userServiceImpl" key="bank_key" />
