@@ -20,9 +20,9 @@ import java.util.Map;
 @Component
 public class CreditRepaymentValidator {
 
-    static String fieldAccount = "accountError";
-    static String fieldCredit = "creditError";
-    static String fieldQuantityOfMoney = "quantityOfMoney";
+    private static String fieldAccount = "accountError";
+    private static String fieldCredit = "creditError";
+    private static String fieldQuantityOfMoney = "quantityOfMoney";
     static String fieldPeriod = "period";
     static String fieldSalary = "salary";
     static String fieldPlaceOfWork = "placeOfWork";

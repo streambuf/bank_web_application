@@ -2,12 +2,10 @@ package com.bank.mvc.utils;
 
 import com.bank.mvc.models.ContributionRate;
 import com.bank.mvc.models.enums.ListCurrency;
-import com.bank.mvc.models.enums.ListPaymentProcedure;
 import com.bank.mvc.models.enums.ListPeriod;
 import com.bank.mvc.models.enums.ListQuantityOfMoney;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

@@ -3,7 +3,6 @@ package com.bank.mvc.domain.validation;
 import com.bank.mvc.domain.service.AccountService;
 import com.bank.mvc.models.Account;
 import com.bank.mvc.models.OperationTransfer;
-import com.bank.mvc.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,12 +19,12 @@ public class OperationTransferValidator extends AbstractValidator {
     @Autowired
     AccountService accountService;
 
-    static String fieldAccountPayee = "accountPayee";
-    static String fieldQuantityOfMoney = "quantityOfMoney";
-    static String fieldAccountSender = "accountSenderError";
-    static int maxLengthAccountPayee = 19;
-    static double minQuantityOfMoney = 1;
-    static double maxQuantityOfMoney = 100000;
+    private static String fieldAccountPayee = "accountPayee";
+    private static String fieldQuantityOfMoney = "quantityOfMoney";
+    private static String fieldAccountSender = "accountSenderError";
+    private static int maxLengthAccountPayee = 19;
+    private static double minQuantityOfMoney = 1;
+    private static double maxQuantityOfMoney = 100000;
 
     public Map<String, String> validate(OperationTransfer operationTransfer) {
 

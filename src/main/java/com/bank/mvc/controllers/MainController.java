@@ -20,9 +20,9 @@ import java.util.*;
 
 
 @Controller
-public class MainController {
+class MainController {
 
-    final static Logger logger = Logger.getLogger(MainController.class);
+    private final static Logger logger = Logger.getLogger(MainController.class);
 
     @Autowired
     private UserService userService;

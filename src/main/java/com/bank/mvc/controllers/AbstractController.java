@@ -11,14 +11,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 
 
-public class AbstractController {
+class AbstractController {
 
-    final static Logger logger = Logger.getLogger(AbstractController.class);
+    final static private Logger logger = Logger.getLogger(AbstractController.class);
 
     @Autowired
     protected UserService userService;
 
-    protected User getCurrentUser() {
+    User getCurrentUser() {
         try {
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             return userService.getUserById(user.getId());

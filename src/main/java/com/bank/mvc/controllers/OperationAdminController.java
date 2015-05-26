@@ -1,8 +1,6 @@
 package com.bank.mvc.controllers;
 
 import com.bank.mvc.domain.service.UserService;
-import com.bank.mvc.models.Account;
-import com.bank.mvc.utils.JsonRequest;
 import com.bank.mvc.utils.JsonResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -22,9 +18,9 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/dashboard/admin/*")
-public class OperationAdminController {
+class OperationAdminController {
 
-    final static Logger logger = Logger.getLogger(OperationEmployeeController.class);
+    private final static Logger logger = Logger.getLogger(OperationEmployeeController.class);
     private static String path = "/dashboard/admin/";
 
     @Autowired

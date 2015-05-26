@@ -18,13 +18,13 @@ import java.util.Map;
 @Component
 public class CreditValidator {
 
-    static String fieldAccount = "accountError";
-    static String fieldQuantityOfMoney = "quantityOfMoney";
-    static String fieldPeriod = "period";
-    static String fieldSalary = "salary";
-    static String fieldPlaceOfWork = "placeOfWork";
-    static double minQuantityOfMoney = 1;
-    static double maxQuantityOfMoney = 100000;
+    private static String fieldAccount = "accountError";
+    private static String fieldQuantityOfMoney = "quantityOfMoney";
+    private static String fieldPeriod = "period";
+    private static String fieldSalary = "salary";
+    private static String fieldPlaceOfWork = "placeOfWork";
+    private static double minQuantityOfMoney = 1;
+    private static double maxQuantityOfMoney = 100000;
 
 
     @Autowired

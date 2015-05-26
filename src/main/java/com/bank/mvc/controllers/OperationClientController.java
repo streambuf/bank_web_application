@@ -24,9 +24,9 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/dashboard/client/*")
-public class OperationClientController {
+class OperationClientController {
 
-    final static Logger logger = Logger.getLogger(OperationClientController.class);
+    private final static Logger logger = Logger.getLogger(OperationClientController.class);
     private static String path = "/dashboard/client/";
 
     @Autowired

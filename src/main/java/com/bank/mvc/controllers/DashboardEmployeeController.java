@@ -1,12 +1,10 @@
 package com.bank.mvc.controllers;
 
 import com.bank.mvc.domain.service.CreditService;
-import com.bank.mvc.domain.service.UserService;
 import com.bank.mvc.models.Credit;
 import com.bank.mvc.models.User;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +19,8 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/dashboard/employee/*")
-public class DashboardEmployeeController extends AbstractController {
-    final static Logger logger = Logger.getLogger(DashboardEmployeeController.class);
+class DashboardEmployeeController extends AbstractController {
+    private final static Logger logger = Logger.getLogger(DashboardEmployeeController.class);
 
     private static String path = "/dashboard/employee/";
 

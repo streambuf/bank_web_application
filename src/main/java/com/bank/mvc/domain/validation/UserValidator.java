@@ -14,8 +14,8 @@ public class UserValidator extends AbstractValidator {
     @Autowired
     UserService userService;
 
-    static String fieldPass = "password";
-    static String fieldConfirmPass = "confirmPassword";
+    private static String fieldPass = "password";
+    private static String fieldConfirmPass = "confirmPassword";
 
     public Map<String, String> validate(User user) {
 

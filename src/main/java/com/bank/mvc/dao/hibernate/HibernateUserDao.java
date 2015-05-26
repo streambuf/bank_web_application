@@ -3,7 +3,6 @@ package com.bank.mvc.dao.hibernate;
 import com.bank.mvc.dao.UserDao;
 import com.bank.mvc.models.User;
 import com.bank.mvc.models.enums.ListRole;
-import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

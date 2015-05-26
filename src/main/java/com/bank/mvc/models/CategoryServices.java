@@ -2,9 +2,7 @@ package com.bank.mvc.models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Zalman on 14.05.2015.

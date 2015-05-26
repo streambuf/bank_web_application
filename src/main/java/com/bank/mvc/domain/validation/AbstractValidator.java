@@ -8,11 +8,11 @@ import java.util.Map;
 /**
  * Created by Zalman on 08.05.2015.
  */
-public class AbstractValidator {
+class AbstractValidator {
 
     final static Logger logger = Logger.getLogger(AbstractValidator.class);
 
-    protected void checkAllFieldsOnEmpty(Object obj, Map<String, String> errors) {
+    void checkAllFieldsOnEmpty(Object obj, Map<String, String> errors) {
         for (Field f : obj.getClass().getDeclaredFields()) {
             f.setAccessible(true);
             try {
@@ -20,7 +20,7 @@ public class AbstractValidator {
                     errors.put(f.getName(), "Необходимо заполнить поле");
                 }
             } catch (IllegalAccessException | ClassCastException e) {
-
+                // ignore
             }
         }
 

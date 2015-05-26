@@ -20,7 +20,7 @@ public class ContributionValidator {
     @Autowired
     AccountService accountService;
 
-    static String fieldAccount = "accountError";
+    private static String fieldAccount = "accountError";
     static String fieldQuantityOfMoney = "quantityOfMoney";
     static String fieldPeriod = "period";
     static String fieldPaymentProcedure = "listPaymentProcedure";

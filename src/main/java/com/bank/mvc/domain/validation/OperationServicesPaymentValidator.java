@@ -23,11 +23,11 @@ public class OperationServicesPaymentValidator {
     @Autowired
     OrganizationService organizationService;
 
-    static String fieldClientIdentifier = "clientIdentifier";
-    static String fieldQuantityOfMoney = "quantityOfMoney";
-    static String fieldAccountSender = "accountSenderError";
-    static double minQuantityOfMoney = 1;
-    static double maxQuantityOfMoney = 100000;
+    private static String fieldClientIdentifier = "clientIdentifier";
+    private static String fieldQuantityOfMoney = "quantityOfMoney";
+    private static String fieldAccountSender = "accountSenderError";
+    private static double minQuantityOfMoney = 1;
+    private static double maxQuantityOfMoney = 100000;
 
     public Map<String, String> validate(OperationServicesPayment operationServicesPayment) {
 

@@ -23,8 +23,8 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/dashboard/employee/*")
-public class OperationEmployeeController {
-    final static Logger logger = Logger.getLogger(OperationEmployeeController.class);
+class OperationEmployeeController {
+    private final static Logger logger = Logger.getLogger(OperationEmployeeController.class);
     private static String path = "/dashboard/employee/";
 
     @Autowired

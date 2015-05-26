@@ -19,7 +19,7 @@ import java.util.Date;
 @Service
 public class CreditServiceImpl implements CreditService {
 
-    static double annualPercentageRate = 20;
+    private static double annualPercentageRate = 20;
 
     @Autowired
     private CreditDao creditDao;
@@ -43,7 +43,7 @@ public class CreditServiceImpl implements CreditService {
     @Override
     public Collection<Credit> getCreditsByUserId(long userId) {
         return creditDao.getByUserId(userId);
-    };
+    }
 
     @Override
     public void saveCredit(Credit credit) {

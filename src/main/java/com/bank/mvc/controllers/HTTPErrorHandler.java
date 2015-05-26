@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
-public class HTTPErrorHandler extends AbstractController {
+class HTTPErrorHandler extends AbstractController {
 
     @RequestMapping(value="/error/404")
     public String error404(Model model) {

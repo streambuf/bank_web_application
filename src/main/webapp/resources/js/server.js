@@ -11,7 +11,7 @@ function sendPost(form, callSuccess, callError, data) {
         data = $(form).serializeForm();
     }
     // TODO delete log in production
-    console.log("Json data for server")
+    console.log("Json data for server");
     console.log(data);
 
     $.ajax({
@@ -26,7 +26,7 @@ function sendPost(form, callSuccess, callError, data) {
                 console.log("sendPost: OK");
                 callSuccess(result);
             } else {
-                console.log("sendPost: ERROR")
+                console.log("sendPost: ERROR");
                 callError(result);
             }
         },

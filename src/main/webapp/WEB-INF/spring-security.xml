@@ -23,7 +23,7 @@
                              always-use-default-target="true"
                              authentication-failure-url="/?error=invalidLoginPassword" />
 
-        
+
         <security:intercept-url pattern="/dashboard/client/**" access="hasRole('ROLE_CLIENT')" />
         <security:intercept-url pattern="/dashboard/employee/**" access="hasRole('ROLE_EMPLOYEE')" />
         <security:intercept-url pattern="/dashboard/admin/**" access="hasRole('ROLE_ADMIN')" />

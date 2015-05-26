@@ -3,8 +3,8 @@ $(function(){
     var li_num = document.getElementById('meta.page.li.num').value;
     $($(".sidebar-menu > li")[li_num]).addClass("active");
 
-    var tree_li_num = document.getElementById('meta.page.tree.li.num')
-    if (tree_li_num) $($($(".sidebar-menu > li")[6]).find("li")[tree_li_num.value]).addClass("active")
+    var tree_li_num = document.getElementById('meta.page.tree.li.num');
+    if (tree_li_num) $($($(".sidebar-menu > li")[6]).find("li")[tree_li_num.value]).addClass("active");
 
 
     $("input[type=number]");
@@ -64,7 +64,7 @@ $(function() {
             function(result) {
                 console.log("OK");
                 if (result.data.add == "OK") {
-                    $($(form)).parents("tr").find(".badge").html("Сотрудник").addClass("bg-yellow")
+                    $($(form)).parents("tr").find(".badge").html("Сотрудник").addClass("bg-yellow");
                     $($(form)).parents("tr").find(".confirm").prop('disabled', true);
                 }
             },

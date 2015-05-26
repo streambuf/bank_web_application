@@ -1,6 +1,5 @@
 package com.bank.mvc.domain.service;
 
-import com.bank.mvc.models.Contribution;
 import com.bank.mvc.models.CreditRepayment;
 
 import java.util.Collection;

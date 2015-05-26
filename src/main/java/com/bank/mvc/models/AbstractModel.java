@@ -1,7 +1,6 @@
 package com.bank.mvc.models;
 
 
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,9 +16,9 @@ public class AbstractModel {
     @GeneratedValue(generator="generator")
     private long id;
 
-    public AbstractModel() {}
+    AbstractModel() {}
 
-    public AbstractModel(long id) {
+    AbstractModel(long id) {
         this.id = id;
     }
 

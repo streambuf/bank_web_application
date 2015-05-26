@@ -1,6 +1,5 @@
 package com.bank.mvc.domain.service.spring;
 
-import com.bank.mvc.dao.AccountDao;
 import com.bank.mvc.dao.OperationTransferDao;
 import com.bank.mvc.domain.service.AccountService;
 import com.bank.mvc.domain.service.OperationTransferService;
